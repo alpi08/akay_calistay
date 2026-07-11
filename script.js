@@ -35,8 +35,8 @@ const translations = {
     visitIg: "Instagram'da Ziyaret Et",
     contactEyebrow: "İletişim", contactTitle: "Bizimle İletişime Geç",
     contactDesc: "Sorularınız mı var? AKAY topluluğunun bir parçası olmak için bize ulaşın.",
-    formName: "Ad Soyad", formEmail: "Email", formSubject: "Konu", formMessage: "Mesaj", formSend: "Gönder",
-    errRequired: "Bu alan zorunludur.", errEmail: "Geçerli bir e-posta adresi girin.",
+    formName: "Ad Soyad", formSubject: "Konu", formMessage: "Mesaj", formSend: "Gönder",
+    errRequired: "Bu alan zorunludur.",
     successTitle: "Mesajınız İçin Teşekkürler!",
     successDesc: "Formumuz şu anda demo amaçlıdır. Bizimle hızlıca iletişime geçmek için Instagram'ı kullanabilirsiniz.",
     igName: "AKAY Çalıştayı", igHandle: "Resmi Instagram",
@@ -83,8 +83,8 @@ const translations = {
     visitIg: "Visit on Instagram",
     contactEyebrow: "Contact", contactTitle: "Get In Touch With Us",
     contactDesc: "Have questions? Reach out to become part of the AKAY community.",
-    formName: "Full Name", formEmail: "Email", formSubject: "Subject", formMessage: "Message", formSend: "Send",
-    errRequired: "This field is required.", errEmail: "Please enter a valid email address.",
+    formName: "Full Name", formSubject: "Subject", formMessage: "Message", formSend: "Send",
+    errRequired: "This field is required.",
     successTitle: "Thank You for Your Message!",
     successDesc: "This form is currently for demo purposes. Reach us quickly on Instagram instead.",
     igName: "AKAY Workshop", igHandle: "Official Instagram",
@@ -137,7 +137,7 @@ const LANGUAGE = {
       }
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-      const key = el.dataset.i18nPlaceholder;
+      const key = el.dataset.i18n-placeholder || el.dataset.i18nPlaceholder;
       if (dict[key]) el.setAttribute('placeholder', dict[key]);
     });
   },
@@ -146,7 +146,8 @@ const LANGUAGE = {
 };
 
 document.addEventListener('DOMContentLoaded', () => LANGUAGE.init());
-// particles.js — lightweight layered canvas particle engine
+
+// particles.js — fare etkileşimli (repulsion + ağ çizgileri) interaktif canvas motoru
 (() => {
   const canvas = document.getElementById('bg-canvas');
   if (!canvas) return;
@@ -157,8 +158,14 @@ document.addEventListener('DOMContentLoaded', () => LANGUAGE.init());
   let width, height, dpr;
   let particles = [];
   let running = true;
+  let mouseX = -1000, mouseY = -1000;
 
   const COLORS = ['rgba(255,255,255,', 'rgba(192,132,252,', 'rgba(233,213,255,'];
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX * dpr;
+    mouseY = e.clientY * dpr;
+  }, { passive: true });
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -168,48 +175,70 @@ document.addEventListener('DOMContentLoaded', () => LANGUAGE.init());
     canvas.height = height * dpr;
     canvas.style.width = width + 'px';
     canvas.style.height = height + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     buildParticles();
   }
 
   function buildParticles() {
     const base = isMobile ? 40 : 110;
     particles = [];
-    // Layer 1: distant stars
     for (let i = 0; i < base; i++) {
       particles.push({
-        x: Math.random() * width, y: Math.random() * height,
-        r: Math.random() * 1.2 + 0.3, speed: 0.02 + Math.random() * 0.03,
+        x: Math.random() * width * dpr, y: Math.random() * height * dpr,
+        r: (Math.random() * 1.2 + 0.3) * dpr, speed: (0.02 + Math.random() * 0.03) * dpr,
         opacity: 0.15, color: COLORS[0], drift: 0
       });
     }
-    // Layer 2: floating dust
     for (let i = 0; i < base * 0.5; i++) {
       particles.push({
-        x: Math.random() * width, y: Math.random() * height,
-        r: Math.random() * 1.8 + 0.6, speed: 0.06 + Math.random() * 0.08,
-        opacity: 0.3, color: COLORS[1], drift: Math.random() * 0.4 - 0.2
+        x: Math.random() * width * dpr, y: Math.random() * height * dpr,
+        r: (Math.random() * 1.8 + 0.6) * dpr, speed: (0.06 + Math.random() * 0.08) * dpr,
+        opacity: 0.3, color: COLORS[1], drift: (Math.random() * 0.4 - 0.2) * dpr
       });
     }
-    // Layer 3: foreground glow particles
     for (let i = 0; i < base * 0.25; i++) {
       particles.push({
-        x: Math.random() * width, y: Math.random() * height,
-        r: Math.random() * 2.4 + 1, speed: 0.12 + Math.random() * 0.12,
-        opacity: 0.5, color: COLORS[2], drift: Math.random() * 0.6 - 0.3
+        x: Math.random() * width * dpr, y: Math.random() * height * dpr,
+        r: (Math.random() * 2.4 + 1) * dpr, speed: (0.12 + Math.random() * 0.12) * dpr,
+        opacity: 0.5, color: COLORS[2], drift: (Math.random() * 0.6 - 0.3) * dpr
       });
     }
   }
 
   function draw() {
     if (!running) return;
-    ctx.clearRect(0, 0, width, height);
-    for (const p of particles) {
+    ctx.clearRect(0, 0, width * dpr, height * dpr);
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
       p.y -= p.speed;
       p.x += p.drift * 0.05;
-      if (p.y < -5) { p.y = height + 5; p.x = Math.random() * width; }
-      if (p.x < -5) p.x = width + 5;
-      if (p.x > width + 5) p.x = -5;
+      if (p.y < -5) { p.y = height * dpr + 5; p.x = Math.random() * width * dpr; }
+      if (p.x < -5) p.x = width * dpr + 5;
+      if (p.x > width * dpr + 5) p.x = -5;
+
+      // Fare Etkileşimi (Parçacıklar fareden kaçar)
+      const dx = mouseX - p.x;
+      const dy = mouseY - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 160 * dpr) {
+        p.x -= (dx / dist) * 1.8;
+        p.y -= (dy / dist) * 1.8;
+      }
+
+      // Yakın parçacıklar arasında ağ (takımyıldızı) çizgileri
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dist2 = Math.hypot(p.x - p2.x, p.y - p2.y);
+        if (dist2 < 85 * dpr) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(168, 85, 247, ${0.18 * (1 - dist2 / (85 * dpr))})`;
+          ctx.lineWidth = 0.8 * dpr;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+
       ctx.beginPath();
       ctx.fillStyle = p.color + p.opacity + ')';
       ctx.shadowBlur = p.r * 3;
@@ -239,6 +268,7 @@ document.addEventListener('DOMContentLoaded', () => LANGUAGE.init());
     running = false;
   }
 })();
+
 // cursor.js — custom cursor with glow ring + dot, mouse light
 (() => {
   if (window.matchMedia('(hover: none)').matches) return;
@@ -280,6 +310,7 @@ document.addEventListener('DOMContentLoaded', () => LANGUAGE.init());
   document.addEventListener('mousedown', () => ring.classList.add('clicking'));
   document.addEventListener('mouseup', () => ring.classList.remove('clicking'));
 })();
+
 // scroll.js — nav scroll state + intersection observer reveals
 (() => {
   const nav = document.querySelector('.nav');
@@ -302,7 +333,6 @@ document.addEventListener('DOMContentLoaded', () => LANGUAGE.init());
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Staggered line-by-line reveal groups
   document.querySelectorAll('[data-reveal-group]').forEach(group => {
     const lines = group.querySelectorAll('.reveal-line');
     const groupObserver = new IntersectionObserver((entries) => {
@@ -318,7 +348,6 @@ document.addEventListener('DOMContentLoaded', () => LANGUAGE.init());
     groupObserver.observe(group);
   });
 
-  // Mobile nav toggle
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
   if (toggle && links) {
@@ -329,7 +358,8 @@ document.addEventListener('DOMContentLoaded', () => LANGUAGE.init());
     links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('mobile-open')));
   }
 })();
-// main.js — loader sequence, hero reveal, tilt cards, modal, form validation, ripple, parallax
+
+// main.js — loader sequence, hero reveal, tilt cards, modal, form validation (E-posta silindi), ripple, parallax
 document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -387,20 +417,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const sub = document.querySelector('.hero-subtitle');
     const ctas = document.querySelector('.hero-ctas');
-    setTimeout(() => { sub.style.transition = 'opacity 900ms var(--ease)'; sub.style.opacity = 1; }, 500);
-    setTimeout(() => { ctas.style.transition = 'opacity 900ms var(--ease)'; ctas.style.opacity = 1; }, 800);
+    if (sub) setTimeout(() => { sub.style.transition = 'opacity 900ms var(--ease)'; sub.style.opacity = 1; }, 500);
+    if (ctas) setTimeout(() => { ctas.style.transition = 'opacity 900ms var(--ease)'; ctas.style.opacity = 1; }, 800);
   }
 
   initHeroChars();
 
   if (reduceMotion) {
-    loader.classList.add('hidden');
+    if (loader) loader.classList.add('hidden');
     playHero();
   } else {
-    buildLoaderTitle();
-    spawnLoaderParticles();
+    if (loaderTitle && loaderScene) {
+      buildLoaderTitle();
+      spawnLoaderParticles();
+    }
     setTimeout(() => {
-      loader.classList.add('hidden');
+      if (loader) loader.classList.add('hidden');
       playHero();
     }, 5200);
   }
@@ -436,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- Glare hover (mission/vision/app/sponsor cards) ---------- */
+  /* ---------- Glare hover ---------- */
   document.querySelectorAll('.glare-hover').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
@@ -449,22 +481,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Committee detail modal ---------- */
   const modal = document.getElementById('committee-modal');
-  const modalTitle = modal.querySelector('.modal-title');
-  const modalBody = modal.querySelector('.modal-body');
+  if (modal) {
+    const modalTitle = modal.querySelector('.modal-title');
+    const modalBody = modal.querySelector('.modal-body');
 
-  document.querySelectorAll('[data-committee]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.dataset.committee;
-      modalTitle.textContent = LANGUAGE.t(`${key}Title`);
-      modalBody.textContent = LANGUAGE.t(`${key}Detail`);
-      modal.classList.add('active');
+    document.querySelectorAll('[data-committee]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.committee;
+        modalTitle.textContent = LANGUAGE.t(`${key}Title`);
+        modalBody.textContent = LANGUAGE.t(`${key}Detail`);
+        modal.classList.add('active');
+      });
     });
-  });
-  modal.querySelector('.modal-close').addEventListener('click', () => modal.classList.remove('active'));
-  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.classList.remove('active'); });
+    modal.querySelector('.modal-close').addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.classList.remove('active'); });
+  }
 
-  /* ---------- Form validation ---------- */
+  /* ---------- Form validation (E-posta alanı ve doğrulaması çıkarıldı) ---------- */
   const form = document.getElementById('contact-form');
   if (form) {
     const successBox = document.getElementById('form-success');
@@ -475,10 +509,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const errorEl = field.parentElement.querySelector('.form-error');
         const value = field.value.trim();
         let ok = value.length > 0;
-        if (field.type === 'email' && ok) {
-          ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-          if (!ok && errorEl) errorEl.textContent = LANGUAGE.t('errEmail');
-        } else if (!ok && errorEl) {
+        
+        if (!ok && errorEl) {
           errorEl.textContent = LANGUAGE.t('errRequired');
         }
         if (errorEl) errorEl.classList.toggle('show', !ok);
@@ -487,12 +519,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (valid) {
         form.style.display = 'none';
-        successBox.classList.add('show');
+        if (successBox) successBox.classList.add('show');
       }
     });
   }
 
-  /* ---------- Parallax on hero (subtle mouse reactive) ---------- */
+  /* ---------- Parallax on hero ---------- */
   if (!reduceMotion) {
     const moon = document.querySelector('.hero-moon');
     window.addEventListener('mousemove', (e) => {
