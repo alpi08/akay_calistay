@@ -1,66 +1,77 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AKAY Çalıştayı</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKAY Çalıştayı — Geleceğin Liderlerini Bir Araya Getiriyoruz</title>
+<meta name="description" content="AKAY Çalıştayı; eleştirel düşünce, liderlik, iletişim ve takım çalışmasını genç zihinlerle buluşturan akademik bir gençlik çalıştayıdır.">
+<meta property="og:title" content="AKAY Çalıştayı">
+<meta property="og:description" content="Geleceğin Liderlerini Bir Araya Getiriyoruz">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%237A3BFF%22/></svg>">
+
+<link rel="stylesheet" href="style.css">
+
+
 </head>
 <body>
 
-  <canvas id="bg-canvas"></canvas>
-  <div class="fog-layer"></div>
-  <div class="mouse-light"></div>
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
-
-  <div id="loader">
-    <div class="loader-scene">
-      <div class="loader-glow"></div>
-      <img src="Logo-1.png" alt="AKAY Çalıştayı Logo" class="loader-logo">
-      <h1 class="loader-title"></h1>
-      <p class="loader-subtitle">Geleceğin Liderlerini Bir Araya Getiriyoruz</p>
-    </div>
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-scene">
+    <div class="loader-glow"></div>
+    <h1 class="loader-title"></h1>
+    <p class="loader-subtitle">Geleceğin Liderlerini Bir Araya Getiriyoruz</p>
   </div>
+</div>
 
-  <header class="nav">
-    <div class="container nav-inner">
-      <a href="#home" class="logo">
-        <img src="Logo-0.png" alt="AKAY Sembol" class="nav-logo">
-        <span>AKAY</span> Çalıştayı
-      </a>
-      <ul class="nav-links">
-        <li><a href="#home" data-i18n="navHome">Ana Sayfa</a></li>
-        <li><a href="#about" data-i18n="navAbout">Hakkımızda</a></li>
-        <li><a href="#mission" data-i18n="navMission">Misyon</a></li>
-        <li><a href="#vision" data-i18n="navVision">Vizyon</a></li>
-        <li><a href="#committees" data-i18n="navCommittees">Komiteler</a></li>
-        <li><a href="#sponsors" data-i18n="navSponsors">Sponsorlar</a></li>
-        <li><a href="#apply" data-i18n="navApply">Başvurular</a></li>
-        <li><a href="#contact" data-i18n="navContact">İletişim</a></li>
-      </ul>
+<!-- Ambient background -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div class="fog-layer" aria-hidden="true"></div>
+<div class="mouse-light" aria-hidden="true"></div>
+
+<!-- Custom cursor -->
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<!-- Navigation -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">AKAY <span>Çalıştayı</span></a>
+    <ul class="nav-links">
+      <li><a href="#home" data-i18n="navHome">Ana Sayfa</a></li>
+      <li><a href="#about" data-i18n="navAbout">Hakkımızda</a></li>
+      <li><a href="#mission" data-i18n="navMission">Misyon</a></li>
+      <li><a href="#vision" data-i18n="navVision">Vizyon</a></li>
+      <li><a href="#committees" data-i18n="navCommittees">Komiteler</a></li>
+      <li><a href="#sponsors" data-i18n="navSponsors">Sponsorlar</a></li>
+      <li><a href="#apply" data-i18n="navApply">Başvurular</a></li>
+      <li><a href="#contact" data-i18n="navContact">İletişim</a></li>
+    </ul>
+    <div style="display:flex; align-items:center; gap:1rem;">
       <div class="lang-switch">
-        <button data-lang-btn="tr" class="active">TR</button>
+        <button data-lang-btn="tr">TR</button>
         <button data-lang-btn="en">EN</button>
       </div>
-      <button class="nav-toggle" aria-label="Menüyü Aç/Kapat">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </header>
+  </div>
+</header>
 
-  <section id="home" class="hero">
-    <div class="hero-watermark">
-      <img src="Logo-0.png" alt="AKAY Watermark">
-    </div>
-    <div class="hero-moon"></div>
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-moon" aria-hidden="true"></div>
     <div class="container hero-content">
-      <span class="eyebrow">AKAY 2026</span>
-      <h1 class="hero-title" data-i18n="heroTitle">AKAY ÇALIŞTAYI</h1>
+      <h1 class="hero-title">AKAY ÇALIŞTAYI</h1>
       <p class="hero-subtitle" data-i18n="heroSubtitleFull">Eleştirel düşünceyi, liderliği ve etkili iletişimi genç zihinlerle buluşturan akademik bir deneyim.</p>
       <div class="hero-ctas">
         <a href="#apply" class="btn btn-primary star-border" data-i18n="heroApply">Başvur</a>
-        <a href="https://instagram.com" target="_blank" class="btn btn-outline" data-i18n="heroInstagram">Instagram</a>
+        <a href="https://www.instagram.com/akay_calistay" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="heroInstagram">Instagram</a>
       </div>
     </div>
     <div class="scroll-indicator">
@@ -69,66 +80,73 @@
     </div>
   </section>
 
+  <!-- ABOUT -->
   <section id="about">
     <div class="container about-grid">
-      <div class="about-visual reveal">
-        <img src="Logo-1.png" alt="AKAY Hakkımızda Logo" class="about-logo-inside">
-      </div>
-      <div class="about-text" data-reveal-group>
+      <div class="about-visual reveal" aria-hidden="true"></div>
+      <div class="about-text">
         <span class="eyebrow" data-i18n="aboutEyebrow">Hakkımızda</span>
-        <h2 class="section-title" data-i18n="aboutTitle">AKAY Çalıştayı</h2>
-        <p class="reveal-line" data-i18n="aboutP1">AKAY Çalıştayı, akademik gelişimi ve eleştirel düşünceyi merkezine alan bir gençlik topluluğudur.</p>
-        <p class="reveal-line" data-i18n="aboutP2">Katılımcılarımız; liderlik, etkili iletişim ve topluluk önünde konuşma becerilerini gerçek tartışma ortamlarında geliştirir.</p>
-        <p class="reveal-line" data-i18n="aboutP3">Her komite, güncel dünya meselelerini analitik bir bakış açısıyla ele alarak katılımcıları geleceğin karar vericileri olarak yetiştirir.</p>
+        <h2 class="section-title reveal" data-i18n="aboutTitle">AKAY Çalıştayı</h2>
+        <p class="reveal" data-i18n="aboutP1">AKAY Çalıştayı, akademik gelişimi ve eleştirel düşünceyi merkezine alan bir gençlik topluluğudur.</p>
+        <p class="reveal" data-i18n="aboutP2">Katılımcılarımız; liderlik, etkili iletişim ve topluluk önünde konuşma becerilerini gerçek tartışma ortamlarında geliştirir.</p>
+        <p class="reveal" data-i18n="aboutP3">Her komite, güncel dünya meselelerini analitik bir bakış açısıyla ele alarak katılımcıları geleceğin karar vericileri olarak yetiştirir.</p>
       </div>
     </div>
   </section>
 
+  <!-- MISSION -->
   <section id="mission">
-    <div class="container mv-combined-grid">
-      <div class="mv-card glass-card glare-hover reveal floating-slow">
-        <img src="Logo-0.png" alt="AKAY" class="card-watermark">
+    <div class="container mv-section">
+      <div class="mv-card glass-card glare-hover reveal">
         <span class="eyebrow" data-i18n="missionEyebrow">Misyon</span>
         <h3 data-i18n="missionTitle">Misyonumuz</h3>
-        <p data-i18n="missionText">AKAY Çalıştayı olarak misyonumuz, genç bireylerin eleştirel düşünme, etkili iletişim... </p>
+        <p data-i18n="missionText">AKAY Çalıştayı olarak misyonumuz...</p>
       </div>
-      <div class="mv-card glass-card glare-hover reveal floating-fast" id="vision">
-        <img src="Logo-0.png" alt="AKAY" class="card-watermark">
-        <span class="eyebrow" data-i18n="visionEyebrow">Vizyon</span>
-        <h3 data-i18n="visionTitle">Vizyonumuz</h3>
-        <p data-i18n="visionText">Vizyonumuz, akademik mükemmelliği ilham verici bir deneyimle birleştiren...</p>
-      </div>
+      <div class="mv-visual reveal" aria-hidden="true"></div>
     </div>
   </section>
 
+  <!-- VISION -->
+  <section id="vision">
+    <div class="container mv-section reverse">
+      <div class="mv-card glass-card glare-hover reveal">
+        <span class="eyebrow" data-i18n="visionEyebrow">Vizyon</span>
+        <h3 data-i18n="visionTitle">Vizyonumuz</h3>
+        <p data-i18n="visionText">Vizyonumuz...</p>
+      </div>
+      <div class="mv-visual reveal" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- COMMITTEES -->
   <section id="committees">
     <div class="container">
       <span class="eyebrow" data-i18n="commEyebrow">Komiteler</span>
-      <h2 class="section-title" data-i18n="commTitle">Geleceği Birlikte Tartışıyoruz</h2>
-      <p class="section-desc" data-i18n="commDesc">Her komite farklı bir küresel meseleye odaklanarak katılımcılarımızın analitik düşünme, iletişim ve takım çalışması becerilerini geliştirmesini sağlar.</p>
-      
+      <h2 class="section-title reveal" data-i18n="commTitle">Geleceği Birlikte Tartışıyoruz</h2>
+      <p class="section-desc reveal" data-i18n="commDesc">Her komite farklı bir küresel meseleye odaklanır.</p>
+
       <div class="committee-grid">
         <div class="tilt-card reveal">
           <div class="tilt-card-inner glass-card">
-            <div class="tilt-icon"><img src="Logo-0.png" alt="AKAY" class="icon-img"></div>
+            <div class="tilt-icon">◈</div>
             <h4 data-i18n="c1Title">Diplomasi Komitesi</h4>
-            <p data-i18n="c1Desc">Uluslararası ilişkileri ve müzakere becerilerini gerçekçi senaryolarla keşfeden komite.</p>
+            <p data-i18n="c1Desc">Uluslararası ilişkileri keşfeden komite.</p>
             <button class="detail-btn" data-committee="c1" data-i18n="detailBtn">Detayları Gör</button>
           </div>
         </div>
         <div class="tilt-card reveal">
           <div class="tilt-card-inner glass-card">
-            <div class="tilt-icon"><img src="Logo-0.png" alt="AKAY" class="icon-img"></div>
+            <div class="tilt-icon">◆</div>
             <h4 data-i18n="c2Title">Ekonomi Komitesi</h4>
-            <p data-i18n="c2Desc">Küresel ekonomik politikaları analiz eden ve çözüm önerileri geliştiren komite.</p>
+            <p data-i18n="c2Desc">Küresel ekonomik politikaları analiz eden komite.</p>
             <button class="detail-btn" data-committee="c2" data-i18n="detailBtn">Detayları Gör</button>
           </div>
         </div>
         <div class="tilt-card reveal">
           <div class="tilt-card-inner glass-card">
-            <div class="tilt-icon"><img src="Logo-0.png" alt="AKAY" class="icon-img"></div>
+            <div class="tilt-icon">◇</div>
             <h4 data-i18n="c3Title">Medya ve İletişim Komitesi</h4>
-            <p data-i18n="c3Desc">Dijital çağda etkili iletişim stratejilerini ve medya okuryazarlığını inceleyen komite.</p>
+            <p data-i18n="c3Desc">Etkili iletişim stratejilerini inceleyen komite.</p>
             <button class="detail-btn" data-committee="c3" data-i18n="detailBtn">Detayları Gör</button>
           </div>
         </div>
@@ -136,66 +154,63 @@
     </div>
   </section>
 
-  <div id="committee-modal" class="modal-overlay">
-    <div class="modal-box glass-card">
-      <button class="modal-close" aria-label="Kapat">&times;</button>
-      <h3 class="modal-title"></h3>
-      <p class="modal-body"></p>
-    </div>
-  </div>
-
+  <!-- APPLICATIONS -->
   <section id="apply">
-    <div class="container">
-      <h2 class="section-title text-center" data-i18n="applyTitle">Sen de Aramıza Katıl</h2>
-      <p class="section-desc text-center" data-i18n="applyDesc">AKAY Çalıştayı, eleştirel düşünen, meraklı ve liderlik vasfı taşıyan gençleri arıyor.</p>
-      
+    <div class="container" style="text-align:center;">
+      <h2 class="section-title reveal" data-i18n="applyTitle">Sen de Aramıza Katıl</h2>
+      <p class="section-desc reveal" style="margin-inline:auto;" data-i18n="applyDesc">AKAY Çalıştayı, eleştirel düşünen gençleri arıyor.</p>
       <div class="apps-grid">
         <div class="app-card glass-card glare-hover reveal">
-          <img src="Logo-0.png" alt="AKAY" class="card-watermark">
           <h4 data-i18n="teamAppTitle">Ekip Başvurusu</h4>
-          <p data-i18n="teamAppDesc">Organizasyon ekibimizin bir parçası olarak çalıştayın perde arkasında yer al.</p>
-          <a href="#" class="btn btn-primary" data-i18n="applyNow">Başvur</a>
+          <p data-i18n="teamAppDesc">Organizasyon ekibinin bir parçası ol.</p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSet9DfTwEO3jdOBQfqw_QmjkNXHArUfq8Zc_aUq2ibsPsoHaA/viewform" target="_blank" rel="noopener" class="btn btn-primary star-border" data-i18n="applyNow">Başvur</a>
         </div>
         <div class="app-card glass-card glare-hover reveal">
-          <img src="Logo-0.png" alt="AKAY" class="card-watermark">
           <h4 data-i18n="academyAppTitle">Akademi Başvurusu</h4>
-          <p data-i18n="academyAppDesc">Komitelere katılımcı olarak katıl ve akademik yolculuğuna başla.</p>
-          <a href="#" class="btn btn-primary" data-i18n="applyNow">Başvur</a>
+          <p data-i18n="academyAppDesc">Komitelere katılımcı olarak katıl.</p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSf1zOQRr3ZuWUW3-047SzuogOTg60BxzNcCXyXHstgYM82pJg/viewform" target="_blank" rel="noopener" class="btn btn-primary star-border" data-i18n="applyNow">Başvur</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SPONSORS -->
   <section id="sponsors">
-    <div class="container text-center">
+    <div class="container" style="text-align:center;">
       <span class="eyebrow" data-i18n="sponsorEyebrow">Sponsorlar</span>
-      <h2 class="section-title" data-i18n="sponsorTitle">Bizi Destekleyenler</h2>
+      <h2 class="section-title reveal" data-i18n="sponsorTitle">Bizi Destekleyenler</h2>
       <div class="sponsor-grid">
         <div class="sponsor-card glass-card glare-hover reveal">
-          <div class="sponsor-mark">EDUTECH</div>
-          <p data-i18n="s1Desc">Eğitim teknolojileri alanında yenilikçi çözümler sunan kurumsal destekçimiz.</p>
-          <a href="#" class="btn btn-outline" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
+          <div class="sponsor-mark">Nova Smart School</div>
+          <p data-i18n="s1Desc">Eğitim teknolojileri alanında destekçimiz.</p>
+          <a href="https://www.instagram.com/novasmartschooltech/" target="_blank" rel="noopener" class="btn btn-outline star-border" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
         </div>
         <div class="sponsor-card glass-card glare-hover reveal">
-          <div class="sponsor-mark">BRANDSTUDIO</div>
-          <p data-i18n="s2Desc">Yaratıcı tasarım ve marka deneyimleri üreten stratejik iş ortağımız.</p>
-          <a href="#" class="btn btn-outline" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
+          <div class="sponsor-mark">Ccord Design</div>
+          <p data-i18n="s2Desc">Yaratıcı tasarım ortağımız.</p>
+          <a href="https://www.instagram.com/ccorddesign/" target="_blank" rel="noopener" class="btn btn-outline star-border" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <span class="eyebrow" data-i18n="contactEyebrow">İletişim</span>
-      <h2 class="section-title" data-i18n="contactTitle">Bizimle İletişime Geç</h2>
-      <p class="section-desc" data-i18n="contactDesc">Sorularınız mı var? AKAY topluluğunun bir parçası olmak için bize ulaşın.</p>
+      <h2 class="section-title reveal" data-i18n="contactTitle">Bizimle İletişime Geç</h2>
+      <p class="section-desc reveal" data-i18n="contactDesc">Sorularınız mı var? Bize ulaşın.</p>
 
       <div class="contact-grid">
         <div class="contact-form-card glass-card reveal">
           <form id="contact-form" novalidate>
             <div class="form-group">
+              <label for="name" class="visually-hidden"></label>
               <input type="text" id="name" data-required data-i18n-placeholder="formName" placeholder="Ad Soyad">
+              <div class="form-error"></div>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" data-required data-i18n-placeholder="formEmail" placeholder="Email">
               <div class="form-error"></div>
             </div>
             <div class="form-group">
@@ -209,77 +224,99 @@
             <button type="submit" class="btn btn-primary star-border" data-i18n="formSend">Gönder</button>
           </form>
           <div id="form-success" class="form-success">
-            <div class="icon">✓</div>
+            <div class="icon">✦</div>
             <h4 data-i18n="successTitle">Mesajınız İçin Teşekkürler!</h4>
-            <p data-i18n="successDesc">Bizimle hızlıca iletişime geçmek için Instagram'ı kullanabilirsiniz.</p>
+            <p data-i18n="successDesc" style="color:var(--text-secondary); margin-top:0.6rem;">Bizimle Instagram'dan iletişime geçebilirsiniz.</p>
           </div>
         </div>
 
         <div class="contact-side">
           <div class="ig-card glass-card glare-hover reveal">
-            <div class="icon-circle"><img src="Logo-0.png" alt="AKAY" class="icon-img"></div>
-            <div class="wa-info">
+            <div class="icon-circle">◎</div>
+            <div>
               <h4 data-i18n="igName">AKAY Çalıştayı</h4>
-              <span data-i18n="igHandle">Resmi Instagram</span>
+              <span style="color:var(--text-muted); font-size:0.85rem;" data-i18n="igHandle">Resmi Instagram</span>
+              <div style="margin-top:0.8rem;">
+                <a href="https://www.instagram.com/akay_calistay" target="_blank" rel="noopener" class="btn btn-outline star-border" style="padding:0.6rem 1.2rem; font-size:0.82rem;" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
+              </div>
             </div>
-            <a href="https://instagram.com" target="_blank" class="btn btn-outline wa-btn">Instagram</a>
           </div>
-          <div class="wa-card glass-card glare-hover reveal">
-            <div style="display:flex; align-items:center; gap:1.2rem; width:100%;">
-              <div class="icon-circle"><img src="Logo-0.png" alt="AKAY" class="icon-img"></div>
+          <div class="wa-card glass-card reveal">
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <div class="icon-circle">✆</div>
               <div class="wa-info">
                 <h4 data-i18n="wa1Name">Zeynep Beril Köse</h4>
                 <span data-i18n="wa1Role">Organizasyon Ekibi</span>
               </div>
             </div>
-            <a href="https://wa.me/900000000000" target="_blank" class="btn btn-outline wa-btn" data-i18n="waBtn">WhatsApp</a>
+            <a href="https://wa.me/905388183222" target="_blank" rel="noopener" class="btn btn-primary star-border wa-btn" data-i18n="waBtn">WhatsApp</a>
           </div>
-          <div class="wa-card glass-card glare-hover reveal">
-            <div style="display:flex; align-items:center; gap:1.2rem; width:100%;">
-              <div class="icon-circle"><img src="Logo-0.png" alt="AKAY" class="icon-img"></div>
+          <div class="wa-card glass-card reveal">
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <div class="icon-circle">✆</div>
               <div class="wa-info">
                 <h4 data-i18n="wa2Name">Eylül Ulubulut</h4>
                 <span data-i18n="wa2Role">Organizasyon Ekibi</span>
               </div>
             </div>
-            <a href="https://wa.me/900000000000" target="_blank" class="btn btn-outline wa-btn" data-i18n="waBtn">WhatsApp</a>
+            <a href="https://wa.me/905054965668" target="_blank" rel="noopener" class="btn btn-primary star-border wa-btn" data-i18n="waBtn">WhatsApp</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a href="#home" class="logo footer-logo-container">
-            <img src="Logo-1.png" alt="AKAY Logo Alt" class="footer-logo-img">
-          </a>
-          <p class="footer-desc" data-i18n="footerDesc">Genç liderleri, eleştirel düşünürleri ve iletişimcileri bir araya getiren akademik bir çalıştay.</p>
-        </div>
-        <div class="footer-col">
-          <h5 data-i18n="footerNav">Navigasyon</h5>
-          <ul class="footer-links">
-            <li><a href="#about" data-i18n="navAbout">Hakkımızda</a></li>
-            <li><a href="#mission" data-i18n="navMission">Misyon</a></li>
-            <li><a href="#committees" data-i18n="navCommittees">Komiteler</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5 data-i18n="footerSocial">Sosyal</h5>
-          <ul class="footer-links">
-            <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-            <li><a href="#contact" data-i18n="navContact">İletişim</a></li>
-          </ul>
-        </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#home" class="logo">AKAY <span>Çalıştayı</span></a>
+        <p class="footer-desc" data-i18n="footerDesc">Genç liderleri bir araya getiren akademik bir çalıştay.</p>
       </div>
-      <div class="footer-bottom">
-        <span>&copy; 2026 AKAY Çalıştayı. <span data-i18n="copyright">Tüm Hakları Saklıdır.</span></span>
+      <div class="footer-col">
+        <h5 data-i18n="footerNav">Navigasyon</h5>
+        <ul class="footer-links">
+          <li><a href="#mission" data-i18n="navMission">Misyon</a></li>
+          <li><a href="#vision" data-i18n="navVision">Vizyon</a></li>
+          <li><a href="#committees" data-i18n="navCommittees">Komiteler</a></li>
+          <li><a href="#sponsors" data-i18n="navSponsors">Sponsorlar</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-i18n="footerSocial">Sosyal</h5>
+        <ul class="footer-links">
+          <li><a href="https://www.instagram.com/akay_calistay" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://wa.me/905388183222" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="#apply" data-i18n="navApply">Başvurular</a></li>
+        </ul>
       </div>
     </div>
-  </footer>
+    <div class="footer-bottom">
+      <span>© 2026 AKAY Çalıştayı — <span data-i18n="copyright">Tüm Hakları Saklıdır.</span></span>
+      <div class="lang-switch">
+        <button data-lang-btn="tr">TR</button>
+        <button data-lang-btn="en">EN</button>
+      </div>
+    </div>
+  </div>
+</footer>
 
-  <script src="script.js"></script>
+<!-- Committee detail modal -->
+<div class="modal-overlay" id="committee-modal">
+  <div class="modal-box glass-card">
+    <button class="modal-close" data-i18n="close" aria-label="Close">✕</button>
+    <h3 class="modal-title" style="margin-bottom:1rem;"></h3>
+    <p class="modal-body" style="color:var(--text-secondary); line-height:1.8;"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+
+
+
 </body>
 </html>
