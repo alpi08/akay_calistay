@@ -368,6 +368,18 @@
       }, { threshold: 0.2 });
       groupObserver.observe(group);
     });
+
+    // Yeni scroll animasyon sınıfları: reveal-slide, reveal-scale, reveal-left, reveal-right, reveal-glow
+    const newRevealClasses = '.reveal-slide, .reveal-scale, .reveal-left, .reveal-right, .reveal-glow';
+    const newObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          newObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll(newRevealClasses).forEach(el => newObserver.observe(el));
   })();
 
   /* ============================================================
@@ -438,6 +450,13 @@
       }
     }
 
+    // Loader logoyu animasyonun tam ortasına yerleştir
+    const loaderLogo = document.querySelector('.loader-logo');
+    if (loaderLogo) {
+      loaderLogo.style.left = '50%';
+      loaderLogo.style.top = '50%';
+    }
+
     function initHeroChars() {
       const heroTitleEl = document.querySelector('.hero-title');
       if (!heroTitleEl) return;
@@ -505,16 +524,19 @@
       });
     });
 
-    /* --- 3D Hero Logo (fare ile kontrol) --- */
+    /* --- 3D Hero Logo (yavaş otomatik dönüş + fare ile kontrol) --- */
     if (!isMobile) {
       const logoWrapper = document.getElementById('hero3dLogo');
       if (logoWrapper) {
         const heroLogo = logoWrapper.querySelector('.hero-3d-logo');
         if (heroLogo) {
-          // Otomatik dönmeyi durdur, fare ile kontrol et
-          heroLogo.style.animation = 'none';
+          // Başlangıçta yavaş otomatik dönüş
+          heroLogo.style.animation = 'spin3dLogo 20s linear infinite';
           let logoRy = 0;
+          let mouseActive = false;
           const handleLogoMove = throttle((e) => {
+            mouseActive = true;
+            heroLogo.style.animation = 'none';
             const rect = logoWrapper.getBoundingClientRect();
             const px = (e.clientX - rect.left) / rect.width - 0.5;
             logoRy += px * 4;
@@ -523,10 +545,14 @@
           }, 16);
           logoWrapper.addEventListener('mousemove', handleLogoMove, { passive: true });
           logoWrapper.addEventListener('mouseleave', () => {
-            // Fare çıkınca yavaşça geri dön
+            // Fare çıkınca yavaşça otomatik dönüşe geri dön
             heroLogo.style.transition = 'transform 1.5s cubic-bezier(0.16,1,0.3,1)';
-            heroLogo.style.transform = `rotateY(${Math.round(logoRy / 90) * 90}deg) rotateX(5deg)`;
-            setTimeout(() => { heroLogo.style.transition = ''; }, 1600);
+            const snapAngle = Math.round(logoRy / 90) * 90;
+            heroLogo.style.transform = `rotateY(${snapAngle}deg) rotateX(5deg)`;
+            setTimeout(() => {
+              heroLogo.style.transition = '';
+              heroLogo.style.animation = 'spin3dLogo 20s linear infinite';
+            }, 1600);
           });
         }
       }
