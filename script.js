@@ -482,51 +482,6 @@ document.addEventListener('DOMContentLoaded', () => {
     card.addEventListener('mouseleave', () => { card.style.background = 'var(--bg-card)'; });
   });
 
-  /* ---------- Committee detail modal ---------- */
-  const modal = document.getElementById('committee-modal');
-  const modalTitle = modal.querySelector('.modal-title');
-  const modalBody = modal.querySelector('.modal-body');
-
-  document.querySelectorAll('[data-committee]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.dataset.committee;
-      modalTitle.textContent = LANGUAGE.t(`${key}Title`);
-      modalBody.textContent = LANGUAGE.t(`${key}Detail`);
-      modal.classList.add('active');
-    });
-  });
-  modal.querySelector('.modal-close').addEventListener('click', () => modal.classList.remove('active'));
-  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.classList.remove('active'); });
-
-  /* ---------- Form validation ---------- */
-  const form = document.getElementById('contact-form');
-  if (form) {
-    const successBox = document.getElementById('form-success');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let valid = true;
-      form.querySelectorAll('[data-required]').forEach(field => {
-        const errorEl = field.parentElement.querySelector('.form-error');
-        const value = field.value.trim();
-        let ok = value.length > 0;
-        if (field.type === 'email' && ok) {
-          ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-          if (!ok && errorEl) errorEl.textContent = LANGUAGE.t('errEmail');
-        } else if (!ok && errorEl) {
-          errorEl.textContent = LANGUAGE.t('errRequired');
-        }
-        if (errorEl) errorEl.classList.toggle('show', !ok);
-        field.style.borderColor = ok ? 'var(--border-soft)' : '#f0abfc';
-        if (!ok) valid = false;
-      });
-      if (valid) {
-        form.style.display = 'none';
-        successBox.classList.add('show');
-      }
-    });
-  }
-
   /* ---------- Parallax on hero (subtle mouse reactive) ---------- */
   if (!reduceMotion) {
     const moon = document.querySelector('.hero-moon');
