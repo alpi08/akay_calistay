@@ -1,12 +1,11 @@
-// script.js — optimize edilmiş birleşik dosya
-// language, particles, cursor, scroll, menu, main, interactions
+// script.js — optimize edilmiş + hatalar düzeltildi + interaktivite artırıldı
+// language, particles, cursor, scroll, menu, main
 
 (function() {
   'use strict';
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = window.matchMedia('(hover: none)').matches;
-  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   /* ============================================================
      1. LANGUAGE SYSTEM
@@ -168,17 +167,29 @@
      ============================================================ */
   function throttle(fn, delay) {
     let last = 0;
+    let rafId = null;
+    let lastArgs = null;
     return function(...args) {
+      lastArgs = args;
       const now = Date.now();
       if (now - last >= delay) {
         last = now;
         fn.apply(this, args);
+      } else if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          rafId = null;
+          const remaining = delay - (Date.now() - last);
+          if (remaining <= 0) {
+            last = Date.now();
+            fn.apply(this, lastArgs);
+          }
+        });
       }
     };
   }
 
   /* ============================================================
-     3. PARTICLES — optimize edilmiş (sayı azaltılmış, FPS düşürülmüş)
+     3. PARTICLES — optimize edilmiş
      ============================================================ */
   (() => {
     const canvas = document.getElementById('bg-canvas');
@@ -191,7 +202,7 @@
 
     const COLORS = ['rgba(255,255,255,', 'rgba(192,132,252,', 'rgba(233,213,255,'];
     let frameCount = 0;
-    const SKIP = 2; // her 3 frame'de bir çiz (FPS'i 3'te 1'e düşür)
+    const SKIP = 2;
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -206,7 +217,6 @@
     }
 
     function buildParticles() {
-      // %60 azaltılmış sayı: mobil 16, masaüstü 44 (eski: 40 / 110)
       const base = isMobile ? 16 : 44;
       particles = [];
       for (let i = 0; i < base; i++) {
@@ -235,7 +245,6 @@
     function draw() {
       if (!running) return;
       frameCount++;
-      // FPS throttle: her SKIP+1 frame'de bir çiz
       if (frameCount % (SKIP + 1) !== 0) {
         requestAnimationFrame(draw);
         return;
@@ -286,7 +295,6 @@
     let mx = window.innerWidth / 2, my = window.innerHeight / 2;
     let rx = mx, ry = my;
 
-    // Throttle edilmiş mousemove (16ms ≈ 60fps)
     const handleMove = throttle((e) => {
       mx = e.clientX; my = e.clientY;
       dot.style.left = mx + 'px';
@@ -308,7 +316,7 @@
     }
     requestAnimationFrame(loop);
 
-    const hoverTargets = 'a, button, .glass-card, input, textarea, .tilt-card';
+    const hoverTargets = 'a, button, .glass-card, input, textarea, .tilt-card, .sm-toggle-header';
     document.addEventListener('mouseover', (e) => {
       if (e.target.closest(hoverTargets)) ring.classList.add('hovering');
     }, { passive: true });
@@ -324,7 +332,7 @@
      ============================================================ */
   (() => {
     const nav = document.querySelector('.nav');
-    const NAV_THRESHOLD = 60; // header yüksekliğine göre scroll davranışı güncellendi
+    const NAV_THRESHOLD = 60;
 
     function onScroll() {
       if (window.scrollY > NAV_THRESHOLD) nav.classList.add('scrolled');
@@ -361,29 +369,22 @@
   })();
 
   /* ============================================================
-     6. STAGGERED MENU
+     6. STAGGERED MENU — header içindeki toggle ile
      ============================================================ */
   (() => {
     const wrapper = document.getElementById('staggered-menu');
-    const toggle = document.getElementById('sm-toggle');
-    const toggleText = document.getElementById('sm-toggle-text');
+    const toggle = document.getElementById('sm-toggle-header');
     const scrim = document.getElementById('sm-scrim');
     const panel = document.getElementById('sm-panel');
     if (!wrapper || !toggle) return;
 
     let open = false;
 
-    function setLabel(key) {
-      toggleText.textContent = LANGUAGE ? LANGUAGE.t(key) : (key === 'menuOpen' ? 'Menü' : 'Kapat');
-      toggleText.setAttribute('data-i18n', key);
-    }
-
     function openMenu() {
       open = true;
       wrapper.classList.add('sm-open');
       toggle.setAttribute('aria-expanded', 'true');
       panel.setAttribute('aria-hidden', 'false');
-      setLabel('menuClose');
       document.body.style.overflow = 'hidden';
     }
 
@@ -392,7 +393,6 @@
       wrapper.classList.remove('sm-open');
       toggle.setAttribute('aria-expanded', 'false');
       panel.setAttribute('aria-hidden', 'true');
-      setLabel('menuOpen');
       document.body.style.overflow = '';
     }
 
@@ -403,7 +403,7 @@
   })();
 
   /* ============================================================
-     7. LOADER + HERO + TILT + RIPPLE + GLARE + PARALLAX
+     7. LOADER + HERO + TILT + RIPPLE + GLARE
      ============================================================ */
   (() => {
     /* --- Loader sequence --- */
@@ -423,7 +423,6 @@
     }
 
     function spawnLoaderParticles() {
-      // 26 → 10 particle (loader particle sayısı azaltıldı)
       for (let i = 0; i < 10; i++) {
         const p = document.createElement('div');
         p.className = 'loader-particle';
@@ -475,7 +474,6 @@
       setTimeout(() => {
         loader.classList.add('hidden');
         playHero();
-        // Loader sonrası DOM cleanup: loader elementlerini gizle
         loader.style.display = 'none';
         loader.remove();
       }, 5200);
@@ -498,7 +496,7 @@
       });
     });
 
-    /* --- Glare hover (mission/vision/app/sponsor cards) --- */
+    /* --- Glare hover (throttle edilmiş) --- */
     document.querySelectorAll('.glare-hover').forEach(card => {
       const glareHandler = throttle((e) => {
         const rect = card.getBoundingClientRect();
@@ -510,7 +508,7 @@
       card.addEventListener('mouseleave', () => { card.style.background = 'var(--bg-card)'; });
     });
 
-    /* --- Tilt-3d cards (hafifletilmiş: rotate değerleri küçültüldü, mobilde kapalı) --- */
+    /* --- Tilt-3d cards (hafifletilmiş, mobilde kapalı) --- */
     if (!isMobile) {
       document.querySelectorAll('.tilt-3d').forEach(card => {
         card.style.transformStyle = 'preserve-3d';
@@ -519,7 +517,7 @@
           const rect = card.getBoundingClientRect();
           const px = (e.clientX - rect.left) / rect.width - 0.5;
           const py = (e.clientY - rect.top) / rect.height - 0.5;
-          const rotX = (-py * 5).toFixed(2); // 8 → 5 (hafifletilmiş)
+          const rotX = (-py * 5).toFixed(2);
           const rotY = (px * 5).toFixed(2);
           card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px) scale(1.015)`;
         }, 32);
@@ -539,7 +537,7 @@
           const rect = card.getBoundingClientRect();
           const px = (e.clientX - rect.left) / rect.width - 0.5;
           const py = (e.clientY - rect.top) / rect.height - 0.5;
-          const rotX = (-py * 6).toFixed(2); // 10 → 6 (hafifletilmiş)
+          const rotX = (-py * 6).toFixed(2);
           const rotY = (px * 6).toFixed(2);
           inner.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px)`;
         }, 32);
@@ -550,29 +548,10 @@
       });
     }
 
-    /* --- Parallax — kaldırıldı (hero-moon artık logo img, dekoratif yuvarlak yok) --- */
-    /* --- Hero scroll blur — kaldırıldı --- */
-
   })();
 
   /* ============================================================
-     8. MENÜ KAPANMA ANİMASYONLARI — hafifletilmiş
-     ============================================================ */
-  // CSS tarafında backdrop-filter blur'ları kaldırıldı
-  // sm-toggle'daki backdrop-filter kaldırıldı (CSS'te)
-  // Menü panelindeki backdrop-filter kaldırıldı (CSS'te)
-
-  /* ============================================================
-     9. SAYFA YÜKLENDİKTEN SONRA TEMİZLİK
-     ============================================================ */
-  window.addEventListener('load', () => {
-    // Görünmeyen animasyonları durdur: IntersectionObserver ile parallax/mouse event'leri
-    // Loader kaldırıldıktan sonra loader-related event'leri temizle
-    // Unused DOM nodes temizlendi (loader.remove() çağrıldı)
-  });
-
-  /* ============================================================
-     LANGUAGE INIT (DOMContentLoaded bağımsız — en son)
+     8. LANGUAGE INIT (en son)
      ============================================================ */
   LANGUAGE.init();
 
