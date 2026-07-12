@@ -43,7 +43,8 @@
       sponsorEyebrow: "Sponsorlar", sponsorTitle: "Bizi Destekleyenler",
       s1Desc: "Eğitim teknolojileri alanında yenilikçi çözümler sunan kurumsal destekçimiz.",
       s2Desc: "Yaratıcı tasarım ve marka deneyimleri üreten stratejik iş ortağımız.",
-      visitIg: "Instagram'da Ziyaret Et",
+      visitIg: "Instagram'da Ziyaret Et", visitWebsite: "Web Sitesi",
+      s3Desc: "Teknoloji alanında kurumsal destekçimiz.",
       contactEyebrow: "İletişim", contactTitle: "Bizimle İletişime Geç",
       contactDesc: "Sorularınız mı var? AKAY topluluğunun bir parçası olmak için bize ulaşın.",
       formName: "Ad Soyad", formEmail: "Email", formSubject: "Konu", formMessage: "Mesaj", formSend: "Gönder",
@@ -92,7 +93,8 @@
       sponsorEyebrow: "Sponsors", sponsorTitle: "Our Supporters",
       s1Desc: "Our corporate supporter delivering innovative solutions in education technology.",
       s2Desc: "Our strategic partner producing creative design and brand experiences.",
-      visitIg: "Visit on Instagram",
+      visitIg: "Visit on Instagram", visitWebsite: "Website",
+      s3Desc: "Our corporate supporter in the technology sector.",
       contactEyebrow: "Contact", contactTitle: "Get In Touch With Us",
       contactDesc: "Have questions? Reach out to become part of the AKAY community.",
       formName: "Full Name", formEmail: "Email", formSubject: "Subject", formMessage: "Message", formSend: "Send",
@@ -452,15 +454,22 @@
     }
 
     function playHero() {
+      // 1. Eyebrow animasyonu
+      const eyebrow = document.querySelector('.hero-eyebrow');
+      if (eyebrow) {
+        setTimeout(() => eyebrow.classList.add('visible'), 200);
+      }
+
+      // 2. Başlık karakterleri — 3D flip in
       document.querySelectorAll('.hero-title .char').forEach(c => {
-        c.style.transition = `opacity 700ms var(--ease), transform 700ms var(--ease)`;
-        c.style.opacity = 1;
-        c.style.transform = 'translateY(0)';
+        c.classList.add('visible');
       });
+
+      // 3. Alt başlık + CTAs
       const sub = document.querySelector('.hero-subtitle');
       const ctas = document.querySelector('.hero-ctas');
-      setTimeout(() => { sub.style.transition = 'opacity 900ms var(--ease)'; sub.style.opacity = 1; }, 500);
-      setTimeout(() => { ctas.style.transition = 'opacity 900ms var(--ease)'; ctas.style.opacity = 1; }, 800);
+      setTimeout(() => { sub.style.transition = 'opacity 900ms var(--ease)'; sub.style.opacity = 1; }, 800);
+      setTimeout(() => { ctas.style.transition = 'opacity 900ms var(--ease)'; ctas.style.opacity = 1; }, 1200);
     }
 
     initHeroChars();
@@ -495,6 +504,33 @@
         }, 700);
       });
     });
+
+    /* --- 3D Hero Logo (fare ile kontrol) --- */
+    if (!isMobile) {
+      const logoWrapper = document.getElementById('hero3dLogo');
+      if (logoWrapper) {
+        const heroLogo = logoWrapper.querySelector('.hero-3d-logo');
+        if (heroLogo) {
+          // Otomatik dönmeyi durdur, fare ile kontrol et
+          heroLogo.style.animation = 'none';
+          let logoRy = 0;
+          const handleLogoMove = throttle((e) => {
+            const rect = logoWrapper.getBoundingClientRect();
+            const px = (e.clientX - rect.left) / rect.width - 0.5;
+            logoRy += px * 4;
+            const tiltX = (e.clientY - rect.top) / rect.height - 0.5;
+            heroLogo.style.transform = `rotateY(${logoRy}deg) rotateX(${(-tiltX * 8).toFixed(1)}deg)`;
+          }, 16);
+          logoWrapper.addEventListener('mousemove', handleLogoMove, { passive: true });
+          logoWrapper.addEventListener('mouseleave', () => {
+            // Fare çıkınca yavaşça geri dön
+            heroLogo.style.transition = 'transform 1.5s cubic-bezier(0.16,1,0.3,1)';
+            heroLogo.style.transform = `rotateY(${Math.round(logoRy / 90) * 90}deg) rotateX(5deg)`;
+            setTimeout(() => { heroLogo.style.transition = ''; }, 1600);
+          });
+        }
+      }
+    }
 
     /* --- Glare hover (throttle edilmiş) --- */
     document.querySelectorAll('.glare-hover').forEach(card => {
