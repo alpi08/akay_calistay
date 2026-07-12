@@ -44,14 +44,11 @@
 <div class="cursor-ring" aria-hidden="true"></div>
 <div class="cursor-dot" aria-hidden="true"></div>
 
-<!-- Gradual blur transition strip -->
-<div class="gradual-blur gb-top" id="gradual-blur-top" aria-hidden="true"></div>
-
 <!-- Navigation -->
 <header class="nav">
   <div class="container nav-inner">
     <a href="#home" class="logo">
-      <img src="assets/Logo-1.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+      <img src="assets/Logo-0.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
       <span class="logo-text-fallback" style="display:none;">AKAY <em>Çalıştayı</em></span>
     </a>
     <div class="lang-switch">
@@ -102,7 +99,7 @@
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <div class="hero-moon" aria-hidden="true"></div>
+    <img src="assets/Logo-0.png" alt="" class="hero-moon hero-logo" onerror="this.style.display='none'" aria-hidden="true">
     <div class="container hero-content">
       <h1 class="hero-title">AKAY ÇALIŞTAYI</h1>
       <p class="hero-subtitle" data-i18n="heroSubtitleFull">Eleştirel düşünceyi, liderliği ve etkili iletişimi genç zihinlerle buluşturan akademik bir deneyim.</p>
@@ -199,7 +196,9 @@
 
       <div class="contact-side contact-side-solo">
         <div class="ig-card glass-card tilt-3d glare-hover reveal">
-          <div class="icon-circle">◎</div>
+          <div class="icon-circle">
+            <img src="assets/Logo-0.png" alt="" onerror="this.parentElement.textContent='◎'">
+          </div>
           <div>
             <h4 data-i18n="igName">AKAY Çalıştayı</h4>
             <span style="color:var(--text-muted); font-size:0.85rem;" data-i18n="igHandle">Resmi Instagram</span>
@@ -240,7 +239,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <a href="#home" class="logo">
-          <img src="assets/Logo-1.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+          <img src="assets/Logo-0.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
           <span class="logo-text-fallback" style="display:none;">AKAY <em>Çalıştayı</em></span>
         </a>
         <p class="footer-desc" data-i18n="footerDesc">Genç liderleri bir araya getiren akademik bir çalıştay.</p>
@@ -273,9 +272,6 @@
 </footer>
 
 <script src="script.js"></script>
-
-
-
 
 
 
