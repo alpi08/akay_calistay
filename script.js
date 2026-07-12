@@ -46,7 +46,8 @@ const translations = {
     footerDesc: "Genç liderleri, eleştirel düşünürleri ve iletişimcileri bir araya getiren akademik bir çalıştay.",
     footerNav: "Navigasyon", footerApps: "Başvurular", footerSocial: "Sosyal",
     copyright: "Tüm Hakları Saklıdır.",
-    close: "Kapat"
+    close: "Kapat",
+    menuOpen: "Menü", menuClose: "Kapat"
   },
   en: {
     navHome: "Home", navAbout: "About", navMission: "Mission", navVision: "Vision",
@@ -94,7 +95,8 @@ const translations = {
     footerDesc: "An academic workshop bringing together young leaders, critical thinkers, and communicators.",
     footerNav: "Navigation", footerApps: "Applications", footerSocial: "Social",
     copyright: "All Rights Reserved.",
-    close: "Close"
+    close: "Close",
+    menuOpen: "Menu", menuClose: "Close"
   }
 };
 
@@ -318,16 +320,49 @@ document.addEventListener('DOMContentLoaded', () => LANGUAGE.init());
     groupObserver.observe(group);
   });
 
-  // Mobile nav toggle
-  const toggle = document.querySelector('.nav-toggle');
-  const links = document.querySelector('.nav-links');
-  if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      const open = links.classList.toggle('mobile-open');
-      toggle.setAttribute('aria-expanded', open);
-    });
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('mobile-open')));
+})();
+// menu.js — vanilla re-creation of the StaggeredMenu interaction (no GSAP dependency)
+(() => {
+  const wrapper = document.getElementById('staggered-menu');
+  const toggle = document.getElementById('sm-toggle');
+  const toggleText = document.getElementById('sm-toggle-text');
+  const scrim = document.getElementById('sm-scrim');
+  const panel = document.getElementById('sm-panel');
+  if (!wrapper || !toggle) return;
+
+  let open = false;
+
+  function setLabel(key) {
+    const span = document.createElement('span');
+    span.className = 'sm-toggle-line';
+    span.setAttribute('data-i18n', key);
+    span.textContent = window.LANGUAGE ? LANGUAGE.t(key) : (key === 'menuOpen' ? 'Menü' : 'Kapat');
+    toggleText.innerHTML = '';
+    toggleText.appendChild(span);
   }
+
+  function openMenu() {
+    open = true;
+    wrapper.classList.add('sm-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    panel.setAttribute('aria-hidden', 'false');
+    setLabel('menuClose');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    open = false;
+    wrapper.classList.remove('sm-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    panel.setAttribute('aria-hidden', 'true');
+    setLabel('menuOpen');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', () => (open ? closeMenu() : openMenu()));
+  scrim.addEventListener('click', closeMenu);
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && open) closeMenu(); });
 })();
 // main.js — loader sequence, hero reveal, tilt cards, modal, form validation, ripple, parallax
 document.addEventListener('DOMContentLoaded', () => {
@@ -501,4 +536,81 @@ document.addEventListener('DOMContentLoaded', () => {
       if (moon) moon.style.transform = `translate(${x}px, ${y}px)`;
     }, { passive: true });
   }
+});
+// interactions.js — GradualBlur, generalized TiltedCard (3D), magnetic buttons, extra life
+document.addEventListener('DOMContentLoaded', () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- GradualBlur: layered progressive blur strip ---------- */
+  function buildGradualBlur(el, steps = 6, maxBlur = 14) {
+    if (!el) return;
+    el.innerHTML = '';
+    for (let i = 0; i < steps; i++) {
+      const layer = document.createElement('div');
+      layer.className = 'gb-layer';
+      const blurAmt = (maxBlur / steps) * (i + 1);
+      const start = (i / steps) * 100;
+      const mid = ((i + 1) / steps) * 100;
+      layer.style.backdropFilter = `blur(${blurAmt}px)`;
+      layer.style.webkitBackdropFilter = `blur(${blurAmt}px)`;
+      layer.style.maskImage = `linear-gradient(to bottom, rgba(0,0,0,1) ${start}%, rgba(0,0,0,1) ${mid}%, rgba(0,0,0,0) 100%)`;
+      layer.style.webkitMaskImage = layer.style.maskImage;
+      el.appendChild(layer);
+    }
+  }
+  buildGradualBlur(document.getElementById('gradual-blur-top'));
+
+  /* ---------- Generalized 3D tilt for any .tilt-3d element ---------- */
+  if (!reduceMotion && !window.matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.tilt-3d').forEach(card => {
+      card.style.transformStyle = 'preserve-3d';
+      card.style.willChange = 'transform';
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        const rotX = (-py * 8).toFixed(2);
+        const rotY = (px * 8).toFixed(2);
+        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px) scale(1.015)`;
+        card.style.boxShadow = `${-px * 30}px ${20 - py * 20}px 60px rgba(122,59,255,0.28)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+        card.style.boxShadow = '';
+      });
+    });
+  }
+
+  /* ---------- Magnetic buttons ---------- */
+  if (!reduceMotion && !window.matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) * 0.28;
+        const y = (e.clientY - rect.top - rect.height / 2) * 0.35;
+        btn.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+  }
+
+  /* ---------- Committee icon tilt-card wrapper also gets subtle depth on scroll ---------- */
+  const heroSection = document.querySelector('.hero');
+  if (heroSection && !reduceMotion) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      heroSection.style.filter = y > 0 ? `blur(${Math.min(y / 90, 4)}px)` : 'none';
+    }, { passive: true });
+  }
+
+  /* ---------- Numbering count animation for committee icons (subtle life) ---------- */
+  document.querySelectorAll('.tilt-icon').forEach((icon, i) => {
+    icon.style.transition = 'transform 500ms var(--ease)';
+    icon.closest('.tilt-card')?.addEventListener('mouseenter', () => {
+      icon.style.transform = 'rotate(180deg) scale(1.12)';
+    });
+    icon.closest('.tilt-card')?.addEventListener('mouseleave', () => {
+      icon.style.transform = 'rotate(0) scale(1)';
+    });
+  });
 });
