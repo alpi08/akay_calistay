@@ -16,7 +16,6 @@
 
 <link rel="stylesheet" href="style.css">
 
-
 </head>
 <body>
 
@@ -48,30 +47,27 @@
 <header class="nav">
   <div class="container nav-inner">
     <a href="#home" class="logo">
-      <img src="assets/Logo-0.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+      <img src="assets/Logo-1.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
       <span class="logo-text-fallback" style="display:none;">AKAY <em>Çalıştayı</em></span>
     </a>
-    <div class="lang-switch">
-      <button data-lang-btn="tr">TR</button>
-      <button data-lang-btn="en">EN</button>
+
+    <!-- Menü toggle header içinde -->
+    <div class="nav-right">
+      <button class="sm-toggle-header" id="sm-toggle-header" aria-label="Menü" aria-expanded="false">
+        <span class="sm-toggle-header-line"></span>
+        <span class="sm-toggle-header-line"></span>
+        <span class="sm-toggle-header-line"></span>
+      </button>
+      <div class="lang-switch">
+        <button data-lang-btn="tr">TR</button>
+        <button data-lang-btn="en">EN</button>
+      </div>
     </div>
   </div>
 </header>
 
 <!-- Staggered side menu -->
-<div class="staggered-menu-wrapper" data-position="right" id="staggered-menu">
-  <button class="sm-toggle" id="sm-toggle" aria-label="Menü" aria-expanded="false" aria-controls="sm-panel">
-    <span class="sm-toggle-textWrap" aria-hidden="true">
-      <span class="sm-toggle-textInner" id="sm-toggle-text">
-        <span class="sm-toggle-line" data-i18n="menuOpen">Menü</span>
-      </span>
-    </span>
-    <span class="sm-icon">
-      <span class="sm-icon-line"></span>
-      <span class="sm-icon-line sm-icon-line-v"></span>
-    </span>
-  </button>
-
+<div class="staggered-menu-wrapper" id="staggered-menu">
   <div class="sm-scrim" id="sm-scrim"></div>
   <aside id="sm-panel" class="staggered-menu-panel" aria-hidden="true">
     <div class="sm-panel-inner">
@@ -99,7 +95,11 @@
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <img src="assets/Logo-0.png" alt="" class="hero-moon hero-logo" onerror="this.style.display='none'" aria-hidden="true">
+    <div class="hero-bg-glow" aria-hidden="true"></div>
+    <div class="hero-floating-logos" aria-hidden="true">
+      <img src="assets/Logo-0.png" alt="" class="hero-float-logo hero-float-1" onerror="this.style.display='none'">
+      <img src="assets/Logo-0.png" alt="" class="hero-float-logo hero-float-2" onerror="this.style.display='none'">
+    </div>
     <div class="container hero-content">
       <h1 class="hero-title">AKAY ÇALIŞTAYI</h1>
       <p class="hero-subtitle" data-i18n="heroSubtitleFull">Eleştirel düşünceyi, liderliği ve etkili iletişimi genç zihinlerle buluşturan akademik bir deneyim.</p>
@@ -117,7 +117,9 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="container about-grid">
-      <div class="about-visual reveal" aria-hidden="true"></div>
+      <div class="about-visual reveal" aria-hidden="true">
+        <img src="assets/Logo-1.png" alt="AKAY Çalıştayı" class="about-logo" onerror="this.style.display='none'">
+      </div>
       <div class="about-text">
         <span class="eyebrow" data-i18n="aboutEyebrow">Hakkımızda</span>
         <h2 class="section-title reveal" data-i18n="aboutTitle">AKAY Çalıştayı</h2>
@@ -239,7 +241,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <a href="#home" class="logo">
-          <img src="assets/Logo-0.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+          <img src="assets/Logo-1.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
           <span class="logo-text-fallback" style="display:none;">AKAY <em>Çalıştayı</em></span>
         </a>
         <p class="footer-desc" data-i18n="footerDesc">Genç liderleri bir araya getiren akademik bir çalıştay.</p>
@@ -272,8 +274,6 @@
 </footer>
 
 <script src="script.js"></script>
-
-
 
 </body>
 </html>
