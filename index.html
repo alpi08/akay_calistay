@@ -23,6 +23,11 @@
 <!-- Loader -->
 <div id="loader">
   <div class="loader-scene">
+    <div class="loader-3d" aria-hidden="true">
+      <div class="loader-ring r1"></div>
+      <div class="loader-ring r2"></div>
+      <div class="loader-ring r3"></div>
+    </div>
     <div class="loader-glow"></div>
     <img src="assets/Logo-0.png" alt="AKAY Çalıştayı" class="loader-logo" onerror="this.style.display='none'">
     <h1 class="loader-title"></h1>
@@ -58,12 +63,6 @@
 
 <!-- Staggered side menu -->
 <div class="staggered-menu-wrapper" data-position="right" id="staggered-menu">
-  <div class="sm-prelayers" aria-hidden="true">
-    <div class="sm-prelayer" style="background:#5227FF"></div>
-    <div class="sm-prelayer" style="background:#7A3BFF"></div>
-    <div class="sm-prelayer" style="background:#A855F7"></div>
-  </div>
-
   <button class="sm-toggle" id="sm-toggle" aria-label="Menü" aria-expanded="false" aria-controls="sm-panel">
     <span class="sm-toggle-textWrap" aria-hidden="true">
       <span class="sm-toggle-textInner" id="sm-toggle-text">
@@ -84,10 +83,9 @@
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#about" data-index="02"><span class="sm-panel-itemLabel" data-i18n="navAbout">Hakkımızda</span></a></li>
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#mission" data-index="03"><span class="sm-panel-itemLabel" data-i18n="navMission">Misyon</span></a></li>
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#vision" data-index="04"><span class="sm-panel-itemLabel" data-i18n="navVision">Vizyon</span></a></li>
-        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#committees" data-index="05"><span class="sm-panel-itemLabel" data-i18n="navCommittees">Komiteler</span></a></li>
-        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#sponsors" data-index="06"><span class="sm-panel-itemLabel" data-i18n="navSponsors">Sponsorlar</span></a></li>
-        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#apply" data-index="07"><span class="sm-panel-itemLabel" data-i18n="navApply">Başvurular</span></a></li>
-        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#contact" data-index="08"><span class="sm-panel-itemLabel" data-i18n="navContact">İletişim</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#sponsors" data-index="05"><span class="sm-panel-itemLabel" data-i18n="navSponsors">Sponsorlar</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#apply" data-index="06"><span class="sm-panel-itemLabel" data-i18n="navApply">Başvurular</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#contact" data-index="07"><span class="sm-panel-itemLabel" data-i18n="navContact">İletişim</span></a></li>
       </ul>
       <div class="sm-socials">
         <h3 class="sm-socials-title" data-i18n="footerSocial">Sosyal</h3>
@@ -109,7 +107,7 @@
       <h1 class="hero-title">AKAY ÇALIŞTAYI</h1>
       <p class="hero-subtitle" data-i18n="heroSubtitleFull">Eleştirel düşünceyi, liderliği ve etkili iletişimi genç zihinlerle buluşturan akademik bir deneyim.</p>
       <div class="hero-ctas">
-        <a href="#apply" class="btn btn-primary star-border" data-i18n="heroApply">Başvur</a>
+        <a href="#apply" class="btn btn-primary" data-i18n="heroApply">Başvur</a>
         <a href="https://www.instagram.com/akay_calistay" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="heroInstagram">Instagram</a>
       </div>
     </div>
@@ -133,61 +131,20 @@
     </div>
   </section>
 
-  <!-- MISSION -->
+  <!-- MISSION & VISION -->
   <section id="mission">
-    <div class="container mv-section">
-      <div class="mv-card glass-card tilt-3d glare-hover reveal">
-        <span class="eyebrow" data-i18n="missionEyebrow">Misyon</span>
-        <h3 data-i18n="missionTitle">Misyonumuz</h3>
-        <p data-i18n="missionText">AKAY Çalıştayı olarak misyonumuz...</p>
-      </div>
-      <div class="mv-visual reveal" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- VISION -->
-  <section id="vision">
-    <div class="container mv-section reverse">
-      <div class="mv-card glass-card tilt-3d glare-hover reveal">
-        <span class="eyebrow" data-i18n="visionEyebrow">Vizyon</span>
-        <h3 data-i18n="visionTitle">Vizyonumuz</h3>
-        <p data-i18n="visionText">Vizyonumuz...</p>
-      </div>
-      <div class="mv-visual reveal" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- COMMITTEES -->
-  <section id="committees">
     <div class="container">
-      <span class="eyebrow" data-i18n="commEyebrow">Komiteler</span>
-      <h2 class="section-title reveal" data-i18n="commTitle">Geleceği Birlikte Tartışıyoruz</h2>
-      <p class="section-desc reveal" data-i18n="commDesc">Her komite farklı bir küresel meseleye odaklanır.</p>
-
-      <div class="committee-grid">
-        <div class="tilt-card reveal">
-          <div class="tilt-card-inner glass-card">
-            <div class="tilt-icon">◈</div>
-            <h4 data-i18n="c1Title">Diplomasi Komitesi</h4>
-            <p data-i18n="c1Desc">Uluslararası ilişkileri keşfeden komite.</p>
-            <button class="detail-btn" data-committee="c1" data-i18n="detailBtn">Detayları Gör</button>
-          </div>
+      <div class="mv-duo">
+        <div class="mv-col tilt-3d reveal">
+          <span class="eyebrow" data-i18n="missionEyebrow">Misyon</span>
+          <h3 data-i18n="missionTitle">Misyonumuz</h3>
+          <p data-i18n="missionText">AKAY Çalıştayı olarak misyonumuz...</p>
         </div>
-        <div class="tilt-card reveal">
-          <div class="tilt-card-inner glass-card">
-            <div class="tilt-icon">◆</div>
-            <h4 data-i18n="c2Title">Ekonomi Komitesi</h4>
-            <p data-i18n="c2Desc">Küresel ekonomik politikaları analiz eden komite.</p>
-            <button class="detail-btn" data-committee="c2" data-i18n="detailBtn">Detayları Gör</button>
-          </div>
-        </div>
-        <div class="tilt-card reveal">
-          <div class="tilt-card-inner glass-card">
-            <div class="tilt-icon">◇</div>
-            <h4 data-i18n="c3Title">Medya ve İletişim Komitesi</h4>
-            <p data-i18n="c3Desc">Etkili iletişim stratejilerini inceleyen komite.</p>
-            <button class="detail-btn" data-committee="c3" data-i18n="detailBtn">Detayları Gör</button>
-          </div>
+        <div class="mv-divider" aria-hidden="true"></div>
+        <div class="mv-col tilt-3d reveal" id="vision">
+          <span class="eyebrow" data-i18n="visionEyebrow">Vizyon</span>
+          <h3 data-i18n="visionTitle">Vizyonumuz</h3>
+          <p data-i18n="visionText">Vizyonumuz...</p>
         </div>
       </div>
     </div>
@@ -202,12 +159,12 @@
         <div class="app-card glass-card tilt-3d glare-hover reveal">
           <h4 data-i18n="teamAppTitle">Ekip Başvurusu</h4>
           <p data-i18n="teamAppDesc">Organizasyon ekibinin bir parçası ol.</p>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSet9DfTwEO3jdOBQfqw_QmjkNXHArUfq8Zc_aUq2ibsPsoHaA/viewform" target="_blank" rel="noopener" class="btn btn-primary star-border" data-i18n="applyNow">Başvur</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSet9DfTwEO3jdOBQfqw_QmjkNXHArUfq8Zc_aUq2ibsPsoHaA/viewform" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="applyNow">Başvur</a>
         </div>
         <div class="app-card glass-card tilt-3d glare-hover reveal">
           <h4 data-i18n="academyAppTitle">Akademi Başvurusu</h4>
           <p data-i18n="academyAppDesc">Komitelere katılımcı olarak katıl.</p>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSf1zOQRr3ZuWUW3-047SzuogOTg60BxzNcCXyXHstgYM82pJg/viewform" target="_blank" rel="noopener" class="btn btn-primary star-border" data-i18n="applyNow">Başvur</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSf1zOQRr3ZuWUW3-047SzuogOTg60BxzNcCXyXHstgYM82pJg/viewform" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="applyNow">Başvur</a>
         </div>
       </div>
     </div>
@@ -222,12 +179,12 @@
         <div class="sponsor-card glass-card tilt-3d glare-hover reveal">
           <div class="sponsor-mark">Nova Smart School</div>
           <p data-i18n="s1Desc">Eğitim teknolojileri alanında destekçimiz.</p>
-          <a href="https://www.instagram.com/novasmartschooltech/" target="_blank" rel="noopener" class="btn btn-outline star-border" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
+          <a href="https://www.instagram.com/novasmartschooltech/" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
         </div>
         <div class="sponsor-card glass-card tilt-3d glare-hover reveal">
           <div class="sponsor-mark">Ccord Design</div>
           <p data-i18n="s2Desc">Yaratıcı tasarım ortağımız.</p>
-          <a href="https://www.instagram.com/ccorddesign/" target="_blank" rel="noopener" class="btn btn-outline star-border" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
+          <a href="https://www.instagram.com/ccorddesign/" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
         </div>
       </div>
     </div>
@@ -240,66 +197,36 @@
       <h2 class="section-title reveal" data-i18n="contactTitle">Bizimle İletişime Geç</h2>
       <p class="section-desc reveal" data-i18n="contactDesc">Sorularınız mı var? Bize ulaşın.</p>
 
-      <div class="contact-grid">
-        <div class="contact-form-card glass-card tilt-3d reveal">
-          <form id="contact-form" novalidate>
-            <div class="form-group">
-              <label for="name" class="visually-hidden"></label>
-              <input type="text" id="name" data-required data-i18n-placeholder="formName" placeholder="Ad Soyad">
-              <div class="form-error"></div>
+      <div class="contact-side contact-side-solo">
+        <div class="ig-card glass-card tilt-3d glare-hover reveal">
+          <div class="icon-circle">◎</div>
+          <div>
+            <h4 data-i18n="igName">AKAY Çalıştayı</h4>
+            <span style="color:var(--text-muted); font-size:0.85rem;" data-i18n="igHandle">Resmi Instagram</span>
+            <div style="margin-top:0.8rem;">
+              <a href="https://www.instagram.com/akay_calistay" target="_blank" rel="noopener" class="btn btn-outline" style="padding:0.6rem 1.2rem; font-size:0.82rem;" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
             </div>
-            <div class="form-group">
-              <input type="email" id="email" data-required data-i18n-placeholder="formEmail" placeholder="Email">
-              <div class="form-error"></div>
-            </div>
-            <div class="form-group">
-              <input type="text" id="subject" data-required data-i18n-placeholder="formSubject" placeholder="Konu">
-              <div class="form-error"></div>
-            </div>
-            <div class="form-group">
-              <textarea id="message" data-required data-i18n-placeholder="formMessage" placeholder="Mesaj"></textarea>
-              <div class="form-error"></div>
-            </div>
-            <button type="submit" class="btn btn-primary star-border" data-i18n="formSend">Gönder</button>
-          </form>
-          <div id="form-success" class="form-success">
-            <div class="icon">✦</div>
-            <h4 data-i18n="successTitle">Mesajınız İçin Teşekkürler!</h4>
-            <p data-i18n="successDesc" style="color:var(--text-secondary); margin-top:0.6rem;">Bizimle Instagram'dan iletişime geçebilirsiniz.</p>
           </div>
         </div>
-
-        <div class="contact-side">
-          <div class="ig-card glass-card tilt-3d glare-hover reveal">
-            <div class="icon-circle">◎</div>
-            <div>
-              <h4 data-i18n="igName">AKAY Çalıştayı</h4>
-              <span style="color:var(--text-muted); font-size:0.85rem;" data-i18n="igHandle">Resmi Instagram</span>
-              <div style="margin-top:0.8rem;">
-                <a href="https://www.instagram.com/akay_calistay" target="_blank" rel="noopener" class="btn btn-outline star-border" style="padding:0.6rem 1.2rem; font-size:0.82rem;" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
-              </div>
+        <div class="wa-card glass-card reveal">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div class="icon-circle">✆</div>
+            <div class="wa-info">
+              <h4 data-i18n="wa1Name">Zeynep Beril Köse</h4>
+              <span data-i18n="wa1Role">Organizasyon Ekibi</span>
             </div>
           </div>
-          <div class="wa-card glass-card reveal">
-            <div style="display:flex; align-items:center; gap:1rem;">
-              <div class="icon-circle">✆</div>
-              <div class="wa-info">
-                <h4 data-i18n="wa1Name">Zeynep Beril Köse</h4>
-                <span data-i18n="wa1Role">Organizasyon Ekibi</span>
-              </div>
+          <a href="https://wa.me/905388183222" target="_blank" rel="noopener" class="btn btn-primary wa-btn" data-i18n="waBtn">WhatsApp</a>
+        </div>
+        <div class="wa-card glass-card reveal">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div class="icon-circle">✆</div>
+            <div class="wa-info">
+              <h4 data-i18n="wa2Name">Eylül Ulubulut</h4>
+              <span data-i18n="wa2Role">Organizasyon Ekibi</span>
             </div>
-            <a href="https://wa.me/905388183222" target="_blank" rel="noopener" class="btn btn-primary star-border wa-btn" data-i18n="waBtn">WhatsApp</a>
           </div>
-          <div class="wa-card glass-card reveal">
-            <div style="display:flex; align-items:center; gap:1rem;">
-              <div class="icon-circle">✆</div>
-              <div class="wa-info">
-                <h4 data-i18n="wa2Name">Eylül Ulubulut</h4>
-                <span data-i18n="wa2Role">Organizasyon Ekibi</span>
-              </div>
-            </div>
-            <a href="https://wa.me/905054965668" target="_blank" rel="noopener" class="btn btn-primary star-border wa-btn" data-i18n="waBtn">WhatsApp</a>
-          </div>
+          <a href="https://wa.me/905054965668" target="_blank" rel="noopener" class="btn btn-primary wa-btn" data-i18n="waBtn">WhatsApp</a>
         </div>
       </div>
     </div>
@@ -312,7 +239,10 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col">
-        <a href="#home" class="logo">AKAY <span>Çalıştayı</span></a>
+        <a href="#home" class="logo">
+          <img src="assets/Logo-1.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+          <span class="logo-text-fallback" style="display:none;">AKAY <em>Çalıştayı</em></span>
+        </a>
         <p class="footer-desc" data-i18n="footerDesc">Genç liderleri bir araya getiren akademik bir çalıştay.</p>
       </div>
       <div class="footer-col">
@@ -320,7 +250,6 @@
         <ul class="footer-links">
           <li><a href="#mission" data-i18n="navMission">Misyon</a></li>
           <li><a href="#vision" data-i18n="navVision">Vizyon</a></li>
-          <li><a href="#committees" data-i18n="navCommittees">Komiteler</a></li>
           <li><a href="#sponsors" data-i18n="navSponsors">Sponsorlar</a></li>
         </ul>
       </div>
@@ -342,15 +271,6 @@
     </div>
   </div>
 </footer>
-
-<!-- Committee detail modal -->
-<div class="modal-overlay" id="committee-modal">
-  <div class="modal-box glass-card">
-    <button class="modal-close" data-i18n="close" aria-label="Close">✕</button>
-    <h3 class="modal-title" style="margin-bottom:1rem;"></h3>
-    <p class="modal-body" style="color:var(--text-secondary); line-height:1.8;"></p>
-  </div>
-</div>
 
 <script src="script.js"></script>
 
