@@ -28,7 +28,7 @@
       <div class="loader-ring r3"></div>
     </div>
     <div class="loader-glow"></div>
-    <img src="assets/Logo-0.png" alt="AKAY Çalıştayı" class="loader-logo" onerror="this.style.display='none'">
+    <img src="Logo-0.png" alt="AKAY Çalıştayı" class="loader-logo" onerror="this.style.display='none'">
     <h1 class="loader-title"></h1>
     <p class="loader-subtitle">Geleceğin Liderlerini Bir Araya Getiriyoruz</p>
   </div>
@@ -47,7 +47,7 @@
 <header class="nav">
   <div class="container nav-inner">
     <a href="#home" class="logo">
-      <img src="assets/Logo-1.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+      <img src="Logo-1.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
       <span class="logo-text-fallback" style="display:none;">AKAY <em>Çalıştayı</em></span>
     </a>
 
@@ -93,21 +93,33 @@
 
 <main>
 
-  <!-- HERO -->
+  <!-- HERO: sol yazı + sağ 3D döner logo -->
   <section class="hero" id="home">
     <div class="hero-bg-glow" aria-hidden="true"></div>
-    <div class="hero-floating-logos" aria-hidden="true">
-      <img src="assets/Logo-0.png" alt="" class="hero-float-logo hero-float-1" onerror="this.style.display='none'">
-      <img src="assets/Logo-0.png" alt="" class="hero-float-logo hero-float-2" onerror="this.style.display='none'">
-    </div>
-    <div class="container hero-content">
-      <h1 class="hero-title">AKAY ÇALIŞTAYI</h1>
-      <p class="hero-subtitle" data-i18n="heroSubtitleFull">Eleştirel düşünceyi, liderliği ve etkili iletişimi genç zihinlerle buluşturan akademik bir deneyim.</p>
-      <div class="hero-ctas">
-        <a href="#apply" class="btn btn-primary" data-i18n="heroApply">Başvur</a>
-        <a href="https://www.instagram.com/akay_calistay" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="heroInstagram">Instagram</a>
+
+    <div class="container hero-layout">
+
+      <!-- SOL: yazı -->
+      <div class="hero-left">
+        <span class="eyebrow hero-eyebrow" data-i18n="heroSubtitle">Geleceğin Liderlerini Bir Araya Getiriyoruz</span>
+        <h1 class="hero-title">AKAY ÇALIŞTAYI</h1>
+        <p class="hero-subtitle" data-i18n="heroSubtitleFull">Eleştirel düşünceyi, liderliği ve etkili iletişimi genç zihinlerle buluşturan akademik bir deneyim.</p>
+        <div class="hero-ctas">
+          <a href="#apply" class="btn btn-primary" data-i18n="heroApply">Başvur</a>
+          <a href="https://www.instagram.com/akay_calistay" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="heroInstagram">Instagram</a>
+        </div>
       </div>
+
+      <!-- SAĞ: 3D döner logo -->
+      <div class="hero-right">
+        <div class="hero-3d-logo-wrapper" id="hero3dLogo">
+          <img src="Logo-0.png" alt="AKAY Çalıştayı" class="hero-3d-logo" onerror="this.style.display='none'">
+        </div>
+        <div class="hero-3d-glow" aria-hidden="true"></div>
+      </div>
+
     </div>
+
     <div class="scroll-indicator">
       <div class="scroll-mouse"></div>
       <span data-i18n="scrollHint">Aşağı Kaydır</span>
@@ -118,7 +130,7 @@
   <section id="about">
     <div class="container about-grid">
       <div class="about-visual reveal" aria-hidden="true">
-        <img src="assets/Logo-1.png" alt="AKAY Çalıştayı" class="about-logo" onerror="this.style.display='none'">
+        <img src="Logo-1.png" alt="AKAY Çalıştayı" class="about-logo" onerror="this.style.display='none'">
       </div>
       <div class="about-text">
         <span class="eyebrow" data-i18n="aboutEyebrow">Hakkımızda</span>
@@ -169,7 +181,7 @@
     </div>
   </section>
 
-  <!-- SPONSORS -->
+  <!-- SPONSORS (3 kart: Nova, Ccord, Vertex) -->
   <section id="sponsors">
     <div class="container" style="text-align:center;">
       <span class="eyebrow" data-i18n="sponsorEyebrow">Sponsorlar</span>
@@ -185,6 +197,11 @@
           <p data-i18n="s2Desc">Yaratıcı tasarım ortağımız.</p>
           <a href="https://www.instagram.com/ccorddesign/" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="visitIg">Instagram'da Ziyaret Et</a>
         </div>
+        <div class="sponsor-card glass-card tilt-3d glare-hover reveal">
+          <div class="sponsor-mark">Vertex</div>
+          <p data-i18n="s3Desc">Teknoloji alanında kurumsal destekçimiz.</p>
+          <a href="https://vertexishere.com" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="visitWebsite">Web Sitesi</a>
+        </div>
       </div>
     </div>
   </section>
@@ -199,7 +216,7 @@
       <div class="contact-side contact-side-solo">
         <div class="ig-card glass-card tilt-3d glare-hover reveal">
           <div class="icon-circle">
-            <img src="assets/Logo-0.png" alt="" onerror="this.parentElement.textContent='◎'">
+            <img src="Logo-0.png" alt="" onerror="this.parentElement.textContent='◎'">
           </div>
           <div>
             <h4 data-i18n="igName">AKAY Çalıştayı</h4>
@@ -241,7 +258,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <a href="#home" class="logo">
-          <img src="assets/Logo-1.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+          <img src="Logo-1.png" alt="AKAY Çalıştayı" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
           <span class="logo-text-fallback" style="display:none;">AKAY <em>Çalıştayı</em></span>
         </a>
         <p class="footer-desc" data-i18n="footerDesc">Genç liderleri bir araya getiren akademik bir çalıştay.</p>
