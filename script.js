@@ -20,6 +20,19 @@
     navigator.maxTouchPoints > 0;
 
   /* =========================================================
+     SAYFA HAZIR
+     
+     ÖNEMLİ:
+     CSS tarafında .reveal varsayılan olarak görünür.
+     JS gerçekten çalışıyorsa .js-ready eklenir ve
+     animasyonlar aktif hale gelir.
+     
+     Böylece JS ölürse tüm site kaybolmaz.
+  ========================================================= */
+
+  document.documentElement.classList.add("js-ready");
+
+  /* =========================================================
      TRANSLATIONS
   ========================================================= */
 
@@ -268,17 +281,19 @@
 
   let language = "tr";
   let countdownTimer = null;
-  let loaderFinished = false;
+  let loaderClosed = false;
 
   try {
-    const saved =
-      localStorage.getItem("akay-language");
+    const savedLanguage =
+      localStorage.getItem(
+        "akay-language"
+      );
 
     if (
-      saved === "tr" ||
-      saved === "en"
+      savedLanguage === "tr" ||
+      savedLanguage === "en"
     ) {
-      language = saved;
+      language = savedLanguage;
     }
   } catch {
     language = "tr";
@@ -292,8 +307,8 @@
     return path
       .split(".")
       .reduce(
-        (object, key) =>
-          object && object[key],
+        (current, key) =>
+          current && current[key],
         translations[language]
       );
   }
@@ -304,20 +319,22 @@
 
     $$("[data-i18n]").forEach(
       (element) => {
-        const value =
+        const translated =
           getTranslation(
             element.dataset.i18n
           );
 
         if (
-          typeof value === "string"
+          typeof translated ===
+          "string"
         ) {
-          element.innerHTML = value;
+          element.innerHTML =
+            translated;
         }
       }
     );
 
-    const languageButton =
+    const langButton =
       $("#langButton");
 
     const mobileLang =
@@ -326,8 +343,8 @@
     const footerLang =
       $("#footerLang");
 
-    if (languageButton) {
-      languageButton.textContent =
+    if (langButton) {
+      langButton.textContent =
         language === "tr"
           ? "TR / EN"
           : "EN / TR";
@@ -365,7 +382,7 @@
         language
       );
     } catch {
-      // localStorage erişimi yoksa oturum içinde çalışmaya devam eder.
+      /* localStorage yoksa devam et */
     }
 
     translatePage();
@@ -374,27 +391,32 @@
   function setupLanguage() {
     translatePage();
 
-    $("#langButton")
-      ?.addEventListener(
-        "click",
-        switchLanguage
-      );
+    $("#langButton")?.addEventListener(
+      "click",
+      switchLanguage
+    );
 
-    $("#mobileLang")
-      ?.addEventListener(
-        "click",
-        switchLanguage
-      );
+    $("#mobileLang")?.addEventListener(
+      "click",
+      switchLanguage
+    );
 
-    $("#footerLang")
-      ?.addEventListener(
-        "click",
-        switchLanguage
-      );
+    $("#footerLang")?.addEventListener(
+      "click",
+      switchLanguage
+    );
   }
 
   /* =========================================================
      LOADER
+     
+     ÜÇLÜ GÜVENLİK:
+     1. Normal JS çıkışı
+     2. Hard timeout
+     3. CSS failsafe zaten style.css içinde mevcut
+     
+     Böylece JS'nin geri kalanında bir hata olsa bile
+     loader kendi CSS animasyonuyla kapanır.
   ========================================================= */
 
   function closeLoader() {
@@ -403,28 +425,29 @@
 
     if (
       !loader ||
-      loaderFinished
+      loaderClosed
     ) {
       return;
     }
 
-    loaderFinished = true;
+    loaderClosed = true;
 
     loader.classList.add(
       "is-hidden"
     );
 
-    /*
-      CSS kendi başına da kapanıyor.
-      Bu timeout sadece DOM temizliği için.
-    */
     window.setTimeout(
       () => {
-        if (loader.isConnected) {
+        if (
+          loader &&
+          loader.isConnected
+        ) {
           loader.remove();
         }
       },
-      reducedMotion ? 100 : 950
+      reducedMotion
+        ? 80
+        : 950
     );
   }
 
@@ -435,54 +458,34 @@
     window.setTimeout(
       closeLoader,
       reducedMotion
-        ? 100
+        ? 120
         : 2850
     );
 
     /*
       Hard failsafe.
-      JavaScript'in herhangi bir kısmı takılsa bile
-      loader hiçbir zaman sonsuza kadar kalmaz.
     */
     window.setTimeout(
       closeLoader,
-      3600
+      3650
     );
 
     /*
-      Browser bfcache / pageshow durumları.
+      Browser sayfayı bfcache'den
+      geri getirirse.
     */
     window.addEventListener(
       "pageshow",
       () => {
         window.setTimeout(
           closeLoader,
-          reducedMotion ? 80 : 2700
+          reducedMotion
+            ? 100
+            : 2750
         );
       },
       { once: true }
     );
-
-    /*
-      DOM hazır olduktan sonra tekrar kontrol.
-    */
-    if (
-      document.readyState ===
-      "loading"
-    ) {
-      document.addEventListener(
-        "DOMContentLoaded",
-        () => {
-          window.setTimeout(
-            closeLoader,
-            reducedMotion
-              ? 120
-              : 2800
-          );
-        },
-        { once: true }
-      );
-    }
   }
 
   /* =========================================================
@@ -497,19 +500,18 @@
       return;
     }
 
-    const update =
-      () => {
-        header.classList.toggle(
-          "scrolled",
-          window.scrollY > 30
-        );
-      };
+    function updateHeader() {
+      header.classList.toggle(
+        "scrolled",
+        window.scrollY > 30
+      );
+    }
 
-    update();
+    updateHeader();
 
     window.addEventListener(
       "scroll",
-      update,
+      updateHeader,
       {
         passive: true
       }
@@ -534,33 +536,32 @@
       return;
     }
 
-    const setMenu =
-      (open) => {
-        button.classList.toggle(
-          "open",
-          open
-        );
+    function setMenu(open) {
+      button.classList.toggle(
+        "open",
+        open
+      );
 
-        panel.classList.toggle(
-          "open",
-          open
-        );
+      panel.classList.toggle(
+        "open",
+        open
+      );
 
-        button.setAttribute(
-          "aria-expanded",
-          String(open)
-        );
+      button.setAttribute(
+        "aria-expanded",
+        String(open)
+      );
 
-        panel.setAttribute(
-          "aria-hidden",
-          String(!open)
-        );
+      panel.setAttribute(
+        "aria-hidden",
+        String(!open)
+      );
 
-        document.body.classList.toggle(
-          "menu-open",
-          open
-        );
-      };
+      document.body.classList.toggle(
+        "menu-open",
+        open
+      );
+    }
 
     button.addEventListener(
       "click",
@@ -573,9 +574,7 @@
       }
     );
 
-    $$(
-      ".mobile-panel a"
-    ).forEach(
+    $$(".mobile-panel a").forEach(
       (link) => {
         link.addEventListener(
           "click",
@@ -592,9 +591,7 @@
   ========================================================= */
 
   function setupSmoothScroll() {
-    $$(
-      'a[href^="#"]'
-    ).forEach(
+    $$('a[href^="#"]').forEach(
       (link) => {
         link.addEventListener(
           "click",
@@ -622,10 +619,14 @@
 
             event.preventDefault();
 
+            const header =
+              $("#header");
+
             const headerHeight =
-              $("#header")
-                ?.getBoundingClientRect()
-                .height || 0;
+              header
+                ? header.getBoundingClientRect()
+                    .height
+                : 0;
 
             const targetTop =
               target.getBoundingClientRect()
@@ -635,21 +636,22 @@
               10;
 
             window.scrollTo({
-              top: targetTop,
+              top:
+                targetTop,
               behavior:
                 reducedMotion
                   ? "auto"
                   : "smooth"
             });
 
-            if (
-              history.replaceState
-            ) {
+            try {
               history.replaceState(
                 null,
                 "",
                 id
               );
+            } catch {
+              /* Browser history erişilemiyorsa scroll yine çalışır. */
             }
           }
         );
@@ -658,22 +660,21 @@
   }
 
   /* =========================================================
-     ACTIVE NAVIGATION
+     ACTIVE NAV
   ========================================================= */
 
   function setupActiveNavigation() {
     const links =
-      $$(
-        ".desktop-nav a"
-      );
+      $$(".desktop-nav a");
 
     const sections =
-      $$(
-        "[data-section]"
-      );
+      $$("[data-section]");
 
     if (
-      !("IntersectionObserver" in window)
+      !(
+        "IntersectionObserver"
+        in window
+      )
     ) {
       return;
     }
@@ -690,7 +691,10 @@
               }
 
               const section =
-                entry.target.dataset.section;
+                entry
+                  .target
+                  .dataset
+                  .section;
 
               links.forEach(
                 (link) => {
@@ -706,7 +710,8 @@
         },
         {
           rootMargin:
-            "-35% 0px -50% 0px"
+            "-35% 0px -50% 0px",
+          threshold: 0
         }
       );
 
@@ -720,7 +725,12 @@
   }
 
   /* =========================================================
-     REVEAL
+     REVEAL ANIMATIONS
+     
+     DİKKAT:
+     CSS'de içerik normalde görünür.
+     Bu fonksiyon sadece .js-ready altında
+     opacity animasyonunu kullanıyor.
   ========================================================= */
 
   function setupReveal() {
@@ -767,9 +777,9 @@
           );
         },
         {
-          threshold: .12,
+          threshold: 0.08,
           rootMargin:
-            "0px 0px -7% 0px"
+            "0px 0px -5% 0px"
         }
       );
 
@@ -779,6 +789,40 @@
           element
         );
       }
+    );
+
+    /*
+      Bazı mobil tarayıcılarda ilk paint sırasında
+      IntersectionObserver gecikebilir.
+      Bu kontrol görünmeyen eleman bırakmaz.
+    */
+    window.setTimeout(
+      () => {
+        elements.forEach(
+          (element) => {
+            const rect =
+              element.getBoundingClientRect();
+
+            const visible =
+              rect.top <
+                window.innerHeight &&
+              rect.bottom >
+                0;
+
+            if (
+              visible &&
+              !element.classList.contains(
+                "visible"
+              )
+            ) {
+              element.classList.add(
+                "visible"
+              );
+            }
+          }
+        );
+      },
+      300
     );
   }
 
@@ -800,139 +844,120 @@
       return;
     }
 
-    /*
-      15 Eylül 2026
-      Türkiye saati, gün başlangıcı.
-    */
     const target =
       new Date(
         "2026-09-15T00:00:00+03:00"
       ).getTime();
 
     const days =
-      $(
-        '[data-unit="days"]'
-      );
+      $('[data-unit="days"]');
 
     const hours =
-      $(
-        '[data-unit="hours"]'
-      );
+      $('[data-unit="hours"]');
 
     const minutes =
-      $(
-        '[data-unit="minutes"]'
-      );
+      $('[data-unit="minutes"]');
 
     const seconds =
-      $(
-        '[data-unit="seconds"]'
-      );
+      $('[data-unit="seconds"]');
 
-    const setValue =
-      (
-        element,
-        value
-      ) => {
-        if (
-          !element
-        ) {
-          return;
-        }
+    function setValue(
+      element,
+      value
+    ) {
+      if (!element) {
+        return;
+      }
 
-        const text =
-          String(value)
-            .padStart(
-              2,
-              "0"
-            );
+      const next =
+        String(value)
+          .padStart(2, "0");
 
-        if (
-          element.textContent ===
-          text
-        ) {
-          return;
-        }
+      if (
+        element.textContent ===
+        next
+      ) {
+        return;
+      }
 
-        element.textContent =
-          text;
+      element.textContent =
+        next;
 
-        if (
-          !reducedMotion
-        ) {
-          element.classList.remove(
-            "changed"
-          );
+      if (!reducedMotion) {
+        element.classList.remove(
+          "changed"
+        );
 
-          void element.offsetWidth;
+        void element.offsetWidth;
 
-          element.classList.add(
-            "changed"
-          );
-        }
-      };
+        element.classList.add(
+          "changed"
+        );
+      }
+    }
 
-    const render =
-      () => {
-        const distance =
-          target -
-          Date.now();
+    function render() {
+      const difference =
+        target -
+        Date.now();
+
+      if (
+        difference <= 0
+      ) {
+        countdown.hidden =
+          true;
+
+        started.hidden =
+          false;
 
         if (
-          distance <= 0
+          countdownTimer
         ) {
-          countdown.hidden =
-            true;
-
-          started.hidden =
-            false;
-
-          if (
+          clearInterval(
             countdownTimer
-          ) {
-            clearInterval(
-              countdownTimer
-            );
+          );
 
-            countdownTimer =
-              null;
-          }
-
-          return;
+          countdownTimer =
+            null;
         }
 
-        const totalSeconds =
-          Math.floor(
-            distance / 1000
-          );
+        return;
+      }
 
-        const d =
-          Math.floor(
-            totalSeconds / 86400
-          );
+      const totalSeconds =
+        Math.floor(
+          difference / 1000
+        );
 
-        const h =
-          Math.floor(
-            (totalSeconds %
-              86400) /
-              3600
-          );
+      const d =
+        Math.floor(
+          totalSeconds /
+            86400
+        );
 
-        const m =
-          Math.floor(
-            (totalSeconds %
-              3600) /
-              60
-          );
+      const h =
+        Math.floor(
+          (totalSeconds %
+            86400) /
+            3600
+        );
 
-        const s =
-          totalSeconds % 60;
+      const m =
+        Math.floor(
+          (totalSeconds %
+            3600) /
+            60
+        );
 
-        setValue(days, d);
-        setValue(hours, h);
-        setValue(minutes, m);
-        setValue(seconds, s);
-      };
+      const s =
+        totalSeconds %
+        60;
+
+      setValue(days, d);
+      setValue(hours, h);
+      setValue(minutes, m);
+      setValue(seconds, s);
+    }
 
     render();
 
@@ -947,7 +972,7 @@
      POINTER LIGHT
   ========================================================= */
 
-  function setupPointer() {
+  function setupPointerLight() {
     if (
       isTouch ||
       reducedMotion
@@ -992,28 +1017,29 @@
       }
     );
 
-    const animate =
-      () => {
-        currentX +=
-          (targetX -
-            currentX) *
-          .12;
+    function animate() {
+      currentX +=
+        (
+          targetX -
+          currentX
+        ) * 0.12;
 
-        currentY +=
-          (targetY -
-            currentY) *
-          .12;
+      currentY +=
+        (
+          targetY -
+          currentY
+        ) * 0.12;
 
-        light.style.left =
-          `${currentX}px`;
+      light.style.left =
+        `${currentX}px`;
 
-        light.style.top =
-          `${currentY}px`;
+      light.style.top =
+        `${currentY}px`;
 
-        requestAnimationFrame(
-          animate
-        );
-      };
+      requestAnimationFrame(
+        animate
+      );
+    }
 
     requestAnimationFrame(
       animate
@@ -1039,9 +1065,9 @@
       return;
     }
 
-    const items =
-      $$(
-        ".hero-orb, .hero-glow"
+    const elements =
+      $(
+        ".hero-orb, .hero-glow",
       );
 
     let targetX = 0;
@@ -1057,14 +1083,14 @@
           (
             event.clientX /
             window.innerWidth -
-            .5
+            0.5
           ) * 1.5;
 
         targetY =
           (
             event.clientY /
             window.innerHeight -
-            .5
+            0.5
           ) * 1.5;
       },
       {
@@ -1072,35 +1098,36 @@
       }
     );
 
-    const animate =
-      () => {
-        currentX +=
-          (targetX -
-            currentX) *
-          .04;
+    function animate() {
+      currentX +=
+        (
+          targetX -
+          currentX
+        ) * 0.04;
 
-        currentY +=
-          (targetY -
-            currentY) *
-          .04;
+      currentY +=
+        (
+          targetY -
+          currentY
+        ) * 0.04;
 
-        items.forEach(
-          (item, index) => {
-            const power =
-              (index + 1) * 3;
+      elements.forEach(
+        (element, index) => {
+          const power =
+            (index + 1) * 3;
 
-            item.style.translate =
-              `
-                ${currentX * power}px
-                ${currentY * power}px
-              `;
-          }
-        );
+          element.style.translate =
+            `
+              ${currentX * power}px
+              ${currentY * power}px
+            `;
+        }
+      );
 
-        requestAnimationFrame(
-          animate
-        );
-      };
+      requestAnimationFrame(
+        animate
+      );
+    }
 
     requestAnimationFrame(
       animate
@@ -1108,7 +1135,7 @@
   }
 
   /* =========================================================
-     KEYBOARD
+     ESC KEY
   ========================================================= */
 
   function setupKeyboard() {
@@ -1122,14 +1149,14 @@
           return;
         }
 
-        const menu =
+        const panel =
           $("#mobilePanel");
 
         const button =
           $("#menuButton");
 
         if (
-          menu?.classList.contains(
+          panel?.classList.contains(
             "open"
           )
         ) {
@@ -1140,11 +1167,17 @@
   }
 
   /* =========================================================
-     INITIALIZE
+     INIT
   ========================================================= */
 
   function init() {
+    /*
+      Loader en başta kurulur ama diğer scriptlerin
+      herhangi birinin hata vermesi loader'ın CSS
+      failsafe'ini etkilemez.
+    */
     setupLoader();
+
     setupLanguage();
 
     setupHeader();
@@ -1156,25 +1189,26 @@
 
     setupCountdown();
 
-    setupPointer();
+    setupPointerLight();
     setupHeroParallax();
 
     setupKeyboard();
   }
 
-  /*
-    window.load beklenmiyor.
-    Bu çok önemli:
-    Görsel/font/GitHub Pages kaynaklarından biri gecikse
-    bile sitenin geri kalanı çalışmaya devam eder.
-  */
+  /* =========================================================
+     START
+  ========================================================= */
+
   if (
-    document.readyState === "loading"
+    document.readyState ===
+    "loading"
   ) {
     document.addEventListener(
       "DOMContentLoaded",
       init,
-      { once: true }
+      {
+        once: true
+      }
     );
   } else {
     init();
