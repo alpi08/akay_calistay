@@ -2,8 +2,8 @@
   "use strict";
 
   /* =========================================================
-     DOM HELPERS
-     ========================================================= */
+     HELPERS
+  ========================================================= */
 
   const $ = (selector, root = document) =>
     root.querySelector(selector);
@@ -21,7 +21,7 @@
 
   /* =========================================================
      TRANSLATIONS
-     ========================================================= */
+  ========================================================= */
 
   const translations = {
     tr: {
@@ -29,45 +29,40 @@
         home: "Ana Sayfa",
         about: "Hakkımızda",
         event: "Etkinlik",
-        committees: "Komiteler",
         schedule: "Akış",
+        committees: "Komiteler",
         sponsors: "Sponsorluk",
         contact: "İletişim"
       },
 
       hero: {
-        eyebrow: "Gençlik / Fikir / Perspektif",
+        eyebrow: "GENÇLİK / FİKİR / PERSPEKTİF",
         copy:
           "Bilginin yalnızca paylaşılmadığı, bakış açılarının birbirine temas ettiği bir düşünce alanı.",
         explore: "Deneyimi Keşfet",
-        connect: "İletişime Geç",
-        dateLabel: "Etkinlik Tarihi",
-        month: "Eylül",
-        sideNote:
-          "Düşün. Tartış. Perspektifini genişlet."
+        contact: "İletişime Geç",
+        date: "ETKİNLİK TARİHİ",
+        month: "Eylül"
       },
 
       countdown: {
-        kicker: "Başlangıca kalan süre",
+        label: "Başlangıca kalan süre",
         live: "CANLI",
         days: "GÜN",
         hours: "SAAT",
         minutes: "DAKİKA",
         seconds: "SANİYE",
-        startedKicker: "Şimdi",
         started: "Etkinlik Başladı"
       },
 
       about: {
-        eyebrow: "Neden Akay?",
+        eyebrow: "NEDEN AKAY?",
         title:
           "Fikirlerin kesiştiği yerde <em>perspektif</em> değişir.",
         missionLabel: "MİSYON",
         missionTitle: "Özgürce ifade et.",
         missionText:
           "Akay Çalıştayı olarak misyonumuz; Gençlerin hızla gelişen ve değişen dünyaya dair farkındalıklarını artırırken, onlara fikirlerini özgürce ifade edebilecekleri, güçlü bir bilgi paylaşım alanı sunmaktır. Komite konularımız ise hem akademik anlamda geliştirici hem de sosyal bakımdan günlük hayatımızı doğrudan etkileyen konular olarak özenle seçilmiştir. Sosyal becerilerini aktif olarak kullanabilecekleri bu platformda, çok yönlü bakış açıları kazanmalarını hedefliyoruz.",
-        axis:
-          "BİR FİKİR / BİRDEN ÇOK BAKIŞ",
         visionLabel: "VİZYON",
         visionTitle:
           "Aydınlık zihni somut faydaya dönüştür.",
@@ -76,15 +71,13 @@
       },
 
       event: {
-        eyebrow: "Etkinlik",
+        eyebrow: "ETKİNLİK",
         title:
           "Bir buluşma değil, <em>bir düşünce alanı.</em>",
-        statement:
-          "Henüz açıklanmayan ayrıntıların yerini doldurmak yerine, burada gerçek olanı net ve güçlü biçimde sunuyoruz.",
-        date: "Tarih",
-        location: "Konum",
-        fee: "Etkinlik Ücreti",
-        duration: "Süre"
+        dateLabel: "TARİH",
+        location: "KONUM",
+        fee: "ETKİNLİK ÜCRETİ",
+        duration: "SÜRE"
       },
 
       common: {
@@ -92,62 +85,49 @@
       },
 
       schedule: {
-        eyebrow: "Akış",
+        eyebrow: "AKIŞ",
         title:
           "Zamanın ritmi <em>yakında</em> görünür olacak.",
-        frameLabel:
-          "GENEL AKIŞ / FRAMEWORK",
+        top: "GENEL AKIŞ / FRAMEWORK",
         status: "PROGRAM HAZIRLANIYOR",
         emptyTitle:
           "Program yakında açıklanacaktır.",
         emptyText:
-          "Gerçek zaman, oturum, salon, komite ve konuşmacı bilgileri doğrulandığında bu akış dinamik olarak doldurulacaktır.",
-        time: "Zaman",
-        session: "Oturum",
-        room: "Salon / Konum",
-        committee: "Komite"
+          "Gerçek zaman, oturum, salon, komite ve konuşmacı bilgileri doğrulandığında bu akış dinamik olarak doldurulacaktır."
       },
 
       committees: {
-        eyebrow: "Komiteler",
+        eyebrow: "KOMİTELER",
         title:
           "Gündemler hazır olduğunda <em>sahne açılacak.</em>",
         label: "AÇILACAK ALAN",
         emptyTitle:
           "Komiteler ve gündem maddeleri yakında açıklanacaktır.",
         emptyText:
-          "Yayınlandığında her komite; gündem, açıklama, salon ve moderasyon bilgileriyle etkileşimli olarak burada yer alacaktır.",
-        awaiting: "Yakında"
+          "Yayınlandığında her komite; gündem, açıklama, salon ve moderasyon bilgileriyle etkileşimli olarak burada yer alacaktır."
       },
 
       sponsors: {
-        eyebrow: "Sponsorluk",
+        eyebrow: "SPONSORLUK",
         title:
           "Bu deneyim <em>birlikte</em> büyüyor.",
         ai: "YAPAY ZEKA SPONSORU",
         it: "BT SPONSORU",
         design:
           "SOSYAL MEDYA / GRAFİK TASARIM SPONSORU",
-        visit:
-          "Web sitesini ziyaret et",
-        instagramVisit:
-          "Instagram'ı ziyaret et",
-        note:
-          "Üç destekçi, tek bir deneyim."
+        visit: "Web sitesini ziyaret et",
+        instagram: "Instagram'ı ziyaret et"
       },
 
       team: {
-        eyebrow: "Koordinasyon",
-        title:
-          "Doğrudan <em>ulaş.</em>",
-        role:
-          "Genel Koordinatör"
+        eyebrow: "KOORDİNASYON",
+        title: "Doğrudan <em>ulaş.</em>",
+        role: "GENEL KOORDİNATÖR"
       },
 
       contact: {
-        eyebrow: "İletişim",
-        title:
-          "Perspektifini <em>paylaş.</em>",
+        eyebrow: "İLETİŞİM",
+        title: "Perspektifini <em>paylaş.</em>",
         text:
           "Akay'ın güncel duyuruları ve etkinlik iletişimi için resmi Instagram hesabını takip et."
       },
@@ -158,8 +138,7 @@
         navigation: "NAVİGASYON",
         supporters: "DESTEKÇİLER",
         social: "SOSYAL",
-        rights:
-          "Tüm hakları saklıdır."
+        rights: "Tüm hakları saklıdır."
       }
     },
 
@@ -168,41 +147,34 @@
         home: "Home",
         about: "About",
         event: "Event",
-        committees: "Committees",
         schedule: "Schedule",
+        committees: "Committees",
         sponsors: "Sponsors",
         contact: "Contact"
       },
 
       hero: {
-        eyebrow:
-          "Youth / Idea / Perspective",
+        eyebrow: "YOUTH / IDEA / PERSPECTIVE",
         copy:
           "A space for thought where knowledge is not simply shared, but perspectives meet and reshape one another.",
-        explore:
-          "Explore the Experience",
-        connect: "Get in Touch",
-        dateLabel: "Event Date",
-        month: "September",
-        sideNote:
-          "Think. Debate. Expand your perspective."
+        explore: "Explore the Experience",
+        contact: "Get in Touch",
+        date: "EVENT DATE",
+        month: "September"
       },
 
       countdown: {
-        kicker:
-          "Time until the opening",
+        label: "Time until the opening",
         live: "LIVE",
         days: "DAYS",
         hours: "HOURS",
         minutes: "MINUTES",
         seconds: "SECONDS",
-        startedKicker: "Now",
-        started:
-          "The Event Has Started"
+        started: "The Event Has Started"
       },
 
       about: {
-        eyebrow: "Why Akay?",
+        eyebrow: "WHY AKAY?",
         title:
           "Where ideas intersect, <em>perspective</em> changes.",
         missionLabel: "MISSION",
@@ -210,8 +182,6 @@
           "Express yourself freely.",
         missionText:
           "Our mission as Akay Workshop is to increase young people’s awareness of a rapidly developing and changing world while providing a strong space for knowledge sharing where they can express their ideas freely. Our committee topics are carefully selected to be academically enriching and socially relevant to everyday life. Through this platform, where participants can actively use their social skills, we aim to help them gain multidimensional perspectives.",
-        axis:
-          "ONE IDEA / MANY PERSPECTIVES",
         visionLabel: "VISION",
         visionTitle:
           "Turn enlightened minds into tangible benefit.",
@@ -220,15 +190,13 @@
       },
 
       event: {
-        eyebrow: "Event",
+        eyebrow: "EVENT",
         title:
           "Not just a gathering, <em>a space for thought.</em>",
-        statement:
-          "Instead of filling in details that have not been announced, we present what is real here with clarity and intention.",
-        date: "Date",
-        location: "Location",
-        fee: "Event Fee",
-        duration: "Duration"
+        dateLabel: "DATE",
+        location: "LOCATION",
+        fee: "EVENT FEE",
+        duration: "DURATION"
       },
 
       common: {
@@ -236,64 +204,49 @@
       },
 
       schedule: {
-        eyebrow: "Schedule",
+        eyebrow: "SCHEDULE",
         title:
           "The rhythm of time will <em>soon</em> come into view.",
-        frameLabel:
-          "GENERAL FLOW / FRAMEWORK",
-        status:
-          "PROGRAM IN PREPARATION",
+        top: "GENERAL FLOW / FRAMEWORK",
+        status: "PROGRAM IN PREPARATION",
         emptyTitle:
           "The full program will be announced soon.",
         emptyText:
-          "Once verified, real times, sessions, rooms, committees, and speaker information will populate this flow dynamically.",
-        time: "Time",
-        session: "Session",
-        room: "Room / Location",
-        committee: "Committee"
+          "Once verified, real times, sessions, rooms, committees, and speaker information will populate this flow dynamically."
       },
 
       committees: {
-        eyebrow: "Committees",
+        eyebrow: "COMMITTEES",
         title:
           "When the agendas are ready, <em>the stage opens.</em>",
-        label:
-          "SPACE TO BE OPENED",
+        label: "SPACE TO BE OPENED",
         emptyTitle:
           "Committees and agenda topics will be announced soon.",
         emptyText:
-          "Once published, each committee will appear here interactively with agenda, description, room, and moderation details.",
-        awaiting: "Coming Soon"
+          "Once published, each committee will appear here interactively with agenda, description, room, and moderation details."
       },
 
       sponsors: {
-        eyebrow: "Sponsorship",
+        eyebrow: "SPONSORSHIP",
         title:
           "This experience grows <em>together.</em>",
-        ai:
-          "ARTIFICIAL INTELLIGENCE SPONSOR",
+        ai: "ARTIFICIAL INTELLIGENCE SPONSOR",
         it: "IT SPONSOR",
         design:
           "SOCIAL MEDIA / GRAPHIC DESIGN SPONSOR",
         visit: "Visit website",
-        instagramVisit:
-          "Visit Instagram",
-        note:
-          "Three supporters, one experience."
+        instagram: "Visit Instagram"
       },
 
       team: {
-        eyebrow: "Coordination",
-        title:
-          "Reach us <em>directly.</em>",
-        role:
-          "General Coordinator"
+        eyebrow: "COORDINATION",
+        title: "Reach us <em>directly.</em>",
+        role: "GENERAL COORDINATOR"
       },
 
       contact: {
-        eyebrow: "Contact",
-        title:
-          "Share your <em>perspective.</em>",
+        eyebrow: "CONTACT",
+        title: "Share your <em>perspective.</em>",
         text:
           "Follow the official Instagram account for Akay’s latest announcements and event communication."
       },
@@ -304,64 +257,57 @@
         navigation: "NAVIGATION",
         supporters: "SUPPORTERS",
         social: "SOCIAL",
-        rights:
-          "All rights reserved."
+        rights: "All rights reserved."
       }
     }
   };
 
   /* =========================================================
      STATE
-     ========================================================= */
+  ========================================================= */
 
-  let savedLanguage = "tr";
+  let language = "tr";
+  let countdownTimer = null;
+  let loaderFinished = false;
 
   try {
-    const stored =
-      localStorage.getItem("akay-lang");
+    const saved =
+      localStorage.getItem("akay-language");
 
     if (
-      stored === "tr" ||
-      stored === "en"
+      saved === "tr" ||
+      saved === "en"
     ) {
-      savedLanguage = stored;
+      language = saved;
     }
   } catch {
-    // localStorage erişilemezse Türkçe kalır.
+    language = "tr";
   }
 
-  const state = {
-    lang: savedLanguage,
-    countdownInterval: null
-  };
-
   /* =========================================================
-     TRANSLATION HELPERS
-     ========================================================= */
+     TRANSLATION
+  ========================================================= */
 
-  function getNested(object, path) {
+  function getTranslation(path) {
     return path
       .split(".")
       .reduce(
-        (current, key) =>
-          current && current[key],
-        object
+        (object, key) =>
+          object && object[key],
+        translations[language]
       );
   }
 
-  function applyTranslations() {
-    const dictionary =
-      translations[state.lang];
-
+  function translatePage() {
     document.documentElement.lang =
-      state.lang;
+      language;
 
     $$("[data-i18n]").forEach(
       (element) => {
-        const value = getNested(
-          dictionary,
-          element.dataset.i18n
-        );
+        const value =
+          getTranslation(
+            element.dataset.i18n
+          );
 
         if (
           typeof value === "string"
@@ -371,287 +317,199 @@
       }
     );
 
-    const current =
-      $(".lang-current");
+    const languageButton =
+      $("#langButton");
 
-    const other =
-      $(".lang-other");
+    const mobileLang =
+      $("#mobileLang");
 
-    if (current) {
-      current.textContent =
-        state.lang.toUpperCase();
+    const footerLang =
+      $("#footerLang");
+
+    if (languageButton) {
+      languageButton.textContent =
+        language === "tr"
+          ? "TR / EN"
+          : "EN / TR";
     }
 
-    if (other) {
-      other.textContent =
-        state.lang === "tr"
-          ? "EN"
-          : "TR";
+    if (mobileLang) {
+      mobileLang.textContent =
+        language === "tr"
+          ? "EN ↗"
+          : "TR ↗";
     }
 
-    const languageLabel =
-      state.lang === "tr"
-        ? "Dili İngilizceye değiştir"
-        : "Switch language to Turkish";
-
-    const languageSwitch =
-      $("#languageSwitch");
-
-    if (languageSwitch) {
-      languageSwitch.setAttribute(
-        "aria-label",
-        languageLabel
-      );
-
-      languageSwitch.setAttribute(
-        "aria-pressed",
-        state.lang === "en"
-          ? "true"
-          : "false"
-      );
+    if (footerLang) {
+      footerLang.textContent =
+        language === "tr"
+          ? "TR / EN ↗"
+          : "EN / TR ↗";
     }
 
-    const mobileLanguage =
-      $("#mobileLanguage");
-
-    if (mobileLanguage) {
-      mobileLanguage.innerHTML =
-        `
-          ${state.lang === "tr" ? "EN" : "TR"}
-          <span>↗</span>
-        `;
-
-      mobileLanguage.setAttribute(
-        "aria-label",
-        languageLabel
-      );
-    }
-
-    const footerLanguage =
-      $("#footerLanguage");
-
-    if (footerLanguage) {
-      footerLanguage.textContent =
-        `
-          ${state.lang.toUpperCase()}
-          /
-          ${state.lang === "tr" ? "EN" : "TR"}
-          ↗
-        `;
-    }
-
-    updateMeta();
-  }
-
-  function updateMeta() {
     document.title =
-      state.lang === "tr"
+      language === "tr"
         ? "Akay Perspektif ve Aydınlanma Çalıştayı"
         : "Akay Perspective and Enlightenment Workshop";
-
-    const description =
-      $('meta[name="description"]');
-
-    if (!description) {
-      return;
-    }
-
-    description.content =
-      state.lang === "tr"
-        ? "Akay Perspektif ve Aydınlanma Çalıştayı. Gençlerin fikirlerini özgürce ifade edebileceği, bilgi paylaşımı ve çok yönlü bakış açıları geliştiren bir deneyim."
-        : "Akay Perspective and Enlightenment Workshop. A space for young people to express ideas freely, share knowledge, and develop multidimensional perspectives.";
   }
 
-  function toggleLanguage() {
-    state.lang =
-      state.lang === "tr"
+  function switchLanguage() {
+    language =
+      language === "tr"
         ? "en"
         : "tr";
 
     try {
       localStorage.setItem(
-        "akay-lang",
-        state.lang
+        "akay-language",
+        language
       );
     } catch {
-      // Persist edilemezse sadece mevcut oturum değişir.
+      // localStorage erişimi yoksa oturum içinde çalışmaya devam eder.
     }
 
-    applyTranslations();
+    translatePage();
   }
 
-  function initLanguage() {
-    applyTranslations();
+  function setupLanguage() {
+    translatePage();
 
-    [
-      $("#languageSwitch"),
-      $("#mobileLanguage"),
-      $("#footerLanguage")
-    ].forEach((button) => {
-      button?.addEventListener(
+    $("#langButton")
+      ?.addEventListener(
         "click",
-        toggleLanguage
+        switchLanguage
       );
-    });
+
+    $("#mobileLang")
+      ?.addEventListener(
+        "click",
+        switchLanguage
+      );
+
+    $("#footerLang")
+      ?.addEventListener(
+        "click",
+        switchLanguage
+      );
   }
 
   /* =========================================================
-     ASSET FALLBACKS
-     ========================================================= */
+     LOADER
+  ========================================================= */
 
-  function setupAssetFallbacks() {
-    $(
-      ".loader-logo, .brand-logo, .footer-brand img"
-    ).forEach((image) => {
-      image.addEventListener(
-        "error",
-        () => {
-          image.hidden = true;
-
-          if (
-            image.classList.contains(
-              "loader-logo"
-            )
-          ) {
-            image
-              .closest(".loader-core")
-              ?.classList.add(
-                "no-logo"
-              );
-          }
-
-          if (
-            image.classList.contains(
-              "brand-logo"
-            )
-          ) {
-            image
-              .closest(".brand")
-              ?.classList.add(
-                "no-logo"
-              );
-          }
-
-          if (
-            image.closest(
-              ".footer-brand"
-            )
-          ) {
-            image
-              .closest(".footer-brand")
-              ?.classList.add(
-                "no-logo"
-              );
-          }
-        },
-        { once: true }
-      );
-    });
-  }
-
-  /* =========================================================
-     CINEMATIC LOADER
-     ========================================================= */
-
-  function setupLoader() {
+  function closeLoader() {
     const loader =
       $("#loader");
 
-    if (!loader) {
+    if (
+      !loader ||
+      loaderFinished
+    ) {
       return;
     }
 
-    let finished = false;
+    loaderFinished = true;
 
-    const finish = () => {
-      if (finished) {
-        return;
-      }
+    loader.classList.add(
+      "is-hidden"
+    );
 
-      finished = true;
-
-      loader.classList.add(
-        "is-hidden"
-      );
-
-      loader.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-      window.setTimeout(
-        () => {
+    /*
+      CSS kendi başına da kapanıyor.
+      Bu timeout sadece DOM temizliği için.
+    */
+    window.setTimeout(
+      () => {
+        if (loader.isConnected) {
           loader.remove();
-        },
-        reducedMotion
-          ? 80
-          : 1050
-      );
-    };
+        }
+      },
+      reducedMotion ? 100 : 950
+    );
+  }
 
-    const start = () => {
-      /*
-        Normal akış:
-        Intro yaklaşık 2.45 saniye görünür.
-      */
-      window.setTimeout(
-        finish,
-        reducedMotion
-          ? 100
-          : 2450
-      );
-    };
+  function setupLoader() {
+    /*
+      Normal çıkış.
+    */
+    window.setTimeout(
+      closeLoader,
+      reducedMotion
+        ? 100
+        : 2850
+    );
 
+    /*
+      Hard failsafe.
+      JavaScript'in herhangi bir kısmı takılsa bile
+      loader hiçbir zaman sonsuza kadar kalmaz.
+    */
+    window.setTimeout(
+      closeLoader,
+      3600
+    );
+
+    /*
+      Browser bfcache / pageshow durumları.
+    */
+    window.addEventListener(
+      "pageshow",
+      () => {
+        window.setTimeout(
+          closeLoader,
+          reducedMotion ? 80 : 2700
+        );
+      },
+      { once: true }
+    );
+
+    /*
+      DOM hazır olduktan sonra tekrar kontrol.
+    */
     if (
       document.readyState ===
       "loading"
     ) {
       document.addEventListener(
         "DOMContentLoaded",
-        start,
+        () => {
+          window.setTimeout(
+            closeLoader,
+            reducedMotion
+              ? 120
+              : 2800
+          );
+        },
         { once: true }
       );
-    } else {
-      start();
     }
-
-    /*
-      Güvenlik çıkışı:
-      Logo, font veya harici kaynak takılırsa
-      kullanıcı loader'ın içinde kilitlenmez.
-    */
-    window.setTimeout(
-      finish,
-      reducedMotion
-        ? 650
-        : 3400
-    );
   }
 
   /* =========================================================
      HEADER
-     ========================================================= */
+  ========================================================= */
 
   function setupHeader() {
     const header =
-      $("#siteHeader");
+      $("#header");
 
     if (!header) {
       return;
     }
 
-    const onScroll = () => {
-      header.classList.toggle(
-        "scrolled",
-        window.scrollY > 24
-      );
-    };
+    const update =
+      () => {
+        header.classList.toggle(
+          "scrolled",
+          window.scrollY > 30
+        );
+      };
 
-    onScroll();
+    update();
 
     window.addEventListener(
       "scroll",
-      onScroll,
+      update,
       {
         passive: true
       }
@@ -659,150 +517,214 @@
   }
 
   /* =========================================================
-     MOBILE NAVIGATION
-     ========================================================= */
+     MOBILE MENU
+  ========================================================= */
 
-  function setupMobileNav() {
-    const toggle =
-      $("#menuToggle");
+  function setupMobileMenu() {
+    const button =
+      $("#menuButton");
 
-    const nav =
-      $("#mobileNav");
+    const panel =
+      $("#mobilePanel");
 
     if (
-      !toggle ||
-      !nav
+      !button ||
+      !panel
     ) {
       return;
     }
 
-    const setOpen = (
-      open
-    ) => {
-      toggle.setAttribute(
-        "aria-expanded",
-        String(open)
-      );
+    const setMenu =
+      (open) => {
+        button.classList.toggle(
+          "open",
+          open
+        );
 
-      toggle.setAttribute(
-        "aria-label",
-        open
-          ? (
-              state.lang === "tr"
-                ? "Menüyü kapat"
-                : "Close menu"
-            )
-          : (
-              state.lang === "tr"
-                ? "Menüyü aç"
-                : "Open menu"
-            )
-      );
+        panel.classList.toggle(
+          "open",
+          open
+        );
 
-      nav.classList.toggle(
-        "is-open",
-        open
-      );
+        button.setAttribute(
+          "aria-expanded",
+          String(open)
+        );
 
-      nav.setAttribute(
-        "aria-hidden",
-        String(!open)
-      );
+        panel.setAttribute(
+          "aria-hidden",
+          String(!open)
+        );
 
-      document.body.classList.toggle(
-        "menu-open",
-        open
-      );
-    };
+        document.body.classList.toggle(
+          "menu-open",
+          open
+        );
+      };
 
-    toggle.addEventListener(
+    button.addEventListener(
       "click",
       () => {
-        setOpen(
-          !nav.classList.contains(
-            "is-open"
+        setMenu(
+          !panel.classList.contains(
+            "open"
           )
         );
       }
     );
 
-    $$(".mobile-nav-link")
-      .forEach((link) => {
+    $$(
+      ".mobile-panel a"
+    ).forEach(
+      (link) => {
         link.addEventListener(
           "click",
           () => {
-            setOpen(false);
+            setMenu(false);
           }
         );
-      });
+      }
+    );
   }
 
   /* =========================================================
-     SMOOTH NAVIGATION
-     ========================================================= */
+     SMOOTH SCROLL
+  ========================================================= */
 
-  function setupSmoothNav() {
+  function setupSmoothScroll() {
     $$(
       'a[href^="#"]'
-    ).forEach((link) => {
-      link.addEventListener(
-        "click",
-        (event) => {
-          const id =
-            link.getAttribute(
-              "href"
-            );
+    ).forEach(
+      (link) => {
+        link.addEventListener(
+          "click",
+          (event) => {
+            const id =
+              link.getAttribute(
+                "href"
+              );
 
-          if (
-            !id ||
-            id === "#"
-          ) {
-            return;
+            if (
+              !id ||
+              id === "#"
+            ) {
+              return;
+            }
+
+            const target =
+              document.querySelector(
+                id
+              );
+
+            if (!target) {
+              return;
+            }
+
+            event.preventDefault();
+
+            const headerHeight =
+              $("#header")
+                ?.getBoundingClientRect()
+                .height || 0;
+
+            const targetTop =
+              target.getBoundingClientRect()
+                .top +
+              window.scrollY -
+              headerHeight -
+              10;
+
+            window.scrollTo({
+              top: targetTop,
+              behavior:
+                reducedMotion
+                  ? "auto"
+                  : "smooth"
+            });
+
+            if (
+              history.replaceState
+            ) {
+              history.replaceState(
+                null,
+                "",
+                id
+              );
+            }
           }
-
-          const target =
-            document.querySelector(
-              id
-            );
-
-          if (!target) {
-            return;
-          }
-
-          event.preventDefault();
-
-          const headerOffset = 82;
-
-          const top =
-            target.getBoundingClientRect()
-              .top +
-            window.scrollY -
-            headerOffset;
-
-          window.scrollTo({
-            top,
-            behavior:
-              reducedMotion
-                ? "auto"
-                : "smooth"
-          });
-
-          history.replaceState(
-            null,
-            "",
-            id
-          );
-        }
-      );
-    });
+        );
+      }
+    );
   }
 
   /* =========================================================
-     REVEAL ANIMATIONS
-     ========================================================= */
+     ACTIVE NAVIGATION
+  ========================================================= */
+
+  function setupActiveNavigation() {
+    const links =
+      $$(
+        ".desktop-nav a"
+      );
+
+    const sections =
+      $$(
+        "[data-section]"
+      );
+
+    if (
+      !("IntersectionObserver" in window)
+    ) {
+      return;
+    }
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach(
+            (entry) => {
+              if (
+                !entry.isIntersecting
+              ) {
+                return;
+              }
+
+              const section =
+                entry.target.dataset.section;
+
+              links.forEach(
+                (link) => {
+                  link.classList.toggle(
+                    "active",
+                    link.dataset.section ===
+                      section
+                  );
+                }
+              );
+            }
+          );
+        },
+        {
+          rootMargin:
+            "-35% 0px -50% 0px"
+        }
+      );
+
+    sections.forEach(
+      (section) => {
+        observer.observe(
+          section
+        );
+      }
+    );
+  }
+
+  /* =========================================================
+     REVEAL
+  ========================================================= */
 
   function setupReveal() {
-    const items =
+    const elements =
       $$(".reveal");
 
     if (
@@ -812,10 +734,10 @@
         in window
       )
     ) {
-      items.forEach(
+      elements.forEach(
         (element) => {
           element.classList.add(
-            "is-visible"
+            "visible"
           );
         }
       );
@@ -835,7 +757,7 @@
               }
 
               entry.target.classList.add(
-                "is-visible"
+                "visible"
               );
 
               observer.unobserve(
@@ -845,13 +767,13 @@
           );
         },
         {
-          threshold: 0.12,
+          threshold: .12,
           rootMargin:
-            "0px 0px -8% 0px"
+            "0px 0px -7% 0px"
         }
       );
 
-    items.forEach(
+    elements.forEach(
       (element) => {
         observer.observe(
           element
@@ -861,78 +783,171 @@
   }
 
   /* =========================================================
-     ACTIVE SECTION
-     ========================================================= */
+     COUNTDOWN
+  ========================================================= */
 
-  function setupActiveSection() {
-    const links =
-      $(
-        ".nav-link, .mobile-nav-link"
-      );
+  function setupCountdown() {
+    const countdown =
+      $("#countdown");
 
-    const sections =
-      $$(
-        "[data-section-id]"
-      );
+    const started =
+      $("#eventStarted");
 
     if (
-      !(
-        "IntersectionObserver"
-        in window
-      )
+      !countdown ||
+      !started
     ) {
       return;
     }
 
-    const observer =
-      new IntersectionObserver(
-        (entries) => {
-          entries.forEach(
-            (entry) => {
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
+    /*
+      15 Eylül 2026
+      Türkiye saati, gün başlangıcı.
+    */
+    const target =
+      new Date(
+        "2026-09-15T00:00:00+03:00"
+      ).getTime();
 
-              const id =
-                entry.target
-                  .dataset
-                  .sectionId;
-
-              links.forEach(
-                (link) => {
-                  link.classList.toggle(
-                    "active",
-                    link.dataset.section ===
-                      id
-                  );
-                }
-              );
-            }
-          );
-        },
-        {
-          rootMargin:
-            "-35% 0px -50% 0px",
-          threshold: 0
-        }
+    const days =
+      $(
+        '[data-unit="days"]'
       );
 
-    sections.forEach(
-      (section) => {
-        observer.observe(
-          section
-        );
-      }
-    );
+    const hours =
+      $(
+        '[data-unit="hours"]'
+      );
+
+    const minutes =
+      $(
+        '[data-unit="minutes"]'
+      );
+
+    const seconds =
+      $(
+        '[data-unit="seconds"]'
+      );
+
+    const setValue =
+      (
+        element,
+        value
+      ) => {
+        if (
+          !element
+        ) {
+          return;
+        }
+
+        const text =
+          String(value)
+            .padStart(
+              2,
+              "0"
+            );
+
+        if (
+          element.textContent ===
+          text
+        ) {
+          return;
+        }
+
+        element.textContent =
+          text;
+
+        if (
+          !reducedMotion
+        ) {
+          element.classList.remove(
+            "changed"
+          );
+
+          void element.offsetWidth;
+
+          element.classList.add(
+            "changed"
+          );
+        }
+      };
+
+    const render =
+      () => {
+        const distance =
+          target -
+          Date.now();
+
+        if (
+          distance <= 0
+        ) {
+          countdown.hidden =
+            true;
+
+          started.hidden =
+            false;
+
+          if (
+            countdownTimer
+          ) {
+            clearInterval(
+              countdownTimer
+            );
+
+            countdownTimer =
+              null;
+          }
+
+          return;
+        }
+
+        const totalSeconds =
+          Math.floor(
+            distance / 1000
+          );
+
+        const d =
+          Math.floor(
+            totalSeconds / 86400
+          );
+
+        const h =
+          Math.floor(
+            (totalSeconds %
+              86400) /
+              3600
+          );
+
+        const m =
+          Math.floor(
+            (totalSeconds %
+              3600) /
+              60
+          );
+
+        const s =
+          totalSeconds % 60;
+
+        setValue(days, d);
+        setValue(hours, h);
+        setValue(minutes, m);
+        setValue(seconds, s);
+      };
+
+    render();
+
+    countdownTimer =
+      window.setInterval(
+        render,
+        1000
+      );
   }
 
   /* =========================================================
-     POINTER GLOW
-     ========================================================= */
+     POINTER LIGHT
+  ========================================================= */
 
-  function setupPointerGlow() {
+  function setupPointer() {
     if (
       isTouch ||
       reducedMotion
@@ -940,15 +955,15 @@
       return;
     }
 
-    const glow =
-      $(".cursor-glow");
+    const light =
+      $(".pointer-light");
 
-    if (!glow) {
+    if (!light) {
       return;
     }
 
     document.body.classList.add(
-      "cursor-ready"
+      "pointer-active"
     );
 
     let targetX =
@@ -977,146 +992,37 @@
       }
     );
 
-    const frame = () => {
-      currentX +=
-        (targetX -
-          currentX) *
-        0.13;
+    const animate =
+      () => {
+        currentX +=
+          (targetX -
+            currentX) *
+          .12;
 
-      currentY +=
-        (targetY -
-          currentY) *
-        0.13;
+        currentY +=
+          (targetY -
+            currentY) *
+          .12;
 
-      glow.style.left =
-        `${currentX}px`;
+        light.style.left =
+          `${currentX}px`;
 
-      glow.style.top =
-        `${currentY}px`;
+        light.style.top =
+          `${currentY}px`;
 
-      requestAnimationFrame(
-        frame
-      );
-    };
+        requestAnimationFrame(
+          animate
+        );
+      };
 
     requestAnimationFrame(
-      frame
-    );
-  }
-
-  /* =========================================================
-     MAGNETIC BUTTONS
-     ========================================================= */
-
-  function setupMagnetic() {
-    if (
-      isTouch ||
-      reducedMotion
-    ) {
-      return;
-    }
-
-    $$(".magnetic").forEach(
-      (element) => {
-        element.addEventListener(
-          "pointermove",
-          (event) => {
-            const rect =
-              element.getBoundingClientRect();
-
-            const x =
-              event.clientX -
-              rect.left -
-              rect.width / 2;
-
-            const y =
-              event.clientY -
-              rect.top -
-              rect.height / 2;
-
-            element.style.transform =
-              `
-                translate(
-                  ${x * 0.12}px,
-                  ${y * 0.12}px
-                )
-              `;
-          }
-        );
-
-        element.addEventListener(
-          "pointerleave",
-          () => {
-            element.style.transform =
-              "";
-          }
-        );
-      }
-    );
-  }
-
-  /* =========================================================
-     3D TILT CARDS
-     ========================================================= */
-
-  function setupTiltCards() {
-    if (
-      isTouch ||
-      reducedMotion
-    ) {
-      return;
-    }
-
-    $$(".tilt-card").forEach(
-      (card) => {
-        card.addEventListener(
-          "pointermove",
-          (event) => {
-            const rect =
-              card.getBoundingClientRect();
-
-            const px =
-              (
-                event.clientX -
-                rect.left
-              ) / rect.width;
-
-            const py =
-              (
-                event.clientY -
-                rect.top
-              ) / rect.height;
-
-            const rotateY =
-              (px - 0.5) * 5;
-
-            const rotateX =
-              (py - 0.5) * -5;
-
-            card.style.transform =
-              `
-                perspective(900px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                translateY(-2px)
-              `;
-          }
-        );
-
-        card.addEventListener(
-          "pointerleave",
-          () => {
-            card.style.transform =
-              "";
-          }
-        );
-      }
+      animate
     );
   }
 
   /* =========================================================
      HERO PARALLAX
-     ========================================================= */
+  ========================================================= */
 
   function setupHeroParallax() {
     if (
@@ -1133,13 +1039,9 @@
       return;
     }
 
-    const decorativeElements =
+    const items =
       $$(
-        `
-          .hero-orbit,
-          .hero-glow,
-          .hero-fragment
-        `
+        ".hero-orb, .hero-glow"
       );
 
     let targetX = 0;
@@ -1151,248 +1053,65 @@
     window.addEventListener(
       "pointermove",
       (event) => {
-        const rect =
-          hero.getBoundingClientRect();
-
-        if (
-          event.clientY <
-            rect.top ||
-          event.clientY >
-            rect.bottom
-        ) {
-          return;
-        }
-
         targetX =
           (
             event.clientX /
             window.innerWidth -
-            0.5
-          ) * 1.8;
+            .5
+          ) * 1.5;
 
         targetY =
           (
             event.clientY /
             window.innerHeight -
-            0.5
-          ) * 1.8;
+            .5
+          ) * 1.5;
       },
       {
         passive: true
       }
     );
 
-    const frame = () => {
-      currentX +=
-        (targetX -
-          currentX) *
-        0.04;
+    const animate =
+      () => {
+        currentX +=
+          (targetX -
+            currentX) *
+          .04;
 
-      currentY +=
-        (targetY -
-          currentY) *
-        0.04;
+        currentY +=
+          (targetY -
+            currentY) *
+          .04;
 
-      decorativeElements.forEach(
-        (
-          element,
-          index
-        ) => {
-          const strength =
-            ((index % 3) + 1) * 4;
+        items.forEach(
+          (item, index) => {
+            const power =
+              (index + 1) * 3;
 
-          element.style.translate =
-            `
-              ${currentX * strength}px
-              ${currentY * strength}px
-            `;
-        }
-      );
-
-      requestAnimationFrame(
-        frame
-      );
-    };
-
-    requestAnimationFrame(
-      frame
-    );
-  }
-
-  /* =========================================================
-     COUNTDOWN
-     ========================================================= */
-
-  function getEventTarget() {
-    /*
-      Saat belirtilmediği için
-      Türkiye yerel gün başlangıcı
-      00:00 TRT kullanılıyor.
-    */
-    return new Date(
-      "2026-09-15T00:00:00+03:00"
-    );
-  }
-
-  function setupCountdown() {
-    const countdown =
-      $("#countdown");
-
-    const started =
-      $("#countdownStarted");
-
-    const shell =
-      $("#countdownShell");
-
-    if (
-      !countdown ||
-      !started ||
-      !shell
-    ) {
-      return;
-    }
-
-    const target =
-      getEventTarget();
-
-    const units = [
-      "days",
-      "hours",
-      "minutes",
-      "seconds"
-    ];
-
-    const values =
-      Object.fromEntries(
-        units.map(
-          (unit) => [
-            unit,
-            $(
+            item.style.translate =
               `
-                [data-unit="${unit}"]
-                [data-value]
-              `,
-              countdown
-            )
-          ]
-        )
-      );
-
-    const showStartedState = () => {
-      countdown.hidden = true;
-      started.hidden = false;
-
-      shell.classList.add(
-        "event-live"
-      );
-
-      if (
-        state.countdownInterval
-      ) {
-        clearInterval(
-          state.countdownInterval
+                ${currentX * power}px
+                ${currentY * power}px
+              `;
+          }
         );
 
-        state.countdownInterval =
-          null;
-      }
-    };
-
-    const tick = () => {
-      const difference =
-        target.getTime() -
-        Date.now();
-
-      if (
-        difference <= 0
-      ) {
-        showStartedState();
-        return;
-      }
-
-      const totalSeconds =
-        Math.floor(
-          difference / 1000
+        requestAnimationFrame(
+          animate
         );
-
-      const next = {
-        days:
-          Math.floor(
-            totalSeconds /
-              86400
-          ),
-
-        hours:
-          Math.floor(
-            (totalSeconds %
-              86400) /
-              3600
-          ),
-
-        minutes:
-          Math.floor(
-            (totalSeconds %
-              3600) /
-              60
-          ),
-
-        seconds:
-          totalSeconds % 60
       };
 
-      units.forEach(
-        (unit) => {
-          const text =
-            String(
-              next[unit]
-            ).padStart(
-              2,
-              "0"
-            );
-
-          const node =
-            values[unit];
-
-          if (
-            node &&
-            node.textContent !==
-              text
-          ) {
-            node.textContent =
-              text;
-
-            if (
-              !reducedMotion
-            ) {
-              node.classList.remove(
-                "bump"
-              );
-
-              void node.offsetWidth;
-
-              node.classList.add(
-                "bump"
-              );
-            }
-          }
-        }
-      );
-    };
-
-    tick();
-
-    state.countdownInterval =
-      window.setInterval(
-        tick,
-        1000
-      );
+    requestAnimationFrame(
+      animate
+    );
   }
 
   /* =========================================================
-     KEYBOARD / ACCESSIBILITY
-     ========================================================= */
+     KEYBOARD
+  ========================================================= */
 
-  function setupKeyboardFocus() {
+  function setupKeyboard() {
     document.addEventListener(
       "keydown",
       (event) => {
@@ -1403,49 +1122,62 @@
           return;
         }
 
-        const nav =
-          $("#mobileNav");
+        const menu =
+          $("#mobilePanel");
 
-        const toggle =
-          $("#menuToggle");
+        const button =
+          $("#menuButton");
 
         if (
-          nav?.classList.contains(
-            "is-open"
+          menu?.classList.contains(
+            "open"
           )
         ) {
-          toggle?.click();
+          button?.click();
         }
       }
     );
   }
 
   /* =========================================================
-     INITIALIZATION
-     ========================================================= */
+     INITIALIZE
+  ========================================================= */
 
   function init() {
-    setupAssetFallbacks();
     setupLoader();
-
-    initLanguage();
+    setupLanguage();
 
     setupHeader();
-    setupMobileNav();
-    setupSmoothNav();
+    setupMobileMenu();
+    setupSmoothScroll();
+    setupActiveNavigation();
 
     setupReveal();
-    setupActiveSection();
-
-    setupPointerGlow();
-    setupMagnetic();
-    setupTiltCards();
-    setupHeroParallax();
 
     setupCountdown();
 
-    setupKeyboardFocus();
+    setupPointer();
+    setupHeroParallax();
+
+    setupKeyboard();
   }
 
-  init();
+  /*
+    window.load beklenmiyor.
+    Bu çok önemli:
+    Görsel/font/GitHub Pages kaynaklarından biri gecikse
+    bile sitenin geri kalanı çalışmaya devam eder.
+  */
+  if (
+    document.readyState === "loading"
+  ) {
+    document.addEventListener(
+      "DOMContentLoaded",
+      init,
+      { once: true }
+    );
+  } else {
+    init();
+  }
+
 })();
