@@ -1,1785 +1,1317 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07040d">
+<meta name="description" content="Akay Perspektif ve Aydınlanma Çalıştayı">
+<title>Akay Perspektif ve Aydınlanma Çalıştayı</title>
 
-  <meta
-    name="theme-color"
-    content="#07040D"
-  >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <meta
-    name="description"
-    content="Akay Perspektif ve Aydınlanma Çalıştayı. Gençlerin fikirlerini özgürce ifade edebileceği, bilgi paylaşımı ve çok yönlü bakış açıları geliştiren bir deneyim."
-  >
+<link
+  href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+>
 
-  <meta
-    property="og:title"
-    content="Akay Perspektif ve Aydınlanma Çalıştayı"
-  >
-
-  <meta
-    property="og:description"
-    content="15 Eylül 2026 tarihinde gerçekleşecek Akay Perspektif ve Aydınlanma Çalıştayı."
-  >
-
-  <meta
-    property="og:type"
-    content="website"
-  >
-
-  <title>Akay Perspektif ve Aydınlanma Çalıştayı</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 
 <body>
 
-  <div class="noise" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
+<div class="site-noise" aria-hidden="true"></div>
+<div class="pointer-light" aria-hidden="true"></div>
 
-  <!-- CINEMATIC LOADER -->
-  <div
-    class="loader"
-    id="loader"
-    aria-hidden="true"
-  >
-    <div class="loader-noise" aria-hidden="true"></div>
+<!-- =========================
+     CINEMATIC LOADER
+========================= -->
 
-    <div
-      class="loader-aurora loader-aurora-a"
-      aria-hidden="true"
-    ></div>
+<div class="loader" id="loader">
 
-    <div
-      class="loader-aurora loader-aurora-b"
-      aria-hidden="true"
-    ></div>
+  <div class="loader-bg loader-bg-a"></div>
+  <div class="loader-bg loader-bg-b"></div>
 
-    <div
-      class="loader-grid"
-      aria-hidden="true"
-    ></div>
+  <div class="loader-grid"></div>
 
-    <div
-      class="loader-orbit loader-orbit-a"
-      aria-hidden="true"
-    ></div>
+  <div class="loader-ring ring-1"></div>
+  <div class="loader-ring ring-2"></div>
+  <div class="loader-ring ring-3"></div>
 
-    <div
-      class="loader-orbit loader-orbit-b"
-      aria-hidden="true"
-    ></div>
+  <div class="loader-core">
 
-    <div
-      class="loader-orbit loader-orbit-c"
-      aria-hidden="true"
-    ></div>
+    <div class="loader-halo"></div>
 
-    <div class="loader-corner loader-corner-tl">
-      AKAY / 2026
-    </div>
+    <div class="loader-spark spark-1"></div>
+    <div class="loader-spark spark-2"></div>
+    <div class="loader-spark spark-3"></div>
+    <div class="loader-spark spark-4"></div>
 
-    <div class="loader-corner loader-corner-br">
-      PERSPECTIVE LAB / 01
-    </div>
-
-    <div class="loader-core">
-
-      <div
-        class="loader-halo"
-        aria-hidden="true"
-      ></div>
-
-      <div
-        class="loader-particles"
-        id="loaderParticles"
-        aria-hidden="true"
-      ></div>
-
-      <div
-        class="loader-sweep"
-        aria-hidden="true"
-      ></div>
-
-      <img
-        src="Logo-0.png"
-        alt=""
-        class="loader-logo"
-      >
-
-      <div class="loader-fallback">
-        AKAY
-      </div>
-
-    </div>
-
-    <div class="loader-caption">
-      <span class="loader-caption-line"></span>
-
-      <span>
-        AKAY PERSPEKTİF VE AYDINLANMA ÇALIŞTAYI
-      </span>
-
-      <span class="loader-caption-line"></span>
-    </div>
-
-    <div
-      class="loader-progress"
-      aria-hidden="true"
+    <img
+      class="loader-logo"
+      src="Logo-0.png"
+      alt=""
+      onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
     >
-      <span></span>
+
+    <div class="loader-text-logo">
+      AKAY
     </div>
+
+    <div class="loader-flare"></div>
+
   </div>
 
-  <!-- HEADER -->
-  <header
-    class="site-header"
-    id="siteHeader"
-  >
-    <div class="header-inner">
+  <div class="loader-meta loader-meta-left">
+    AKAY / 2026
+  </div>
+
+  <div class="loader-meta loader-meta-right">
+    PERSPECTIVE / 01
+  </div>
+
+  <div class="loader-label">
+    AKAY PERSPEKTİF VE AYDINLANMA ÇALIŞTAYI
+  </div>
+
+  <div class="loader-progress">
+    <span></span>
+  </div>
+
+</div>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header" id="header">
+
+  <div class="header-inner">
+
+    <a
+      href="#home"
+      class="brand"
+      aria-label="Akay ana sayfa"
+    >
+      <img
+        src="Logo-1.png"
+        alt="Akay Perspektif ve Aydınlanma Çalıştayı"
+      >
+
+      <span>
+        AKAY / ÇALIŞTAY
+      </span>
+    </a>
+
+    <nav
+      class="desktop-nav"
+      aria-label="Ana navigasyon"
+    >
 
       <a
         href="#home"
-        class="brand"
-        aria-label="Akay - Ana Sayfa"
+        data-section="home"
+        data-i18n="nav.home"
       >
-        <img
-          src="Logo-1.png"
-          alt="Akay Perspektif ve Aydınlanma Çalıştayı"
-          class="brand-logo"
-        >
-
-        <span class="brand-fallback">
-          AKAY<span> / </span>ÇALIŞTAY
-        </span>
+        Ana Sayfa
       </a>
 
-      <nav
-        class="desktop-nav"
-        aria-label="Ana navigasyon"
+      <a
+        href="#about"
+        data-section="about"
+        data-i18n="nav.about"
       >
-        <a
-          href="#home"
-          class="nav-link active"
-          data-section="home"
-          data-i18n="nav.home"
-        >
-          Ana Sayfa
-        </a>
+        Hakkımızda
+      </a>
 
-        <a
-          href="#about"
-          class="nav-link"
-          data-section="about"
-          data-i18n="nav.about"
-        >
-          Hakkımızda
-        </a>
-
-        <a
-          href="#event"
-          class="nav-link"
-          data-section="event"
-          data-i18n="nav.event"
-        >
-          Etkinlik
-        </a>
-
-        <a
-          href="#committees"
-          class="nav-link"
-          data-section="committees"
-          data-i18n="nav.committees"
-        >
-          Komiteler
-        </a>
-
-        <a
-          href="#schedule"
-          class="nav-link"
-          data-section="schedule"
-          data-i18n="nav.schedule"
-        >
-          Akış
-        </a>
-
-        <a
-          href="#sponsors"
-          class="nav-link"
-          data-section="sponsors"
-          data-i18n="nav.sponsors"
-        >
-          Sponsorluk
-        </a>
-
-        <a
-          href="#contact"
-          class="nav-link"
-          data-section="contact"
-          data-i18n="nav.contact"
-        >
-          İletişim
-        </a>
-      </nav>
-
-      <button
-        class="language-switch"
-        id="languageSwitch"
-        type="button"
-        aria-label="Dili değiştir"
-        aria-pressed="false"
+      <a
+        href="#event"
+        data-section="event"
+        data-i18n="nav.event"
       >
-        <span class="lang-dot"></span>
-        <span class="lang-current">TR</span>
-        <span class="lang-divider">/</span>
-        <span class="lang-other">EN</span>
-      </button>
+        Etkinlik
+      </a>
 
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        type="button"
-        aria-label="Menüyü aç"
-        aria-expanded="false"
-        aria-controls="mobileNav"
+      <a
+        href="#schedule"
+        data-section="schedule"
+        data-i18n="nav.schedule"
       >
-        <span></span>
-        <span></span>
-      </button>
+        Akış
+      </a>
+
+      <a
+        href="#committees"
+        data-section="committees"
+        data-i18n="nav.committees"
+      >
+        Komiteler
+      </a>
+
+      <a
+        href="#sponsors"
+        data-section="sponsors"
+        data-i18n="nav.sponsors"
+      >
+        Sponsorluk
+      </a>
+
+      <a
+        href="#contact"
+        data-section="contact"
+        data-i18n="nav.contact"
+      >
+        İletişim
+      </a>
+
+    </nav>
+
+    <button
+      class="lang-button"
+      id="langButton"
+      type="button"
+    >
+      TR / EN
+    </button>
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      type="button"
+      aria-label="Menüyü aç"
+      aria-expanded="false"
+    >
+      <i></i>
+      <i></i>
+    </button>
+
+  </div>
+
+  <div
+    class="mobile-panel"
+    id="mobilePanel"
+    aria-hidden="true"
+  >
+
+    <nav>
+
+      <a
+        href="#home"
+        data-i18n="nav.home"
+      >
+        Ana Sayfa
+      </a>
+
+      <a
+        href="#about"
+        data-i18n="nav.about"
+      >
+        Hakkımızda
+      </a>
+
+      <a
+        href="#event"
+        data-i18n="nav.event"
+      >
+        Etkinlik
+      </a>
+
+      <a
+        href="#schedule"
+        data-i18n="nav.schedule"
+      >
+        Akış
+      </a>
+
+      <a
+        href="#committees"
+        data-i18n="nav.committees"
+      >
+        Komiteler
+      </a>
+
+      <a
+        href="#sponsors"
+        data-i18n="nav.sponsors"
+      >
+        Sponsorluk
+      </a>
+
+      <a
+        href="#contact"
+        data-i18n="nav.contact"
+      >
+        İletişim
+      </a>
+
+    </nav>
+
+    <button
+      class="mobile-lang"
+      id="mobileLang"
+      type="button"
+    >
+      EN ↗
+    </button>
+
+  </div>
+
+</header>
+
+<main>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section
+  class="hero section"
+  id="home"
+  data-section="home"
+>
+
+  <div class="hero-grid"></div>
+
+  <div class="hero-orb orb-a"></div>
+  <div class="hero-orb orb-b"></div>
+
+  <div class="hero-glow glow-a"></div>
+  <div class="hero-glow glow-b"></div>
+
+  <div class="hero-content wrap">
+
+    <div class="hero-kicker reveal">
+      AKAY
+      <span>·</span>
+      2026
+    </div>
+
+    <div class="hero-layout">
+
+      <div>
+
+        <p
+          class="eyebrow reveal"
+          data-i18n="hero.eyebrow"
+        >
+          GENÇLİK / FİKİR / PERSPEKTİF
+        </p>
+
+        <h1 class="hero-title">
+
+          <span>
+            Akay
+          </span>
+
+          <span>
+            <em>Perspektif</em>
+          </span>
+
+          <span>
+            ve Aydınlanma
+          </span>
+
+          <span>
+            Çalıştayı
+          </span>
+
+        </h1>
+
+        <p
+          class="hero-copy reveal"
+          data-i18n="hero.copy"
+        >
+          Bilginin yalnızca paylaşılmadığı,
+          bakış açılarının birbirine temas ettiği
+          bir düşünce alanı.
+        </p>
+
+        <div class="hero-actions reveal">
+
+          <a
+            class="button button-primary"
+            href="#about"
+            data-i18n="hero.explore"
+          >
+            Deneyimi Keşfet
+            <b>↘</b>
+          </a>
+
+          <a
+            class="button button-secondary"
+            href="#contact"
+            data-i18n="hero.contact"
+          >
+            İletişime Geç
+            <b>↗</b>
+          </a>
+
+        </div>
+
+      </div>
+
+      <aside class="date-card reveal">
+
+        <small
+          data-i18n="hero.date"
+        >
+          ETKİNLİK TARİHİ
+        </small>
+
+        <strong>
+          15
+        </strong>
+
+        <span>
+          <b data-i18n="hero.month">
+            Eylül
+          </b>
+
+          <i>
+            2026
+          </i>
+        </span>
+
+      </aside>
+
+    </div>
+
+    <!-- COUNTDOWN -->
+
+    <div
+      class="countdown reveal"
+      id="countdownBox"
+    >
+
+      <div class="countdown-top">
+
+        <span
+          data-i18n="countdown.label"
+        >
+          Başlangıca kalan süre
+        </span>
+
+        <span class="live">
+
+          <i></i>
+
+          <span
+            data-i18n="countdown.live"
+          >
+            CANLI
+          </span>
+
+        </span>
+
+      </div>
+
+      <div
+        class="countdown-main"
+        id="countdown"
+      >
+
+        <div>
+          <strong data-unit="days">
+            00
+          </strong>
+
+          <span
+            data-i18n="countdown.days"
+          >
+            GÜN
+          </span>
+        </div>
+
+        <b>:</b>
+
+        <div>
+          <strong data-unit="hours">
+            00
+          </strong>
+
+          <span
+            data-i18n="countdown.hours"
+          >
+            SAAT
+          </span>
+        </div>
+
+        <b>:</b>
+
+        <div>
+          <strong data-unit="minutes">
+            00
+          </strong>
+
+          <span
+            data-i18n="countdown.minutes"
+          >
+            DAKİKA
+          </span>
+        </div>
+
+        <b>:</b>
+
+        <div>
+          <strong data-unit="seconds">
+            00
+          </strong>
+
+          <span
+            data-i18n="countdown.seconds"
+          >
+            SANİYE
+          </span>
+        </div>
+
+      </div>
+
+      <div
+        class="event-started"
+        id="eventStarted"
+        hidden
+        data-i18n="countdown.started"
+      >
+        Etkinlik Başladı
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="scroll-hint">
+    SCROLL
+    <span></span>
+  </div>
+
+</section>
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section
+  class="about section"
+  id="about"
+  data-section="about"
+>
+
+  <div class="wrap">
+
+    <div class="section-head reveal">
+
+      <small>
+        01
+      </small>
+
+      <div>
+
+        <p
+          class="eyebrow"
+          data-i18n="about.eyebrow"
+        >
+          NEDEN AKAY?
+        </p>
+
+        <h2
+          data-i18n="about.title"
+        >
+          Fikirlerin kesiştiği yerde
+          <em>perspektif</em> değişir.
+        </h2>
+
+      </div>
+
+    </div>
+
+    <div class="manifesto-grid">
+
+      <article
+        class="glass-card reveal"
+      >
+
+        <div class="card-label">
+          01 /
+          <span
+            data-i18n="about.missionLabel"
+          >
+            MİSYON
+          </span>
+        </div>
+
+        <h3
+          data-i18n="about.missionTitle"
+        >
+          Özgürce ifade et.
+        </h3>
+
+        <p
+          data-i18n="about.missionText"
+        >
+          Akay Çalıştayı olarak misyonumuz;
+          Gençlerin hızla gelişen ve değişen
+          dünyaya dair farkındalıklarını artırırken,
+          onlara fikirlerini özgürce ifade
+          edebilecekleri, güçlü bir bilgi paylaşım
+          alanı sunmaktır. Komite konularımız ise
+          hem akademik anlamda geliştirici hem de
+          sosyal bakımdan günlük hayatımızı doğrudan
+          etkileyen konular olarak özenle seçilmiştir.
+          Sosyal becerilerini aktif olarak
+          kullanabilecekleri bu platformda,
+          çok yönlü bakış açıları kazanmalarını
+          hedefliyoruz.
+        </p>
+
+      </article>
+
+      <article
+        class="glass-card reveal"
+      >
+
+        <div class="card-label">
+          02 /
+          <span
+            data-i18n="about.visionLabel"
+          >
+            VİZYON
+          </span>
+        </div>
+
+        <h3
+          data-i18n="about.visionTitle"
+        >
+          Aydınlık zihni somut faydaya dönüştür.
+        </h3>
+
+        <p
+          data-i18n="about.visionText"
+        >
+          Akay Perspektif ve Aydınlanma Çalıştayı
+          ekibi olarak Türkiye’deki gençlerin Türk
+          kültürü ve kökeni başta olmak üzere;
+          dünya tarihini, farklı kültürleri ve dilleri
+          anlayarak farkındalığı, entelektüel donanımı
+          ve hitabet becerisi yüksek bireyler olmalarına
+          katkı sağlayarak ülkemiz adına faydalı
+          bireyler yetiştirmeyi amaçlıyoruz.
+
+          <br><br>
+
+          Nihai hedefimiz, gençlerin bu süreçte
+          edindikleri bilgi birikimini ve aydınlık
+          zihinlerini kullanarak başta ülkemiz olmak
+          üzere tüm insanlığa somut faydalar sunan
+          bireyler olarak yetişmeleridir.
+        </p>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     EVENT
+========================= -->
+
+<section
+  class="event section"
+  id="event"
+  data-section="event"
+>
+
+  <div class="wrap">
+
+    <div class="section-head reveal">
+
+      <small>
+        02
+      </small>
+
+      <div>
+
+        <p
+          class="eyebrow"
+          data-i18n="event.eyebrow"
+        >
+          ETKİNLİK
+        </p>
+
+        <h2
+          data-i18n="event.title"
+        >
+          Bir buluşma değil,
+          <em>bir düşünce alanı.</em>
+        </h2>
+
+      </div>
+
+    </div>
+
+    <div class="info-grid">
+
+      <article class="info-card reveal">
+
+        <small
+          data-i18n="event.dateLabel"
+        >
+          TARİH
+        </small>
+
+        <strong>
+          15 Eylül 2026
+        </strong>
+
+      </article>
+
+      <article class="info-card reveal">
+
+        <small
+          data-i18n="event.location"
+        >
+          KONUM
+        </small>
+
+        <strong
+          data-i18n="common.comingSoon"
+        >
+          Yakında Açıklanacak
+        </strong>
+
+      </article>
+
+      <article class="info-card reveal">
+
+        <small
+          data-i18n="event.fee"
+        >
+          ETKİNLİK ÜCRETİ
+        </small>
+
+        <strong
+          data-i18n="common.comingSoon"
+        >
+          Yakında Açıklanacak
+        </strong>
+
+      </article>
+
+      <article class="info-card reveal">
+
+        <small
+          data-i18n="event.duration"
+        >
+          SÜRE
+        </small>
+
+        <strong
+          data-i18n="common.comingSoon"
+        >
+          Yakında Açıklanacak
+        </strong>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     SCHEDULE
+========================= -->
+
+<section
+  class="schedule section"
+  id="schedule"
+  data-section="schedule"
+>
+
+  <div class="wrap">
+
+    <div class="section-head reveal">
+
+      <small>
+        03
+      </small>
+
+      <div>
+
+        <p
+          class="eyebrow"
+          data-i18n="schedule.eyebrow"
+        >
+          AKIŞ
+        </p>
+
+        <h2
+          data-i18n="schedule.title"
+        >
+          Zamanın ritmi
+          <em>yakında</em>
+          görünür olacak.
+        </h2>
+
+      </div>
 
     </div>
 
     <div
-      class="mobile-nav"
-      id="mobileNav"
-      aria-hidden="true"
-    >
-      <div class="mobile-nav-inner">
-
-        <div class="mobile-nav-kicker">
-          AKAY / 2026
-        </div>
-
-        <a
-          href="#home"
-          class="mobile-nav-link"
-          data-section="home"
-          data-i18n="nav.home"
-        >
-          Ana Sayfa
-        </a>
-
-        <a
-          href="#about"
-          class="mobile-nav-link"
-          data-section="about"
-          data-i18n="nav.about"
-        >
-          Hakkımızda
-        </a>
-
-        <a
-          href="#event"
-          class="mobile-nav-link"
-          data-section="event"
-          data-i18n="nav.event"
-        >
-          Etkinlik
-        </a>
-
-        <a
-          href="#committees"
-          class="mobile-nav-link"
-          data-section="committees"
-          data-i18n="nav.committees"
-        >
-          Komiteler
-        </a>
-
-        <a
-          href="#schedule"
-          class="mobile-nav-link"
-          data-section="schedule"
-          data-i18n="nav.schedule"
-        >
-          Akış
-        </a>
-
-        <a
-          href="#sponsors"
-          class="mobile-nav-link"
-          data-section="sponsors"
-          data-i18n="nav.sponsors"
-        >
-          Sponsorluk
-        </a>
-
-        <a
-          href="#contact"
-          class="mobile-nav-link"
-          data-section="contact"
-          data-i18n="nav.contact"
-        >
-          İletişim
-        </a>
-
-        <button
-          class="mobile-lang"
-          id="mobileLanguage"
-          type="button"
-          aria-label="Dili değiştir"
-        >
-          EN
-          <span>↗</span>
-        </button>
-
-      </div>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- HERO -->
-    <section
-      class="hero section"
-      id="home"
-      data-section-id="home"
+      class="schedule-box reveal"
     >
 
-      <div
-        class="hero-grid"
-        aria-hidden="true"
-      ></div>
+      <div class="schedule-top">
 
-      <div
-        class="hero-orbit hero-orbit-one"
-        aria-hidden="true"
-      ></div>
-
-      <div
-        class="hero-orbit hero-orbit-two"
-        aria-hidden="true"
-      ></div>
-
-      <div
-        class="hero-orbit hero-orbit-three"
-        aria-hidden="true"
-      ></div>
-
-      <div
-        class="hero-glow hero-glow-main"
-        aria-hidden="true"
-      ></div>
-
-      <div
-        class="hero-glow hero-glow-secondary"
-        aria-hidden="true"
-      ></div>
-
-      <div
-        class="hero-fragment fragment-a"
-        aria-hidden="true"
-      >
-        PERSPECTIVE
-      </div>
-
-      <div
-        class="hero-fragment fragment-b"
-        aria-hidden="true"
-      >
-        IDEA / 01
-      </div>
-
-      <div
-        class="hero-fragment fragment-c"
-        aria-hidden="true"
-      >
-        01———09
-      </div>
-
-      <div class="hero-content container">
-
-        <div class="hero-meta reveal">
-          AKAY
-          <span>·</span>
-          2026
-        </div>
-
-        <div class="hero-layout">
-
-          <div class="hero-title-wrap">
-
-            <p
-              class="eyebrow reveal"
-              data-i18n="hero.eyebrow"
-            >
-              Gençlik / Fikir / Perspektif
-            </p>
-
-            <h1 class="hero-title">
-
-              <span class="hero-title-line">
-                Akay
-              </span>
-
-              <span class="hero-title-line">
-                <em>Perspektif</em>
-              </span>
-
-              <span class="hero-title-line">
-                ve Aydınlanma
-              </span>
-
-              <span class="hero-title-line">
-                Çalıştayı
-              </span>
-
-            </h1>
-
-            <p
-              class="hero-copy reveal"
-              data-i18n="hero.copy"
-            >
-              Bilginin yalnızca paylaşılmadığı,
-              bakış açılarının birbirine temas ettiği
-              bir düşünce alanı.
-            </p>
-
-            <div class="hero-actions reveal">
-
-              <a
-                href="#about"
-                class="magnetic button button-primary"
-                data-i18n="hero.explore"
-              >
-                Deneyimi Keşfet
-                <span>↘</span>
-              </a>
-
-              <a
-                href="#contact"
-                class="magnetic button button-ghost"
-                data-i18n="hero.connect"
-              >
-                İletişime Geç
-                <span>↗</span>
-              </a>
-
-            </div>
-
-          </div>
-
-          <div class="hero-side">
-
-            <div class="date-lockup reveal">
-
-              <span
-                class="date-label"
-                data-i18n="hero.dateLabel"
-              >
-                Etkinlik Tarihi
-              </span>
-
-              <strong>15</strong>
-
-              <div class="date-month">
-                <span data-i18n="hero.month">
-                  Eylül
-                </span>
-
-                <small>2026</small>
-              </div>
-
-            </div>
-
-            <div class="hero-side-note reveal">
-
-              <span class="side-line"></span>
-
-              <span data-i18n="hero.sideNote">
-                Düşün. Tartış. Perspektifini genişlet.
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div
-          class="countdown-shell reveal"
-          id="countdownShell"
+        <span
+          data-i18n="schedule.top"
         >
+          GENEL AKIŞ / FRAMEWORK
+        </span>
 
-          <div class="countdown-heading">
+        <span class="status">
 
-            <span data-i18n="countdown.kicker">
-              Başlangıca kalan süre
-            </span>
+          <i></i>
 
-            <span class="live-dot">
-
-              <i></i>
-
-              <span data-i18n="countdown.live">
-                CANLI
-              </span>
-
-            </span>
-
-          </div>
-
-          <div class="countdown-stage">
-
-            <div
-              class="countdown-ring ring-a"
-              aria-hidden="true"
-            ></div>
-
-            <div
-              class="countdown-ring ring-b"
-              aria-hidden="true"
-            ></div>
-
-            <div
-              class="countdown-center-mark"
-              aria-hidden="true"
-            >
-              AKAY
-            </div>
-
-            <div
-              class="countdown-grid"
-              id="countdown"
-            >
-
-              <div
-                class="time-unit"
-                data-unit="days"
-              >
-                <div
-                  class="time-number"
-                  data-value
-                >
-                  00
-                </div>
-
-                <div
-                  class="time-label"
-                  data-i18n="countdown.days"
-                >
-                  GÜN
-                </div>
-              </div>
-
-              <div class="time-separator">
-                :
-              </div>
-
-              <div
-                class="time-unit"
-                data-unit="hours"
-              >
-                <div
-                  class="time-number"
-                  data-value
-                >
-                  00
-                </div>
-
-                <div
-                  class="time-label"
-                  data-i18n="countdown.hours"
-                >
-                  SAAT
-                </div>
-              </div>
-
-              <div class="time-separator">
-                :
-              </div>
-
-              <div
-                class="time-unit"
-                data-unit="minutes"
-              >
-                <div
-                  class="time-number"
-                  data-value
-                >
-                  00
-                </div>
-
-                <div
-                  class="time-label"
-                  data-i18n="countdown.minutes"
-                >
-                  DAKİKA
-                </div>
-              </div>
-
-              <div class="time-separator">
-                :
-              </div>
-
-              <div
-                class="time-unit"
-                data-unit="seconds"
-              >
-                <div
-                  class="time-number"
-                  data-value
-                >
-                  00
-                </div>
-
-                <div
-                  class="time-label"
-                  data-i18n="countdown.seconds"
-                >
-                  SANİYE
-                </div>
-              </div>
-
-            </div>
-
-            <div
-              class="countdown-started"
-              id="countdownStarted"
-              hidden
-            >
-
-              <span
-                class="started-kicker"
-                data-i18n="countdown.startedKicker"
-              >
-                Şimdi
-              </span>
-
-              <strong
-                data-i18n="countdown.started"
-              >
-                Etkinlik Başladı
-              </strong>
-
-              <span class="started-mark">
-                ◉
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div
-        class="scroll-cue"
-        aria-hidden="true"
-      >
-        <span></span>
-        <small>SCROLL</small>
-      </div>
-
-    </section>
-
-    <!-- ABOUT -->
-    <section
-      class="manifesto section"
-      id="about"
-      data-section-id="about"
-    >
-
-      <div
-        class="section-backword"
-        aria-hidden="true"
-      >
-        PERSPEKTİF
-      </div>
-
-      <div class="container">
-
-        <div class="section-intro reveal">
-
-          <div class="section-index">
-            01
-          </div>
-
-          <div>
-
-            <p
-              class="eyebrow"
-              data-i18n="about.eyebrow"
-            >
-              Neden Akay?
-            </p>
-
-            <h2
-              data-i18n="about.title"
-            >
-              Fikirlerin kesiştiği yerde
-              <em>perspektif</em> değişir.
-            </h2>
-
-          </div>
-
-        </div>
-
-        <div class="manifesto-axis">
-
-          <div
-            class="axis-line"
-            aria-hidden="true"
-          ></div>
-
-          <article
-            class="manifesto-panel mission reveal"
+          <span
+            data-i18n="schedule.status"
           >
-
-            <div class="panel-topline">
-              <span>01</span>
-
-              <span
-                data-i18n="about.missionLabel"
-              >
-                MİSYON
-              </span>
-            </div>
-
-            <div class="panel-symbol">
-              ↗
-            </div>
-
-            <h3
-              data-i18n="about.missionTitle"
-            >
-              Özgürce ifade et.
-            </h3>
-
-            <p
-              data-i18n="about.missionText"
-            >
-              Akay Çalıştayı olarak misyonumuz;
-              Gençlerin hızla gelişen ve değişen
-              dünyaya dair farkındalıklarını artırırken,
-              onlara fikirlerini özgürce ifade
-              edebilecekleri, güçlü bir bilgi paylaşım
-              alanı sunmaktır. Komite konularımız ise
-              hem akademik anlamda geliştirici hem de
-              sosyal bakımdan günlük hayatımızı
-              doğrudan etkileyen konular olarak
-              özenle seçilmiştir. Sosyal becerilerini
-              aktif olarak kullanabilecekleri bu
-              platformda, çok yönlü bakış açıları
-              kazanmalarını hedefliyoruz.
-            </p>
-
-            <div class="panel-foot">
-              <span
-                data-i18n="about.axis"
-              >
-                BİR FİKİR / BİRDEN ÇOK BAKIŞ
-              </span>
-            </div>
-
-          </article>
-
-          <article
-            class="manifesto-panel vision reveal"
-          >
-
-            <div class="panel-topline">
-              <span>02</span>
-
-              <span
-                data-i18n="about.visionLabel"
-              >
-                VİZYON
-              </span>
-            </div>
-
-            <div class="panel-symbol">
-              ↗
-            </div>
-
-            <h3
-              data-i18n="about.visionTitle"
-            >
-              Aydınlık zihni somut faydaya dönüştür.
-            </h3>
-
-            <p
-              data-i18n="about.visionText"
-            >
-              Akay Perspektif ve Aydınlanma Çalıştayı
-              ekibi olarak Türkiye’deki gençlerin Türk
-              kültürü ve kökeni başta olmak üzere;
-              dünya tarihini, farklı kültürleri ve dilleri
-              anlayarak farkındalığı, entelektüel donanımı
-              ve hitabet becerisi yüksek bireyler olmalarına
-              katkı sağlayarak ülkemiz adına faydalı
-              bireyler yetiştirmeyi amaçlıyoruz.
-              <br><br>
-              Nihai hedefimiz, gençlerin bu süreçte
-              edindikleri bilgi birikimini ve aydınlık
-              zihinlerini kullanarak başta ülkemiz olmak
-              üzere tüm insanlığa somut faydalar sunan
-              bireyler olarak yetişmeleridir.
-            </p>
-
-            <div class="panel-foot">
-              <span>
-                AKAY / 02
-              </span>
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- EVENT -->
-    <section
-      class="event-section section"
-      id="event"
-      data-section-id="event"
-    >
-
-      <div class="container">
-
-        <div class="section-intro reveal">
-
-          <div class="section-index">
-            02
-          </div>
-
-          <div>
-
-            <p
-              class="eyebrow"
-              data-i18n="event.eyebrow"
-            >
-              Etkinlik
-            </p>
-
-            <h2
-              data-i18n="event.title"
-            >
-              Bir buluşma değil,
-              <em>bir düşünce alanı.</em>
-            </h2>
-
-          </div>
-
-        </div>
-
-        <div class="event-statement reveal">
-
-          <span class="statement-mark">
-            /
+            PROGRAM HAZIRLANIYOR
           </span>
 
-          <p
-            data-i18n="event.statement"
-          >
-            Henüz açıklanmayan ayrıntıların yerini
-            doldurmak yerine, burada gerçek olanı
-            net ve güçlü biçimde sunuyoruz.
-          </p>
-
-        </div>
-
-        <div class="event-modules">
-
-          <article
-            class="info-module tilt-card reveal"
-          >
-            <span class="module-index">
-              01
-            </span>
-
-            <span
-              class="module-label"
-              data-i18n="event.date"
-            >
-              Tarih
-            </span>
-
-            <strong>
-              15 Eylül 2026
-            </strong>
-          </article>
-
-          <article
-            class="info-module tilt-card reveal"
-          >
-            <span class="module-index">
-              02
-            </span>
-
-            <span
-              class="module-label"
-              data-i18n="event.location"
-            >
-              Konum
-            </span>
-
-            <strong
-              data-i18n="common.comingSoon"
-            >
-              Yakında Açıklanacak
-            </strong>
-          </article>
-
-          <article
-            class="info-module tilt-card reveal"
-          >
-            <span class="module-index">
-              03
-            </span>
-
-            <span
-              class="module-label"
-              data-i18n="event.fee"
-            >
-              Etkinlik Ücreti
-            </span>
-
-            <strong
-              data-i18n="common.comingSoon"
-            >
-              Yakında Açıklanacak
-            </strong>
-          </article>
-
-          <article
-            class="info-module tilt-card reveal"
-          >
-            <span class="module-index">
-              04
-            </span>
-
-            <span
-              class="module-label"
-              data-i18n="event.duration"
-            >
-              Süre
-            </span>
-
-            <strong
-              data-i18n="common.comingSoon"
-            >
-              Yakında Açıklanacak
-            </strong>
-          </article>
-
-        </div>
+        </span>
 
       </div>
 
-    </section>
+      <div class="schedule-empty">
 
-    <!-- SCHEDULE -->
-    <section
-      class="schedule-section section"
-      id="schedule"
-      data-section-id="schedule"
-    >
+        <span>
+          00
+        </span>
 
-      <div class="container">
+        <h3
+          data-i18n="schedule.emptyTitle"
+        >
+          Program yakında açıklanacaktır.
+        </h3>
 
-        <div class="section-intro reveal">
-
-          <div class="section-index">
-            03
-          </div>
-
-          <div>
-
-            <p
-              class="eyebrow"
-              data-i18n="schedule.eyebrow"
-            >
-              Akış
-            </p>
-
-            <h2
-              data-i18n="schedule.title"
-            >
-              Zamanın ritmi
-              <em>yakında</em>
-              görünür olacak.
-            </h2>
-
-          </div>
-
-        </div>
-
-        <div class="schedule-frame reveal">
-
-          <div class="schedule-head">
-
-            <div>
-              <span
-                data-i18n="schedule.frameLabel"
-              >
-                GENEL AKIŞ / FRAMEWORK
-              </span>
-            </div>
-
-            <div class="schedule-status">
-
-              <span></span>
-
-              <span
-                data-i18n="schedule.status"
-              >
-                PROGRAM HAZIRLANIYOR
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="schedule-empty">
-
-            <div
-              class="empty-orbit"
-              aria-hidden="true"
-            ></div>
-
-            <span class="empty-number">
-              00
-            </span>
-
-            <h3
-              data-i18n="schedule.emptyTitle"
-            >
-              Program yakında açıklanacaktır.
-            </h3>
-
-            <p
-              data-i18n="schedule.emptyText"
-            >
-              Gerçek zaman, oturum, salon,
-              komite ve konuşmacı bilgileri
-              doğrulandığında bu akış dinamik
-              olarak doldurulacaktır.
-            </p>
-
-          </div>
-
-          <div class="schedule-schema">
-
-            <div>
-              <span
-                data-i18n="schedule.time"
-              >
-                Zaman
-              </span>
-
-              <b>—</b>
-            </div>
-
-            <div>
-              <span
-                data-i18n="schedule.session"
-              >
-                Oturum
-              </span>
-
-              <b>—</b>
-            </div>
-
-            <div>
-              <span
-                data-i18n="schedule.room"
-              >
-                Salon / Konum
-              </span>
-
-              <b>—</b>
-            </div>
-
-            <div>
-              <span
-                data-i18n="schedule.committee"
-              >
-                Komite
-              </span>
-
-              <b>—</b>
-            </div>
-
-          </div>
-
-        </div>
+        <p
+          data-i18n="schedule.emptyText"
+        >
+          Gerçek zaman, oturum, salon, komite
+          ve konuşmacı bilgileri doğrulandığında
+          bu akış dinamik olarak doldurulacaktır.
+        </p>
 
       </div>
 
-    </section>
+    </div>
 
-    <!-- COMMITTEES -->
-    <section
-      class="committee-section section"
-      id="committees"
-      data-section-id="committees"
+  </div>
+
+</section>
+
+<!-- =========================
+     COMMITTEES
+========================= -->
+
+<section
+  class="committee section"
+  id="committees"
+  data-section="committees"
+>
+
+  <div class="wrap">
+
+    <div class="section-head reveal">
+
+      <small>
+        04
+      </small>
+
+      <div>
+
+        <p
+          class="eyebrow"
+          data-i18n="committees.eyebrow"
+        >
+          KOMİTELER
+        </p>
+
+        <h2
+          data-i18n="committees.title"
+        >
+          Gündemler hazır olduğunda
+          <em>sahne açılacak.</em>
+        </h2>
+
+      </div>
+
+    </div>
+
+    <div
+      class="committee-box reveal"
     >
 
-      <div class="container">
+      <div class="committee-number">
+        00
+      </div>
 
-        <div class="section-intro reveal">
+      <div class="committee-art">
 
-          <div class="section-index">
-            04
-          </div>
+        <i></i>
+        <i></i>
+        <b></b>
 
-          <div>
+      </div>
 
-            <p
-              class="eyebrow"
-              data-i18n="committees.eyebrow"
-            >
-              Komiteler
-            </p>
+      <div>
 
-            <h2
-              data-i18n="committees.title"
-            >
-              Gündemler hazır olduğunda
-              <em>sahne açılacak.</em>
-            </h2>
+        <p
+          class="eyebrow"
+          data-i18n="committees.label"
+        >
+          AÇILACAK ALAN
+        </p>
 
-          </div>
+        <h3
+          data-i18n="committees.emptyTitle"
+        >
+          Komiteler ve gündem maddeleri
+          yakında açıklanacaktır.
+        </h3>
 
+        <p
+          data-i18n="committees.emptyText"
+        >
+          Yayınlandığında her komite;
+          gündem, açıklama, salon ve moderasyon
+          bilgileriyle etkileşimli olarak
+          burada yer alacaktır.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     SPONSORS
+========================= -->
+
+<section
+  class="sponsors section"
+  id="sponsors"
+  data-section="sponsors"
+>
+
+  <div class="wrap">
+
+    <div class="section-head reveal">
+
+      <small>
+        05
+      </small>
+
+      <div>
+
+        <p
+          class="eyebrow"
+          data-i18n="sponsors.eyebrow"
+        >
+          SPONSORLUK
+        </p>
+
+        <h2
+          data-i18n="sponsors.title"
+        >
+          Bu deneyim
+          <em>birlikte</em> büyüyor.
+        </h2>
+
+      </div>
+
+    </div>
+
+    <div class="sponsor-grid">
+
+      <a
+        class="sponsor reveal"
+        href="https://vertexishere.com/tr/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        <small>
+          01 /
+          <span data-i18n="sponsors.ai">
+            YAPAY ZEKA SPONSORU
+          </span>
+        </small>
+
+        <strong>
+          Vertex
+        </strong>
+
+        <span
+          data-i18n="sponsors.visit"
+        >
+          Web sitesini ziyaret et ↗
+        </span>
+
+      </a>
+
+      <a
+        class="sponsor reveal"
+        href="https://trybanna.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        <small>
+          02 /
+          <span data-i18n="sponsors.it">
+            BT SPONSORU
+          </span>
+        </small>
+
+        <strong>
+          Banna
+        </strong>
+
+        <span
+          data-i18n="sponsors.visit"
+        >
+          Web sitesini ziyaret et ↗
+        </span>
+
+      </a>
+
+      <a
+        class="sponsor reveal"
+        href="https://www.instagram.com/ccorddesign?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        <small>
+          03 /
+          <span data-i18n="sponsors.design">
+            SOSYAL MEDYA / GRAFİK TASARIM SPONSORU
+          </span>
+        </small>
+
+        <strong>
+          Cord Design
+        </strong>
+
+        <span
+          data-i18n="sponsors.instagram"
+        >
+          Instagram'ı ziyaret et ↗
+        </span>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     TEAM
+========================= -->
+
+<section
+  class="team section"
+  id="team"
+>
+
+  <div class="wrap">
+
+    <div class="section-head reveal">
+
+      <small>
+        06
+      </small>
+
+      <div>
+
+        <p
+          class="eyebrow"
+          data-i18n="team.eyebrow"
+        >
+          KOORDİNASYON
+        </p>
+
+        <h2
+          data-i18n="team.title"
+        >
+          Doğrudan
+          <em>ulaş.</em>
+        </h2>
+
+      </div>
+
+    </div>
+
+    <div class="team-grid">
+
+      <article class="person reveal">
+
+        <div class="initials">
+          ZK
         </div>
 
-        <div class="committee-stage reveal">
+        <small
+          data-i18n="team.role"
+        >
+          GENEL KOORDİNATÖR
+        </small>
 
-          <div class="committee-index-large">
-            00
-          </div>
+        <h3>
+          Zeynep Beril Köse
+        </h3>
 
-          <div
-            class="committee-art"
-            aria-hidden="true"
+        <a href="tel:+905388183222">
+          0538 818 32 22 ↗
+        </a>
+
+      </article>
+
+      <article class="person reveal">
+
+        <div class="initials">
+          EÜ
+        </div>
+
+        <small
+          data-i18n="team.role"
+        >
+          GENEL KOORDİNATÖR
+        </small>
+
+        <h3>
+          Eylül Ulubulut
+        </h3>
+
+        <a href="tel:+905054965668">
+          0505 496 56 68 ↗
+        </a>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section
+  class="contact section"
+  id="contact"
+  data-section="contact"
+>
+
+  <div class="contact-glow"></div>
+
+  <div class="wrap contact-inner">
+
+    <div class="contact-copy reveal">
+
+      <p
+        class="eyebrow"
+        data-i18n="contact.eyebrow"
+      >
+        İLETİŞİM
+      </p>
+
+      <h2
+        data-i18n="contact.title"
+      >
+        Perspektifini
+        <em>paylaş.</em>
+      </h2>
+
+      <p
+        data-i18n="contact.text"
+      >
+        Akay'ın güncel duyuruları ve etkinlik
+        iletişimi için resmi Instagram hesabını takip et.
+      </p>
+
+    </div>
+
+    <a
+      class="instagram reveal"
+      href="https://www.instagram.com/akay_calistay?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+
+      <div class="instagram-icon">
+        ◎
+      </div>
+
+      <span>
+        @akay_calistay ↗
+      </span>
+
+    </a>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+  <div class="wrap">
+
+    <div class="footer-main">
+
+      <div>
+
+        <img
+          src="Logo-1.png"
+          alt="Akay"
+        >
+
+        <p
+          data-i18n="footer.statement"
+        >
+          Gençlik, fikir, kültür ve çok yönlü
+          bakışın kesiştiği dijital bir deneyim.
+        </p>
+
+      </div>
+
+      <div class="footer-links">
+
+        <div>
+
+          <small
+            data-i18n="footer.navigation"
           >
+            NAVİGASYON
+          </small>
 
-            <div class="art-orbit orbit-x"></div>
-            <div class="art-orbit orbit-y"></div>
-            <div class="art-cross"></div>
+          <a href="#home">
+            Ana Sayfa
+          </a>
 
-            <div class="art-points">
+          <a href="#about">
+            Hakkımızda
+          </a>
 
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-
-            </div>
-
-          </div>
-
-          <div class="committee-copy">
-
-            <span
-              class="eyebrow"
-              data-i18n="committees.label"
-            >
-              AÇILACAK ALAN
-            </span>
-
-            <h3
-              data-i18n="committees.emptyTitle"
-            >
-              Komiteler ve gündem maddeleri
-              yakında açıklanacaktır.
-            </h3>
-
-            <p
-              data-i18n="committees.emptyText"
-            >
-              Yayınlandığında her komite;
-              gündem, açıklama, salon ve
-              moderasyon bilgileriyle etkileşimli
-              olarak burada yer alacaktır.
-            </p>
-
-            <button
-              class="button button-ghost disabled-button"
-              type="button"
-              disabled
-            >
-              <span
-                data-i18n="committees.awaiting"
-              >
-                Yakında
-              </span>
-
-              <span>◌</span>
-            </button>
-
-          </div>
+          <a href="#event">
+            Etkinlik
+          </a>
 
         </div>
 
-      </div>
+        <div>
 
-    </section>
-
-    <!-- SPONSORS -->
-    <section
-      class="sponsor-section section"
-      id="sponsors"
-      data-section-id="sponsors"
-    >
-
-      <div class="container">
-
-        <div class="section-intro reveal">
-
-          <div class="section-index">
-            05
-          </div>
-
-          <div>
-
-            <p
-              class="eyebrow"
-              data-i18n="sponsors.eyebrow"
-            >
-              Sponsorluk
-            </p>
-
-            <h2
-              data-i18n="sponsors.title"
-            >
-              Bu deneyim
-              <em>birlikte</em> büyüyor.
-            </h2>
-
-          </div>
-
-        </div>
-
-        <div class="sponsor-list">
+          <small
+            data-i18n="footer.supporters"
+          >
+            DESTEKÇİLER
+          </small>
 
           <a
-            class="sponsor-card sponsor-vertex tilt-card reveal"
             href="https://vertexishere.com/tr/"
             target="_blank"
             rel="noopener noreferrer"
           >
-
-            <div class="sponsor-card-top">
-
-              <span>01</span>
-
-              <span
-                data-i18n="sponsors.ai"
-              >
-                YAPAY ZEKA SPONSORU
-              </span>
-
-            </div>
-
-            <div class="sponsor-brand">
-              Vertex
-            </div>
-
-            <div class="sponsor-card-bottom">
-
-              <span
-                data-i18n="sponsors.visit"
-              >
-                Web sitesini ziyaret et
-              </span>
-
-              <span>↗</span>
-
-            </div>
-
+            Vertex ↗
           </a>
 
           <a
-            class="sponsor-card sponsor-banna tilt-card reveal"
             href="https://trybanna.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
-
-            <div class="sponsor-card-top">
-
-              <span>02</span>
-
-              <span
-                data-i18n="sponsors.it"
-              >
-                BT SPONSORU
-              </span>
-
-            </div>
-
-            <div class="sponsor-brand">
-              Banna
-            </div>
-
-            <div class="sponsor-card-bottom">
-
-              <span
-                data-i18n="sponsors.visit"
-              >
-                Web sitesini ziyaret et
-              </span>
-
-              <span>↗</span>
-
-            </div>
-
+            Banna ↗
           </a>
 
           <a
-            class="sponsor-card sponsor-cord tilt-card reveal"
-            href="https://www.instagram.com/ccorddesign?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            href="https://www.instagram.com/ccorddesign"
             target="_blank"
             rel="noopener noreferrer"
           >
-
-            <div class="sponsor-card-top">
-
-              <span>03</span>
-
-              <span
-                data-i18n="sponsors.design"
-              >
-                SOSYAL MEDYA / GRAFİK TASARIM SPONSORU
-              </span>
-
-            </div>
-
-            <div class="sponsor-brand">
-              Cord Design
-            </div>
-
-            <div class="sponsor-card-bottom">
-
-              <span
-                data-i18n="sponsors.instagramVisit"
-              >
-                Instagram'ı ziyaret et
-              </span>
-
-              <span>↗</span>
-
-            </div>
-
+            Cord Design ↗
           </a>
 
         </div>
 
-        <div class="sponsor-footnote reveal">
+        <div>
 
-          <span>
-            COLLECTIVE / AKAY
-          </span>
-
-          <span
-            data-i18n="sponsors.note"
+          <small
+            data-i18n="footer.social"
           >
-            Üç destekçi, tek bir deneyim.
-          </span>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- TEAM -->
-    <section
-      class="team-section section"
-      id="team"
-      data-section-id="team"
-    >
-
-      <div class="container">
-
-        <div class="section-intro reveal">
-
-          <div class="section-index">
-            06
-          </div>
-
-          <div>
-
-            <p
-              class="eyebrow"
-              data-i18n="team.eyebrow"
-            >
-              Koordinasyon
-            </p>
-
-            <h2
-              data-i18n="team.title"
-            >
-              Doğrudan
-              <em>ulaş.</em>
-            </h2>
-
-          </div>
-
-        </div>
-
-        <div class="team-grid">
-
-          <article
-            class="team-card tilt-card reveal"
-          >
-
-            <div class="team-avatar">
-              ZK
-            </div>
-
-            <div class="team-meta">
-
-              <span
-                data-i18n="team.role"
-              >
-                Genel Koordinatör
-              </span>
-
-              <span>
-                01
-              </span>
-
-            </div>
-
-            <h3>
-              Zeynep Beril Köse
-            </h3>
-
-            <a
-              href="tel:+905388183222"
-              class="team-phone"
-            >
-              0538 818 32 22
-              <span>↗</span>
-            </a>
-
-          </article>
-
-          <article
-            class="team-card tilt-card reveal"
-          >
-
-            <div class="team-avatar">
-              EÜ
-            </div>
-
-            <div class="team-meta">
-
-              <span
-                data-i18n="team.role"
-              >
-                Genel Koordinatör
-              </span>
-
-              <span>
-                02
-              </span>
-
-            </div>
-
-            <h3>
-              Eylül Ulubulut
-            </h3>
-
-            <a
-              href="tel:+905054965668"
-              class="team-phone"
-            >
-              0505 496 56 68
-              <span>↗</span>
-            </a>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- CONTACT -->
-    <section
-      class="contact-section section"
-      id="contact"
-      data-section-id="contact"
-    >
-
-      <div
-        class="contact-glow"
-        aria-hidden="true"
-      ></div>
-
-      <div class="container">
-
-        <div class="contact-layout">
-
-          <div class="contact-copy reveal">
-
-            <p
-              class="eyebrow"
-              data-i18n="contact.eyebrow"
-            >
-              İletişim
-            </p>
-
-            <h2
-              data-i18n="contact.title"
-            >
-              Perspektifini
-              <em>paylaş.</em>
-            </h2>
-
-            <p
-              data-i18n="contact.text"
-            >
-              Akay'ın güncel duyuruları ve etkinlik
-              iletişimi için resmi Instagram hesabını takip et.
-            </p>
-
-          </div>
+            SOSYAL
+          </small>
 
           <a
-            class="instagram-orbit reveal"
-            href="https://www.instagram.com/akay_calistay?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            href="https://www.instagram.com/akay_calistay"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Akay Instagram"
           >
-
-            <span class="ig-ring ring-one"></span>
-            <span class="ig-ring ring-two"></span>
-
-            <span
-              class="ig-glyph"
-              aria-hidden="true"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                role="img"
-              >
-                <rect
-                  x="3"
-                  y="3"
-                  width="18"
-                  height="18"
-                  rx="5"
-                ></rect>
-
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="4.25"
-                ></circle>
-
-                <circle
-                  cx="17.5"
-                  cy="6.5"
-                  r="1"
-                ></circle>
-              </svg>
-            </span>
-
-            <span class="ig-handle">
-              @akay_calistay
-            </span>
-
-            <span class="ig-arrow">
-              ↗
-            </span>
-
+            Instagram ↗
           </a>
 
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-
-    <div class="container">
-
-      <div class="footer-top">
-
-        <div class="footer-brand">
-
-          <img
-            src="Logo-1.png"
-            alt="Akay Perspektif ve Aydınlanma Çalıştayı"
+          <button
+            id="footerLang"
+            type="button"
           >
-
-          <span class="footer-fallback">
-            AKAY
-          </span>
-
-          <p
-            data-i18n="footer.statement"
-          >
-            Gençlik, fikir, kültür ve çok yönlü
-            bakışın kesiştiği dijital bir deneyim.
-          </p>
+            TR / EN ↗
+          </button>
 
         </div>
-
-        <div class="footer-links">
-
-          <div class="footer-column">
-
-            <span
-              class="footer-kicker"
-              data-i18n="footer.navigation"
-            >
-              NAVİGASYON
-            </span>
-
-            <a
-              href="#home"
-              data-i18n="nav.home"
-            >
-              Ana Sayfa
-            </a>
-
-            <a
-              href="#about"
-              data-i18n="nav.about"
-            >
-              Hakkımızda
-            </a>
-
-            <a
-              href="#event"
-              data-i18n="nav.event"
-            >
-              Etkinlik
-            </a>
-
-            <a
-              href="#committees"
-              data-i18n="nav.committees"
-            >
-              Komiteler
-            </a>
-
-          </div>
-
-          <div class="footer-column">
-
-            <span
-              class="footer-kicker"
-              data-i18n="footer.supporters"
-            >
-              DESTEKÇİLER
-            </span>
-
-            <a
-              href="https://vertexishere.com/tr/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Vertex ↗
-            </a>
-
-            <a
-              href="https://trybanna.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Banna ↗
-            </a>
-
-            <a
-              href="https://www.instagram.com/ccorddesign?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Cord Design ↗
-            </a>
-
-          </div>
-
-          <div class="footer-column">
-
-            <span
-              class="footer-kicker"
-              data-i18n="footer.social"
-            >
-              SOSYAL
-            </span>
-
-            <a
-              href="https://www.instagram.com/akay_calistay?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Instagram ↗
-            </a>
-
-            <button
-              id="footerLanguage"
-              type="button"
-            >
-              TR / EN ↗
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="footer-bottom">
-
-        <span>
-          © 2026 AKAY
-        </span>
-
-        <span
-          data-i18n="footer.rights"
-        >
-          Tüm hakları saklıdır.
-        </span>
-
-        <span>
-          15.09.2026
-        </span>
 
       </div>
 
     </div>
 
-  </footer>
+    <div class="footer-bottom">
 
-  <script src="script.js"></script>
+      <span>
+        © 2026 AKAY
+      </span>
+
+      <span
+        data-i18n="footer.rights"
+      >
+        Tüm hakları saklıdır.
+      </span>
+
+      <span>
+        15.09.2026
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<script src="script.js?v=4"></script>
 
 </body>
 </html>
