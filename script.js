@@ -2,7 +2,8 @@
   "use strict";
 
   /* =========================================================
-     HELPERS
+     AKAY PERSPEKTİF VE AYDINLANMA ÇALIŞTAYI
+     Main JavaScript
   ========================================================= */
 
   const $ = (selector, root = document) =>
@@ -11,26 +12,31 @@
   const $$ = (selector, root = document) =>
     [...root.querySelectorAll(selector)];
 
-  const reducedMotion = window.matchMedia(
+  const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  const isTouch =
+  const isTouchDevice =
     "ontouchstart" in window ||
     navigator.maxTouchPoints > 0;
 
   /* =========================================================
-     SAYFA HAZIR
-     
-     ÖNEMLİ:
-     CSS tarafında .reveal varsayılan olarak görünür.
-     JS gerçekten çalışıyorsa .js-ready eklenir ve
-     animasyonlar aktif hale gelir.
-     
-     Böylece JS ölürse tüm site kaybolmaz.
+     STATE
   ========================================================= */
 
-  document.documentElement.classList.add("js-ready");
+  let currentLanguage = "tr";
+  let countdownInterval = null;
+  let loaderClosed = false;
+
+  try {
+    const savedLanguage = localStorage.getItem("akay-language");
+
+    if (savedLanguage === "tr" || savedLanguage === "en") {
+      currentLanguage = savedLanguage;
+    }
+  } catch {
+    currentLanguage = "tr";
+  }
 
   /* =========================================================
      TRANSLATIONS
@@ -60,7 +66,6 @@
 
       countdown: {
         label: "Başlangıca kalan süre",
-        live: "CANLI",
         days: "GÜN",
         hours: "SAAT",
         minutes: "DAKİKA",
@@ -101,7 +106,7 @@
         eyebrow: "AKIŞ",
         title:
           "Zamanın ritmi <em>yakında</em> görünür olacak.",
-        top: "GENEL AKIŞ / FRAMEWORK",
+        top: "GENEL AKIŞ",
         status: "PROGRAM HAZIRLANIYOR",
         emptyTitle:
           "Program yakında açıklanacaktır.",
@@ -117,7 +122,7 @@
         emptyTitle:
           "Komiteler ve gündem maddeleri yakında açıklanacaktır.",
         emptyText:
-          "Yayınlandığında her komite; gündem, açıklama, salon ve moderasyon bilgileriyle etkileşimli olarak burada yer alacaktır."
+          "Yayınlandığında her komite; gündem, açıklama, salon ve moderasyon bilgileriyle burada yer alacaktır."
       },
 
       sponsors: {
@@ -178,7 +183,6 @@
 
       countdown: {
         label: "Time until the opening",
-        live: "LIVE",
         days: "DAYS",
         hours: "HOURS",
         minutes: "MINUTES",
@@ -220,7 +224,7 @@
         eyebrow: "SCHEDULE",
         title:
           "The rhythm of time will <em>soon</em> come into view.",
-        top: "GENERAL FLOW / FRAMEWORK",
+        top: "GENERAL FLOW",
         status: "PROGRAM IN PREPARATION",
         emptyTitle:
           "The full program will be announced soon.",
@@ -236,7 +240,7 @@
         emptyTitle:
           "Committees and agenda topics will be announced soon.",
         emptyText:
-          "Once published, each committee will appear here interactively with agenda, description, room, and moderation details."
+          "Once published, each committee will appear here with agenda, description, room, and moderation details."
       },
 
       sponsors: {
@@ -276,113 +280,67 @@
   };
 
   /* =========================================================
-     STATE
-  ========================================================= */
-
-  let language = "tr";
-  let countdownTimer = null;
-  let loaderClosed = false;
-
-  try {
-    const savedLanguage =
-      localStorage.getItem(
-        "akay-language"
-      );
-
-    if (
-      savedLanguage === "tr" ||
-      savedLanguage === "en"
-    ) {
-      language = savedLanguage;
-    }
-  } catch {
-    language = "tr";
-  }
-
-  /* =========================================================
-     TRANSLATION
+     TRANSLATION HELPERS
   ========================================================= */
 
   function getTranslation(path) {
-    return path
-      .split(".")
-      .reduce(
-        (current, key) =>
-          current && current[key],
-        translations[language]
-      );
+    return path.split(".").reduce(
+      (value, key) =>
+        value && value[key],
+      translations[currentLanguage]
+    );
   }
 
   function translatePage() {
-    document.documentElement.lang =
-      language;
+    document.documentElement.lang = currentLanguage;
 
-    $$("[data-i18n]").forEach(
-      (element) => {
-        const translated =
-          getTranslation(
-            element.dataset.i18n
-          );
+    $$("[data-i18n]").forEach((element) => {
+      const value = getTranslation(element.dataset.i18n);
 
-        if (
-          typeof translated ===
-          "string"
-        ) {
-          element.innerHTML =
-            translated;
-        }
+      if (typeof value === "string") {
+        element.innerHTML = value;
       }
-    );
+    });
 
-    const langButton =
-      $("#langButton");
+    const languageButtons = [
+      $("#langButton"),
+      $("#mobileLang"),
+      $("#footerLang")
+    ].filter(Boolean);
 
-    const mobileLang =
-      $("#mobileLang");
-
-    const footerLang =
-      $("#footerLang");
-
-    if (langButton) {
-      langButton.textContent =
-        language === "tr"
-          ? "TR / EN"
-          : "EN / TR";
-    }
-
-    if (mobileLang) {
-      mobileLang.textContent =
-        language === "tr"
-          ? "EN ↗"
-          : "TR ↗";
-    }
-
-    if (footerLang) {
-      footerLang.textContent =
-        language === "tr"
-          ? "TR / EN ↗"
-          : "EN / TR ↗";
-    }
+    languageButtons.forEach((button) => {
+      if (button.id === "mobileLang") {
+        button.textContent =
+          currentLanguage === "tr"
+            ? "EN ↗"
+            : "TR ↗";
+      } else {
+        button.textContent =
+          currentLanguage === "tr"
+            ? "TR / EN"
+            : "EN / TR";
+      }
+    });
 
     document.title =
-      language === "tr"
+      currentLanguage === "tr"
         ? "Akay Perspektif ve Aydınlanma Çalıştayı"
         : "Akay Perspective and Enlightenment Workshop";
   }
 
-  function switchLanguage() {
-    language =
-      language === "tr"
+  function changeLanguage() {
+    currentLanguage =
+      currentLanguage === "tr"
         ? "en"
         : "tr";
 
     try {
       localStorage.setItem(
         "akay-language",
-        language
+        currentLanguage
       );
     } catch {
-      /* localStorage yoksa devam et */
+      // localStorage erişilemezse dil yine çalışır.
     }
 
     translatePage();
@@ -393,98 +351,55 @@
 
     $("#langButton")?.addEventListener(
       "click",
-      switchLanguage
+      changeLanguage
     );
 
     $("#mobileLang")?.addEventListener(
       "click",
-      switchLanguage
+      changeLanguage
     );
 
     $("#footerLang")?.addEventListener(
       "click",
-      switchLanguage
+      changeLanguage
     );
   }
 
   /* =========================================================
      LOADER
-     
-     ÜÇLÜ GÜVENLİK:
-     1. Normal JS çıkışı
-     2. Hard timeout
-     3. CSS failsafe zaten style.css içinde mevcut
-     
-     Böylece JS'nin geri kalanında bir hata olsa bile
-     loader kendi CSS animasyonuyla kapanır.
   ========================================================= */
 
   function closeLoader() {
-    const loader =
-      $("#loader");
+    const loader = $("#loader");
 
-    if (
-      !loader ||
-      loaderClosed
-    ) {
+    if (!loader || loaderClosed) {
       return;
     }
 
     loaderClosed = true;
+    loader.classList.add("is-hidden");
 
-    loader.classList.add(
-      "is-hidden"
-    );
-
-    window.setTimeout(
-      () => {
-        if (
-          loader &&
-          loader.isConnected
-        ) {
-          loader.remove();
-        }
-      },
-      reducedMotion
-        ? 80
-        : 950
-    );
+    window.setTimeout(() => {
+      loader?.remove();
+    }, prefersReducedMotion ? 100 : 900);
   }
 
   function setupLoader() {
     /*
-      Normal çıkış.
+      Normal kapanış.
     */
     window.setTimeout(
       closeLoader,
-      reducedMotion
-        ? 120
-        : 2850
+      prefersReducedMotion ? 100 : 2800
     );
 
     /*
-      Hard failsafe.
+      Her ihtimale karşı maksimum süre.
+      JS tarafındaki başka bir hata loader'ı kilitlemesin.
     */
     window.setTimeout(
       closeLoader,
-      3650
-    );
-
-    /*
-      Browser sayfayı bfcache'den
-      geri getirirse.
-    */
-    window.addEventListener(
-      "pageshow",
-      () => {
-        window.setTimeout(
-          closeLoader,
-          reducedMotion
-            ? 100
-            : 2750
-        );
-      },
-      { once: true }
+      3800
     );
   }
 
@@ -493,28 +408,25 @@
   ========================================================= */
 
   function setupHeader() {
-    const header =
-      $("#header");
+    const header = $("#header");
 
     if (!header) {
       return;
     }
 
-    function updateHeader() {
+    const updateHeader = () => {
       header.classList.toggle(
         "scrolled",
         window.scrollY > 30
       );
-    }
+    };
 
     updateHeader();
 
     window.addEventListener(
       "scroll",
       updateHeader,
-      {
-        passive: true
-      }
+      { passive: true }
     );
   }
 
@@ -523,54 +435,47 @@
   ========================================================= */
 
   function setupMobileMenu() {
-    const button =
-      $("#menuButton");
+    const menuButton = $("#menuButton");
+    const mobilePanel = $("#mobilePanel");
 
-    const panel =
-      $("#mobilePanel");
-
-    if (
-      !button ||
-      !panel
-    ) {
+    if (!menuButton || !mobilePanel) {
       return;
     }
 
-    function setMenu(open) {
-      button.classList.toggle(
+    function setMenuState(isOpen) {
+      menuButton.classList.toggle(
         "open",
-        open
+        isOpen
       );
 
-      panel.classList.toggle(
+      mobilePanel.classList.toggle(
         "open",
-        open
+        isOpen
       );
 
-      button.setAttribute(
+      menuButton.setAttribute(
         "aria-expanded",
-        String(open)
+        String(isOpen)
       );
 
-      panel.setAttribute(
+      mobilePanel.setAttribute(
         "aria-hidden",
-        String(!open)
+        String(!isOpen)
       );
 
       document.body.classList.toggle(
         "menu-open",
-        open
+        isOpen
       );
     }
 
-    button.addEventListener(
+    menuButton.addEventListener(
       "click",
       () => {
-        setMenu(
-          !panel.classList.contains(
-            "open"
-          )
-        );
+        const isOpen =
+          mobilePanel.classList.contains("open");
+
+        setMenuState(!isOpen);
       }
     );
 
@@ -578,9 +483,7 @@
       (link) => {
         link.addEventListener(
           "click",
-          () => {
-            setMenu(false);
-          }
+          () => setMenuState(false)
         );
       }
     );
@@ -591,90 +494,64 @@
   ========================================================= */
 
   function setupSmoothScroll() {
-    $$('a[href^="#"]').forEach(
-      (link) => {
-        link.addEventListener(
-          "click",
-          (event) => {
-            const id =
-              link.getAttribute(
-                "href"
-              );
+    $$('a[href^="#"]').forEach((link) => {
+      link.addEventListener(
+        "click",
+        (event) => {
+          const href =
+            link.getAttribute("href");
 
-            if (
-              !id ||
-              id === "#"
-            ) {
-              return;
-            }
-
-            const target =
-              document.querySelector(
-                id
-              );
-
-            if (!target) {
-              return;
-            }
-
-            event.preventDefault();
-
-            const header =
-              $("#header");
-
-            const headerHeight =
-              header
-                ? header.getBoundingClientRect()
-                    .height
-                : 0;
-
-            const targetTop =
-              target.getBoundingClientRect()
-                .top +
-              window.scrollY -
-              headerHeight -
-              10;
-
-            window.scrollTo({
-              top:
-                targetTop,
-              behavior:
-                reducedMotion
-                  ? "auto"
-                  : "smooth"
-            });
-
-            try {
-              history.replaceState(
-                null,
-                "",
-                id
-              );
-            } catch {
-              /* Browser history erişilemiyorsa scroll yine çalışır. */
-            }
+          if (!href || href === "#") {
+            return;
           }
-        );
-      }
-    );
+
+          const target =
+            document.querySelector(href);
+
+          if (!target) {
+            return;
+          }
+
+          event.preventDefault();
+
+          const header = $("#header");
+
+          const headerHeight = header
+            ? header.getBoundingClientRect().height
+            : 0;
+
+          const targetPosition =
+            target.getBoundingClientRect().top +
+            window.scrollY -
+            headerHeight -
+            12;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: prefersReducedMotion
+              ? "auto"
+              : "smooth"
+          });
+        }
+      );
+    });
   }
 
   /* =========================================================
-     ACTIVE NAV
+     ACTIVE NAVIGATION
   ========================================================= */
 
   function setupActiveNavigation() {
-    const links =
-      $$(".desktop-nav a");
+    const navLinks =
+      $$(".desktop-nav a[data-section]");
 
     const sections =
       $$("[data-section]");
 
     if (
-      !(
-        "IntersectionObserver"
-        in window
-      )
+      !navLinks.length ||
+      !sections.length ||
+      !("IntersectionObserver" in window)
     ) {
       return;
     }
@@ -682,31 +559,21 @@
     const observer =
       new IntersectionObserver(
         (entries) => {
-          entries.forEach(
-            (entry) => {
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
-
-              const section =
-                entry
-                  .target
-                  .dataset
-                  .section;
-
-              links.forEach(
-                (link) => {
-                  link.classList.toggle(
-                    "active",
-                    link.dataset.section ===
-                      section
-                  );
-                }
-              );
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
             }
-          );
+
+            const sectionName =
+              entry.target.dataset.section;
+
+            navLinks.forEach((link) => {
+              link.classList.toggle(
+                "active",
+                link.dataset.section === sectionName
+              );
+            });
+          });
         },
         {
           rootMargin:
@@ -715,42 +582,33 @@
         }
       );
 
-    sections.forEach(
-      (section) => {
-        observer.observe(
-          section
-        );
-      }
-    );
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
   }
 
   /* =========================================================
-     REVEAL ANIMATIONS
-     
-     DİKKAT:
-     CSS'de içerik normalde görünür.
-     Bu fonksiyon sadece .js-ready altında
-     opacity animasyonunu kullanıyor.
+     REVEAL
   ========================================================= */
 
   function setupReveal() {
-    const elements =
-      $$(".reveal");
+    const elements = $$(".reveal");
 
+    if (!elements.length) {
+      return;
+    }
+
+    /*
+      Hareket azaltma açıksa veya IntersectionObserver yoksa
+      bütün içerikleri direkt göster.
+    */
     if (
-      reducedMotion ||
-      !(
-        "IntersectionObserver"
-        in window
-      )
+      prefersReducedMotion ||
+      !("IntersectionObserver" in window)
     ) {
-      elements.forEach(
-        (element) => {
-          element.classList.add(
-            "visible"
-          );
-        }
-      );
+      elements.forEach((element) => {
+        element.classList.add("visible");
+      });
 
       return;
     }
@@ -758,72 +616,43 @@
     const observer =
       new IntersectionObserver(
         (entries) => {
-          entries.forEach(
-            (entry) => {
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
-
-              entry.target.classList.add(
-                "visible"
-              );
-
-              observer.unobserve(
-                entry.target
-              );
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
             }
-          );
+
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          });
         },
         {
           threshold: 0.08,
-          rootMargin:
-            "0px 0px -5% 0px"
+          rootMargin: "0px 0px -40px 0px"
         }
       );
 
-    elements.forEach(
-      (element) => {
-        observer.observe(
-          element
-        );
-      }
-    );
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
 
     /*
-      Bazı mobil tarayıcılarda ilk paint sırasında
-      IntersectionObserver gecikebilir.
-      Bu kontrol görünmeyen eleman bırakmaz.
+      İlk ekrandaki elemanlar bazı mobil browserlarda
+      IntersectionObserver yüzünden geç kalmasın.
     */
-    window.setTimeout(
-      () => {
-        elements.forEach(
-          (element) => {
-            const rect =
-              element.getBoundingClientRect();
+    window.setTimeout(() => {
+      elements.forEach((element) => {
+        const rect =
+          element.getBoundingClientRect();
 
-            const visible =
-              rect.top <
-                window.innerHeight &&
-              rect.bottom >
-                0;
+        const isVisible =
+          rect.top < window.innerHeight &&
+          rect.bottom > 0;
 
-            if (
-              visible &&
-              !element.classList.contains(
-                "visible"
-              )
-            ) {
-              element.classList.add(
-                "visible"
-              );
-            }
-          }
-        );
-      },
-      300
-    );
+        if (isVisible) {
+          element.classList.add("visible");
+        }
+      });
+    }, 250);
   }
 
   /* =========================================================
@@ -831,37 +660,35 @@
   ========================================================= */
 
   function setupCountdown() {
-    const countdown =
-      $("#countdown");
+    const countdown = $("#countdown");
+    const eventStarted = $("#eventStarted");
 
-    const started =
-      $("#eventStarted");
-
-    if (
-      !countdown ||
-      !started
-    ) {
+    if (!countdown || !eventStarted) {
       return;
     }
 
-    const target =
+    /*
+      15 Eylül 2026 00:00
+      Türkiye UTC+03:00
+    */
+    const targetDate =
       new Date(
         "2026-09-15T00:00:00+03:00"
       ).getTime();
 
-    const days =
+    const daysElement =
       $('[data-unit="days"]');
 
-    const hours =
+    const hoursElement =
       $('[data-unit="hours"]');
 
-    const minutes =
+    const minutesElement =
       $('[data-unit="minutes"]');
 
-    const seconds =
+    const secondsElement =
       $('[data-unit="seconds"]');
 
-    function setValue(
+    function updateNumber(
       element,
       value
     ) {
@@ -869,101 +696,92 @@
         return;
       }
 
-      const next =
-        String(value)
-          .padStart(2, "0");
+      const formatted =
+        String(value).padStart(2, "0");
 
       if (
-        element.textContent ===
-        next
+        element.textContent === formatted
       ) {
         return;
       }
 
-      element.textContent =
-        next;
+      element.textContent = formatted;
 
-      if (!reducedMotion) {
-        element.classList.remove(
-          "changed"
-        );
+      if (!prefersReducedMotion) {
+        element.classList.remove("changed");
 
+        /*
+          CSS animasyonunu yeniden tetikler.
+        */
         void element.offsetWidth;
 
-        element.classList.add(
-          "changed"
-        );
+        element.classList.add("changed");
       }
     }
 
-    function render() {
-      const difference =
-        target -
-        Date.now();
+    function updateCountdown() {
+      const remaining =
+        targetDate - Date.now();
 
-      if (
-        difference <= 0
-      ) {
-        countdown.hidden =
-          true;
+      if (remaining <= 0) {
+        countdown.hidden = true;
+        eventStarted.hidden = false;
 
-        started.hidden =
-          false;
-
-        if (
-          countdownTimer
-        ) {
-          clearInterval(
-            countdownTimer
-          );
-
-          countdownTimer =
-            null;
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
         }
 
         return;
       }
 
       const totalSeconds =
+        Math.floor(remaining / 1000);
+
+      const days =
         Math.floor(
-          difference / 1000
+          totalSeconds / 86400
         );
 
-      const d =
+      const hours =
         Math.floor(
-          totalSeconds /
-            86400
+          (totalSeconds % 86400) / 3600
         );
 
-      const h =
+      const minutes =
         Math.floor(
-          (totalSeconds %
-            86400) /
-            3600
+          (totalSeconds % 3600) / 60
         );
 
-      const m =
-        Math.floor(
-          (totalSeconds %
-            3600) /
-            60
-        );
+      const seconds =
+        totalSeconds % 60;
 
-      const s =
-        totalSeconds %
-        60;
+      updateNumber(
+        daysElement,
+        days
+      );
 
-      setValue(days, d);
-      setValue(hours, h);
-      setValue(minutes, m);
-      setValue(seconds, s);
+      updateNumber(
+        hoursElement,
+        hours
+      );
+
+      updateNumber(
+        minutesElement,
+        minutes
+      );
+
+      updateNumber(
+        secondsElement,
+        seconds
+      );
     }
 
-    render();
+    updateCountdown();
 
-    countdownTimer =
+    countdownInterval =
       window.setInterval(
-        render,
+        updateCountdown,
         1000
       );
   }
@@ -974,8 +792,8 @@
 
   function setupPointerLight() {
     if (
-      isTouch ||
-      reducedMotion
+      isTouchDevice ||
+      prefersReducedMotion
     ) {
       return;
     }
@@ -987,48 +805,30 @@
       return;
     }
 
-    document.body.classList.add(
-      "pointer-active"
-    );
-
     let targetX =
       window.innerWidth / 2;
 
     let targetY =
       window.innerHeight / 2;
 
-    let currentX =
-      targetX;
-
-    let currentY =
-      targetY;
+    let currentX = targetX;
+    let currentY = targetY;
 
     window.addEventListener(
       "pointermove",
       (event) => {
-        targetX =
-          event.clientX;
-
-        targetY =
-          event.clientY;
+        targetX = event.clientX;
+        targetY = event.clientY;
       },
-      {
-        passive: true
-      }
+      { passive: true }
     );
 
     function animate() {
       currentX +=
-        (
-          targetX -
-          currentX
-        ) * 0.12;
+        (targetX - currentX) * 0.10;
 
       currentY +=
-        (
-          targetY -
-          currentY
-        ) * 0.12;
+        (targetY - currentY) * 0.10;
 
       light.style.left =
         `${currentX}px`;
@@ -1036,12 +836,12 @@
       light.style.top =
         `${currentY}px`;
 
-      requestAnimationFrame(
+      window.requestAnimationFrame(
         animate
       );
     }
 
-    requestAnimationFrame(
+    window.requestAnimationFrame(
       animate
     );
   }
@@ -1052,23 +852,20 @@
 
   function setupHeroParallax() {
     if (
-      isTouch ||
-      reducedMotion
+      isTouchDevice ||
+      prefersReducedMotion
     ) {
       return;
     }
 
-    const hero =
-      $(".hero");
+    const elements =
+      $$(
+        ".hero-orb, .hero-glow"
+      );
 
-    if (!hero) {
+    if (!elements.length) {
       return;
     }
-
-    const elements =
-      $(
-        ".hero-orb, .hero-glow",
-      );
 
     let targetX = 0;
     let targetY = 0;
@@ -1084,115 +881,129 @@
             event.clientX /
             window.innerWidth -
             0.5
-          ) * 1.5;
+          );
 
         targetY =
           (
             event.clientY /
             window.innerHeight -
             0.5
-          ) * 1.5;
+          );
       },
-      {
-        passive: true
-      }
+      { passive: true }
     );
 
     function animate() {
       currentX +=
-        (
-          targetX -
-          currentX
-        ) * 0.04;
+        (targetX - currentX) * 0.035;
 
       currentY +=
-        (
-          targetY -
-          currentY
-        ) * 0.04;
+        (targetY - currentY) * 0.035;
 
       elements.forEach(
         (element, index) => {
-          const power =
-            (index + 1) * 3;
+          const strength =
+            (index + 1) * 4;
 
-          element.style.translate =
-            `
-              ${currentX * power}px
-              ${currentY * power}px
-            `;
+          element.style.transform =
+            `translate3d(
+              ${currentX * strength}px,
+              ${currentY * strength}px,
+              0
+            )`;
         }
       );
 
-      requestAnimationFrame(
+      window.requestAnimationFrame(
         animate
       );
     }
 
-    requestAnimationFrame(
+    window.requestAnimationFrame(
       animate
     );
   }
 
   /* =========================================================
-     ESC KEY
+     KEYBOARD
   ========================================================= */
 
   function setupKeyboard() {
     document.addEventListener(
       "keydown",
       (event) => {
-        if (
-          event.key !==
-          "Escape"
-        ) {
+        if (event.key !== "Escape") {
           return;
         }
 
-        const panel =
+        const mobilePanel =
           $("#mobilePanel");
 
-        const button =
+        const menuButton =
           $("#menuButton");
 
         if (
-          panel?.classList.contains(
-            "open"
-          )
+          mobilePanel?.classList.contains("open")
         ) {
-          button?.click();
+          menuButton?.click();
         }
       }
     );
   }
 
   /* =========================================================
-     INIT
+     PAGE VISIBILITY
+  ========================================================= */
+
+  function setupVisibilityHandling() {
+    document.addEventListener(
+      "visibilitychange",
+      () => {
+        if (
+          document.hidden &&
+          countdownInterval
+        ) {
+          clearInterval(
+            countdownInterval
+          );
+
+          countdownInterval = null;
+        } else if (
+          !document.hidden &&
+          !countdownInterval
+        ) {
+          setupCountdown();
+        }
+      }
+    );
+  }
+
+  /* =========================================================
+     INITIALIZATION
   ========================================================= */
 
   function init() {
     /*
-      Loader en başta kurulur ama diğer scriptlerin
-      herhangi birinin hata vermesi loader'ın CSS
-      failsafe'ini etkilemez.
+      CSS'teki .js-ready sistemi sayesinde:
+      JS çalışmasa bile içerik varsayılan olarak görünür.
+      JS düzgün başladıktan sonra animasyonlar devreye girer.
     */
-    setupLoader();
+    document.documentElement.classList.add(
+      "js-ready"
+    );
 
     setupLanguage();
-
+    setupLoader();
     setupHeader();
     setupMobileMenu();
     setupSmoothScroll();
     setupActiveNavigation();
-
     setupReveal();
-
     setupCountdown();
-
     setupPointerLight();
     setupHeroParallax();
-
     setupKeyboard();
+    setupVisibilityHandling();
   }
 
   /* =========================================================
@@ -1200,15 +1011,12 @@
   ========================================================= */
 
   if (
-    document.readyState ===
-    "loading"
+    document.readyState === "loading"
   ) {
     document.addEventListener(
       "DOMContentLoaded",
       init,
-      {
-        once: true
-      }
+      { once: true }
     );
   } else {
     init();
