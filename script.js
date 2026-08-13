@@ -1,8 +1,15 @@
 (() => {
   "use strict";
 
-  const $ = (selector, root = document) => root.querySelector(selector);
-  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  /* =========================================================
+     DOM HELPERS
+     ========================================================= */
+
+  const $ = (selector, root = document) =>
+    root.querySelector(selector);
+
+  const $$ = (selector, root = document) =>
+    [...root.querySelectorAll(selector)];
 
   const reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -11,6 +18,10 @@
   const isTouch =
     "ontouchstart" in window ||
     navigator.maxTouchPoints > 0;
+
+  /* =========================================================
+     TRANSLATIONS
+     ========================================================= */
 
   const translations = {
     tr: {
@@ -26,12 +37,14 @@
 
       hero: {
         eyebrow: "Gençlik / Fikir / Perspektif",
-        copy: "Bilginin yalnızca paylaşılmadığı, bakış açılarının birbirine temas ettiği bir düşünce alanı.",
+        copy:
+          "Bilginin yalnızca paylaşılmadığı, bakış açılarının birbirine temas ettiği bir düşünce alanı.",
         explore: "Deneyimi Keşfet",
         connect: "İletişime Geç",
         dateLabel: "Etkinlik Tarihi",
         month: "Eylül",
-        sideNote: "Düşün. Tartış. Perspektifini genişlet."
+        sideNote:
+          "Düşün. Tartış. Perspektifini genişlet."
       },
 
       countdown: {
@@ -47,21 +60,25 @@
 
       about: {
         eyebrow: "Neden Akay?",
-        title: "Fikirlerin kesiştiği yerde <em>perspektif</em> değişir.",
+        title:
+          "Fikirlerin kesiştiği yerde <em>perspektif</em> değişir.",
         missionLabel: "MİSYON",
         missionTitle: "Özgürce ifade et.",
         missionText:
           "Akay Çalıştayı olarak misyonumuz; Gençlerin hızla gelişen ve değişen dünyaya dair farkındalıklarını artırırken, onlara fikirlerini özgürce ifade edebilecekleri, güçlü bir bilgi paylaşım alanı sunmaktır. Komite konularımız ise hem akademik anlamda geliştirici hem de sosyal bakımdan günlük hayatımızı doğrudan etkileyen konular olarak özenle seçilmiştir. Sosyal becerilerini aktif olarak kullanabilecekleri bu platformda, çok yönlü bakış açıları kazanmalarını hedefliyoruz.",
-        axis: "BİR FİKİR / BİRDEN ÇOK BAKIŞ",
+        axis:
+          "BİR FİKİR / BİRDEN ÇOK BAKIŞ",
         visionLabel: "VİZYON",
-        visionTitle: "Aydınlık zihni somut faydaya dönüştür.",
+        visionTitle:
+          "Aydınlık zihni somut faydaya dönüştür.",
         visionText:
           "Akay Perspektif ve Aydınlanma Çalıştayı ekibi olarak Türkiye’deki gençlerin Türk kültürü ve kökeni başta olmak üzere; dünya tarihini, farklı kültürleri ve dilleri anlayarak farkındalığı, entelektüel donanımı ve hitabet becerisi yüksek bireyler olmalarına katkı sağlayarak ülkemiz adına faydalı bireyler yetiştirmeyi amaçlıyoruz.<br><br>Nihai hedefimiz, gençlerin bu süreçte edindikleri bilgi birikimini ve aydınlık zihinlerini kullanarak başta ülkemiz olmak üzere tüm insanlığa somut faydalar sunan bireyler olarak yetişmeleridir."
       },
 
       event: {
         eyebrow: "Etkinlik",
-        title: "Bir buluşma değil, <em>bir düşünce alanı.</em>",
+        title:
+          "Bir buluşma değil, <em>bir düşünce alanı.</em>",
         statement:
           "Henüz açıklanmayan ayrıntıların yerini doldurmak yerine, burada gerçek olanı net ve güçlü biçimde sunuyoruz.",
         date: "Tarih",
@@ -76,10 +93,13 @@
 
       schedule: {
         eyebrow: "Akış",
-        title: "Zamanın ritmi <em>yakında</em> görünür olacak.",
-        frameLabel: "GENEL AKIŞ / FRAMEWORK",
+        title:
+          "Zamanın ritmi <em>yakında</em> görünür olacak.",
+        frameLabel:
+          "GENEL AKIŞ / FRAMEWORK",
         status: "PROGRAM HAZIRLANIYOR",
-        emptyTitle: "Program yakında açıklanacaktır.",
+        emptyTitle:
+          "Program yakında açıklanacaktır.",
         emptyText:
           "Gerçek zaman, oturum, salon, komite ve konuşmacı bilgileri doğrulandığında bu akış dinamik olarak doldurulacaktır.",
         time: "Zaman",
@@ -90,7 +110,8 @@
 
       committees: {
         eyebrow: "Komiteler",
-        title: "Gündemler hazır olduğunda <em>sahne açılacak.</em>",
+        title:
+          "Gündemler hazır olduğunda <em>sahne açılacak.</em>",
         label: "AÇILACAK ALAN",
         emptyTitle:
           "Komiteler ve gündem maddeleri yakında açıklanacaktır.",
@@ -101,24 +122,32 @@
 
       sponsors: {
         eyebrow: "Sponsorluk",
-        title: "Bu deneyim <em>birlikte</em> büyüyor.",
+        title:
+          "Bu deneyim <em>birlikte</em> büyüyor.",
         ai: "YAPAY ZEKA SPONSORU",
         it: "BT SPONSORU",
-        design: "SOSYAL MEDYA / GRAFİK TASARIM SPONSORU",
-        visit: "Web sitesini ziyaret et",
-        instagramVisit: "Instagram'ı ziyaret et",
-        note: "Üç destekçi, tek bir deneyim."
+        design:
+          "SOSYAL MEDYA / GRAFİK TASARIM SPONSORU",
+        visit:
+          "Web sitesini ziyaret et",
+        instagramVisit:
+          "Instagram'ı ziyaret et",
+        note:
+          "Üç destekçi, tek bir deneyim."
       },
 
       team: {
         eyebrow: "Koordinasyon",
-        title: "Doğrudan <em>ulaş.</em>",
-        role: "Genel Koordinatör"
+        title:
+          "Doğrudan <em>ulaş.</em>",
+        role:
+          "Genel Koordinatör"
       },
 
       contact: {
         eyebrow: "İletişim",
-        title: "Perspektifini <em>paylaş.</em>",
+        title:
+          "Perspektifini <em>paylaş.</em>",
         text:
           "Akay'ın güncel duyuruları ve etkinlik iletişimi için resmi Instagram hesabını takip et."
       },
@@ -129,7 +158,8 @@
         navigation: "NAVİGASYON",
         supporters: "DESTEKÇİLER",
         social: "SOSYAL",
-        rights: "Tüm hakları saklıdır."
+        rights:
+          "Tüm hakları saklıdır."
       }
     },
 
@@ -145,44 +175,54 @@
       },
 
       hero: {
-        eyebrow: "Youth / Idea / Perspective",
+        eyebrow:
+          "Youth / Idea / Perspective",
         copy:
           "A space for thought where knowledge is not simply shared, but perspectives meet and reshape one another.",
-        explore: "Explore the Experience",
+        explore:
+          "Explore the Experience",
         connect: "Get in Touch",
         dateLabel: "Event Date",
         month: "September",
-        sideNote: "Think. Debate. Expand your perspective."
+        sideNote:
+          "Think. Debate. Expand your perspective."
       },
 
       countdown: {
-        kicker: "Time until the opening",
+        kicker:
+          "Time until the opening",
         live: "LIVE",
         days: "DAYS",
         hours: "HOURS",
         minutes: "MINUTES",
         seconds: "SECONDS",
         startedKicker: "Now",
-        started: "The Event Has Started"
+        started:
+          "The Event Has Started"
       },
 
       about: {
         eyebrow: "Why Akay?",
-        title: "Where ideas intersect, <em>perspective</em> changes.",
+        title:
+          "Where ideas intersect, <em>perspective</em> changes.",
         missionLabel: "MISSION",
-        missionTitle: "Express yourself freely.",
+        missionTitle:
+          "Express yourself freely.",
         missionText:
           "Our mission as Akay Workshop is to increase young people’s awareness of a rapidly developing and changing world while providing a strong space for knowledge sharing where they can express their ideas freely. Our committee topics are carefully selected to be academically enriching and socially relevant to everyday life. Through this platform, where participants can actively use their social skills, we aim to help them gain multidimensional perspectives.",
-        axis: "ONE IDEA / MANY PERSPECTIVES",
+        axis:
+          "ONE IDEA / MANY PERSPECTIVES",
         visionLabel: "VISION",
-        visionTitle: "Turn enlightened minds into tangible benefit.",
+        visionTitle:
+          "Turn enlightened minds into tangible benefit.",
         visionText:
           "As the Akay Perspective and Enlightenment Workshop team, we aim to contribute to raising young people in Türkiye as individuals with strong awareness, intellectual depth, and oratory skills by helping them understand Turkish culture and origins, world history, different cultures, and languages, ultimately becoming beneficial individuals for our country.<br><br>Our ultimate goal is to raise young people who can use the knowledge they gain and their enlightened minds to create tangible benefits for all humanity, beginning with our country."
       },
 
       event: {
         eyebrow: "Event",
-        title: "Not just a gathering, <em>a space for thought.</em>",
+        title:
+          "Not just a gathering, <em>a space for thought.</em>",
         statement:
           "Instead of filling in details that have not been announced, we present what is real here with clarity and intention.",
         date: "Date",
@@ -197,10 +237,14 @@
 
       schedule: {
         eyebrow: "Schedule",
-        title: "The rhythm of time will <em>soon</em> come into view.",
-        frameLabel: "GENERAL FLOW / FRAMEWORK",
-        status: "PROGRAM IN PREPARATION",
-        emptyTitle: "The full program will be announced soon.",
+        title:
+          "The rhythm of time will <em>soon</em> come into view.",
+        frameLabel:
+          "GENERAL FLOW / FRAMEWORK",
+        status:
+          "PROGRAM IN PREPARATION",
+        emptyTitle:
+          "The full program will be announced soon.",
         emptyText:
           "Once verified, real times, sessions, rooms, committees, and speaker information will populate this flow dynamically.",
         time: "Time",
@@ -211,8 +255,10 @@
 
       committees: {
         eyebrow: "Committees",
-        title: "When the agendas are ready, <em>the stage opens.</em>",
-        label: "SPACE TO BE OPENED",
+        title:
+          "When the agendas are ready, <em>the stage opens.</em>",
+        label:
+          "SPACE TO BE OPENED",
         emptyTitle:
           "Committees and agenda topics will be announced soon.",
         emptyText:
@@ -222,24 +268,32 @@
 
       sponsors: {
         eyebrow: "Sponsorship",
-        title: "This experience grows <em>together.</em>",
-        ai: "ARTIFICIAL INTELLIGENCE SPONSOR",
+        title:
+          "This experience grows <em>together.</em>",
+        ai:
+          "ARTIFICIAL INTELLIGENCE SPONSOR",
         it: "IT SPONSOR",
-        design: "SOCIAL MEDIA / GRAPHIC DESIGN SPONSOR",
+        design:
+          "SOCIAL MEDIA / GRAPHIC DESIGN SPONSOR",
         visit: "Visit website",
-        instagramVisit: "Visit Instagram",
-        note: "Three supporters, one experience."
+        instagramVisit:
+          "Visit Instagram",
+        note:
+          "Three supporters, one experience."
       },
 
       team: {
         eyebrow: "Coordination",
-        title: "Reach us <em>directly.</em>",
-        role: "General Coordinator"
+        title:
+          "Reach us <em>directly.</em>",
+        role:
+          "General Coordinator"
       },
 
       contact: {
         eyebrow: "Contact",
-        title: "Share your <em>perspective.</em>",
+        title:
+          "Share your <em>perspective.</em>",
         text:
           "Follow the official Instagram account for Akay’s latest announcements and event communication."
       },
@@ -250,57 +304,89 @@
         navigation: "NAVIGATION",
         supporters: "SUPPORTERS",
         social: "SOCIAL",
-        rights: "All rights reserved."
+        rights:
+          "All rights reserved."
       }
     }
   };
 
+  /* =========================================================
+     STATE
+     ========================================================= */
+
   let savedLanguage = "tr";
 
   try {
-    const stored = localStorage.getItem("akay-lang");
+    const stored =
+      localStorage.getItem("akay-lang");
 
-    if (stored === "tr" || stored === "en") {
+    if (
+      stored === "tr" ||
+      stored === "en"
+    ) {
       savedLanguage = stored;
     }
-  } catch {}
+  } catch {
+    // localStorage erişilemezse Türkçe kalır.
+  }
 
   const state = {
     lang: savedLanguage,
     countdownInterval: null
   };
 
+  /* =========================================================
+     TRANSLATION HELPERS
+     ========================================================= */
+
   function getNested(object, path) {
     return path
       .split(".")
-      .reduce((accumulator, key) => accumulator && accumulator[key], object);
+      .reduce(
+        (current, key) =>
+          current && current[key],
+        object
+      );
   }
 
   function applyTranslations() {
-    const dictionary = translations[state.lang];
+    const dictionary =
+      translations[state.lang];
 
-    document.documentElement.lang = state.lang;
+    document.documentElement.lang =
+      state.lang;
 
-    $$("[data-i18n]").forEach((element) => {
-      const value = getNested(
-        dictionary,
-        element.dataset.i18n
-      );
+    $$("[data-i18n]").forEach(
+      (element) => {
+        const value = getNested(
+          dictionary,
+          element.dataset.i18n
+        );
 
-      if (typeof value === "string") {
-        element.innerHTML = value;
+        if (
+          typeof value === "string"
+        ) {
+          element.innerHTML = value;
+        }
       }
-    });
+    );
 
-    const current = $(".lang-current");
-    const other = $(".lang-other");
+    const current =
+      $(".lang-current");
+
+    const other =
+      $(".lang-other");
 
     if (current) {
-      current.textContent = state.lang.toUpperCase();
+      current.textContent =
+        state.lang.toUpperCase();
     }
 
     if (other) {
-      other.textContent = state.lang === "tr" ? "EN" : "TR";
+      other.textContent =
+        state.lang === "tr"
+          ? "EN"
+          : "TR";
     }
 
     const languageLabel =
@@ -308,22 +394,32 @@
         ? "Dili İngilizceye değiştir"
         : "Switch language to Turkish";
 
-    $("#languageSwitch")?.setAttribute(
-      "aria-label",
-      languageLabel
-    );
+    const languageSwitch =
+      $("#languageSwitch");
 
-    $("#languageSwitch")?.setAttribute(
-      "aria-pressed",
-      state.lang === "en" ? "true" : "false"
-    );
+    if (languageSwitch) {
+      languageSwitch.setAttribute(
+        "aria-label",
+        languageLabel
+      );
 
-    const mobileLanguage = $("#mobileLanguage");
-    const footerLanguage = $("#footerLanguage");
+      languageSwitch.setAttribute(
+        "aria-pressed",
+        state.lang === "en"
+          ? "true"
+          : "false"
+      );
+    }
+
+    const mobileLanguage =
+      $("#mobileLanguage");
 
     if (mobileLanguage) {
       mobileLanguage.innerHTML =
-        `${state.lang === "tr" ? "EN" : "TR"} <span>↗</span>`;
+        `
+          ${state.lang === "tr" ? "EN" : "TR"}
+          <span>↗</span>
+        `;
 
       mobileLanguage.setAttribute(
         "aria-label",
@@ -331,14 +427,17 @@
       );
     }
 
+    const footerLanguage =
+      $("#footerLanguage");
+
     if (footerLanguage) {
       footerLanguage.textContent =
-        `${state.lang.toUpperCase()} / ${state.lang === "tr" ? "EN" : "TR"} ↗`;
-
-      footerLanguage.setAttribute(
-        "aria-label",
-        languageLabel
-      );
+        `
+          ${state.lang.toUpperCase()}
+          /
+          ${state.lang === "tr" ? "EN" : "TR"}
+          ↗
+        `;
     }
 
     updateMeta();
@@ -350,23 +449,33 @@
         ? "Akay Perspektif ve Aydınlanma Çalıştayı"
         : "Akay Perspective and Enlightenment Workshop";
 
-    const metaDescription =
-      document.querySelector('meta[name="description"]');
+    const description =
+      $('meta[name="description"]');
 
-    if (metaDescription) {
-      metaDescription.content =
-        state.lang === "tr"
-          ? "Akay Perspektif ve Aydınlanma Çalıştayı. Gençlerin fikirlerini özgürce ifade edebileceği, bilgi paylaşımı ve çok yönlü bakış açıları geliştiren bir deneyim."
-          : "Akay Perspective and Enlightenment Workshop. A space for young people to express ideas freely, share knowledge, and develop multidimensional perspectives.";
+    if (!description) {
+      return;
     }
+
+    description.content =
+      state.lang === "tr"
+        ? "Akay Perspektif ve Aydınlanma Çalıştayı. Gençlerin fikirlerini özgürce ifade edebileceği, bilgi paylaşımı ve çok yönlü bakış açıları geliştiren bir deneyim."
+        : "Akay Perspective and Enlightenment Workshop. A space for young people to express ideas freely, share knowledge, and develop multidimensional perspectives.";
   }
 
   function toggleLanguage() {
-    state.lang = state.lang === "tr" ? "en" : "tr";
+    state.lang =
+      state.lang === "tr"
+        ? "en"
+        : "tr";
 
     try {
-      localStorage.setItem("akay-lang", state.lang);
-    } catch {}
+      localStorage.setItem(
+        "akay-lang",
+        state.lang
+      );
+    } catch {
+      // Persist edilemezse sadece mevcut oturum değişir.
+    }
 
     applyTranslations();
   }
@@ -379,33 +488,60 @@
       $("#mobileLanguage"),
       $("#footerLanguage")
     ].forEach((button) => {
-      button?.addEventListener("click", toggleLanguage);
+      button?.addEventListener(
+        "click",
+        toggleLanguage
+      );
     });
   }
 
+  /* =========================================================
+     ASSET FALLBACKS
+     ========================================================= */
+
   function setupAssetFallbacks() {
-    $$(".loader-logo, .brand-logo, .footer-brand img").forEach((image) => {
+    $(
+      ".loader-logo, .brand-logo, .footer-brand img"
+    ).forEach((image) => {
       image.addEventListener(
         "error",
         () => {
           image.hidden = true;
 
-          if (image.classList.contains("loader-logo")) {
+          if (
+            image.classList.contains(
+              "loader-logo"
+            )
+          ) {
             image
               .closest(".loader-core")
-              ?.classList.add("no-logo");
+              ?.classList.add(
+                "no-logo"
+              );
           }
 
-          if (image.classList.contains("brand-logo")) {
+          if (
+            image.classList.contains(
+              "brand-logo"
+            )
+          ) {
             image
               .closest(".brand")
-              ?.classList.add("no-logo");
+              ?.classList.add(
+                "no-logo"
+              );
           }
 
-          if (image.closest(".footer-brand")) {
+          if (
+            image.closest(
+              ".footer-brand"
+            )
+          ) {
             image
               .closest(".footer-brand")
-              ?.classList.add("no-logo");
+              ?.classList.add(
+                "no-logo"
+              );
           }
         },
         { once: true }
@@ -413,8 +549,13 @@
     });
   }
 
+  /* =========================================================
+     CINEMATIC LOADER
+     ========================================================= */
+
   function setupLoader() {
-    const loader = $("#loader");
+    const loader =
+      $("#loader");
 
     if (!loader) {
       return;
@@ -429,22 +570,42 @@
 
       finished = true;
 
-      loader.classList.add("is-hidden");
-      loader.setAttribute("aria-hidden", "true");
+      loader.classList.add(
+        "is-hidden"
+      );
 
-      window.setTimeout(() => {
-        loader.remove();
-      }, reducedMotion ? 80 : 950);
-    };
+      loader.setAttribute(
+        "aria-hidden",
+        "true"
+      );
 
-    const start = () => {
       window.setTimeout(
-        finish,
-        reducedMotion ? 120 : 1500
+        () => {
+          loader.remove();
+        },
+        reducedMotion
+          ? 80
+          : 1050
       );
     };
 
-    if (document.readyState === "loading") {
+    const start = () => {
+      /*
+        Normal akış:
+        Intro yaklaşık 2.45 saniye görünür.
+      */
+      window.setTimeout(
+        finish,
+        reducedMotion
+          ? 100
+          : 2450
+      );
+    };
+
+    if (
+      document.readyState ===
+      "loading"
+    ) {
       document.addEventListener(
         "DOMContentLoaded",
         start,
@@ -456,17 +617,24 @@
 
     /*
       Güvenlik çıkışı:
-      Font, logo, GitHub Pages veya başka bir kaynak takılsa bile
-      loader hiçbir zaman kullanıcıyı içeride kilitlemez.
+      Logo, font veya harici kaynak takılırsa
+      kullanıcı loader'ın içinde kilitlenmez.
     */
     window.setTimeout(
       finish,
-      reducedMotion ? 700 : 3000
+      reducedMotion
+        ? 650
+        : 3400
     );
   }
 
+  /* =========================================================
+     HEADER
+     ========================================================= */
+
   function setupHeader() {
-    const header = $("#siteHeader");
+    const header =
+      $("#siteHeader");
 
     if (!header) {
       return;
@@ -484,19 +652,33 @@
     window.addEventListener(
       "scroll",
       onScroll,
-      { passive: true }
+      {
+        passive: true
+      }
     );
   }
 
-  function setupMobileNav() {
-    const toggle = $("#menuToggle");
-    const nav = $("#mobileNav");
+  /* =========================================================
+     MOBILE NAVIGATION
+     ========================================================= */
 
-    if (!toggle || !nav) {
+  function setupMobileNav() {
+    const toggle =
+      $("#menuToggle");
+
+    const nav =
+      $("#mobileNav");
+
+    if (
+      !toggle ||
+      !nav
+    ) {
       return;
     }
 
-    const setOpen = (open) => {
+    const setOpen = (
+      open
+    ) => {
       toggle.setAttribute(
         "aria-expanded",
         String(open)
@@ -505,15 +687,22 @@
       toggle.setAttribute(
         "aria-label",
         open
-          ? state.lang === "tr"
-            ? "Menüyü kapat"
-            : "Close menu"
-          : state.lang === "tr"
-            ? "Menüyü aç"
-            : "Open menu"
+          ? (
+              state.lang === "tr"
+                ? "Menüyü kapat"
+                : "Close menu"
+            )
+          : (
+              state.lang === "tr"
+                ? "Menüyü aç"
+                : "Open menu"
+            )
       );
 
-      nav.classList.toggle("is-open", open);
+      nav.classList.toggle(
+        "is-open",
+        open
+      );
 
       nav.setAttribute(
         "aria-hidden",
@@ -526,113 +715,171 @@
       );
     };
 
-    toggle.addEventListener("click", () => {
-      setOpen(
-        !nav.classList.contains("is-open")
-      );
-    });
+    toggle.addEventListener(
+      "click",
+      () => {
+        setOpen(
+          !nav.classList.contains(
+            "is-open"
+          )
+        );
+      }
+    );
 
-    $$(".mobile-nav-link").forEach((link) => {
-      link.addEventListener(
-        "click",
-        () => setOpen(false)
-      );
-    });
-  }
-
-  function setupSmoothNav() {
-    $$('a[href^="#"]').forEach((link) => {
-      link.addEventListener("click", (event) => {
-        const id = link.getAttribute("href");
-
-        if (!id || id === "#") {
-          return;
-        }
-
-        const target = document.querySelector(id);
-
-        if (!target) {
-          return;
-        }
-
-        event.preventDefault();
-
-        const headerOffset = 82;
-
-        const top =
-          target.getBoundingClientRect().top +
-          window.scrollY -
-          headerOffset;
-
-        window.scrollTo({
-          top,
-          behavior: reducedMotion
-            ? "auto"
-            : "smooth"
-        });
-
-        history.replaceState(
-          null,
-          "",
-          id
+    $$(".mobile-nav-link")
+      .forEach((link) => {
+        link.addEventListener(
+          "click",
+          () => {
+            setOpen(false);
+          }
         );
       });
+  }
+
+  /* =========================================================
+     SMOOTH NAVIGATION
+     ========================================================= */
+
+  function setupSmoothNav() {
+    $$(
+      'a[href^="#"]'
+    ).forEach((link) => {
+      link.addEventListener(
+        "click",
+        (event) => {
+          const id =
+            link.getAttribute(
+              "href"
+            );
+
+          if (
+            !id ||
+            id === "#"
+          ) {
+            return;
+          }
+
+          const target =
+            document.querySelector(
+              id
+            );
+
+          if (!target) {
+            return;
+          }
+
+          event.preventDefault();
+
+          const headerOffset = 82;
+
+          const top =
+            target.getBoundingClientRect()
+              .top +
+            window.scrollY -
+            headerOffset;
+
+          window.scrollTo({
+            top,
+            behavior:
+              reducedMotion
+                ? "auto"
+                : "smooth"
+          });
+
+          history.replaceState(
+            null,
+            "",
+            id
+          );
+        }
+      );
     });
   }
 
+  /* =========================================================
+     REVEAL ANIMATIONS
+     ========================================================= */
+
   function setupReveal() {
-    const items = $$(".reveal");
+    const items =
+      $$(".reveal");
 
     if (
       reducedMotion ||
-      !("IntersectionObserver" in window)
+      !(
+        "IntersectionObserver"
+        in window
+      )
     ) {
-      items.forEach((element) => {
-        element.classList.add("is-visible");
-      });
-
-      return;
-    }
-
-    const observer =
-      new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) {
-              return;
-            }
-
-            entry.target.classList.add(
-              "is-visible"
-            );
-
-            observer.unobserve(
-              entry.target
-            );
-          });
-        },
-        {
-          threshold: 0.12,
-          rootMargin: "0px 0px -8% 0px"
+      items.forEach(
+        (element) => {
+          element.classList.add(
+            "is-visible"
+          );
         }
       );
 
-    items.forEach((element) => {
-      observer.observe(element);
-    });
+      return;
+    }
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach(
+            (entry) => {
+              if (
+                !entry.isIntersecting
+              ) {
+                return;
+              }
+
+              entry.target.classList.add(
+                "is-visible"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+            }
+          );
+        },
+        {
+          threshold: 0.12,
+          rootMargin:
+            "0px 0px -8% 0px"
+        }
+      );
+
+    items.forEach(
+      (element) => {
+        observer.observe(
+          element
+        );
+      }
+    );
   }
 
-  function setupActiveSection() {
-    const links = $(
-      ".nav-link, .mobile-nav-link"
-    );
+  /* =========================================================
+     ACTIVE SECTION
+     ========================================================= */
 
-    const sections = $$(
-      "[data-section-id]"
-    );
+  function setupActiveSection() {
+    const links =
+      $(
+        ".nav-link, .mobile-nav-link"
+      );
+
+    const sections =
+      $$(
+        "[data-section-id]"
+      );
 
     if (
-      !("IntersectionObserver" in window)
+      !(
+        "IntersectionObserver"
+        in window
+      )
     ) {
       return;
     }
@@ -640,39 +887,61 @@
     const observer =
       new IntersectionObserver(
         (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) {
-              return;
-            }
+          entries.forEach(
+            (entry) => {
+              if (
+                !entry.isIntersecting
+              ) {
+                return;
+              }
 
-            const id =
-              entry.target.dataset.sectionId;
+              const id =
+                entry.target
+                  .dataset
+                  .sectionId;
 
-            links.forEach((link) => {
-              link.classList.toggle(
-                "active",
-                link.dataset.section === id
+              links.forEach(
+                (link) => {
+                  link.classList.toggle(
+                    "active",
+                    link.dataset.section ===
+                      id
+                  );
+                }
               );
-            });
-          });
+            }
+          );
         },
         {
-          rootMargin: "-35% 0px -50% 0px",
+          rootMargin:
+            "-35% 0px -50% 0px",
           threshold: 0
         }
       );
 
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
+    sections.forEach(
+      (section) => {
+        observer.observe(
+          section
+        );
+      }
+    );
   }
 
+  /* =========================================================
+     POINTER GLOW
+     ========================================================= */
+
   function setupPointerGlow() {
-    if (isTouch || reducedMotion) {
+    if (
+      isTouch ||
+      reducedMotion
+    ) {
       return;
     }
 
-    const glow = $(".cursor-glow");
+    const glow =
+      $(".cursor-glow");
 
     if (!glow) {
       return;
@@ -682,130 +951,196 @@
       "cursor-ready"
     );
 
-    let targetX = window.innerWidth / 2;
-    let targetY = window.innerHeight / 2;
+    let targetX =
+      window.innerWidth / 2;
 
-    let currentX = targetX;
-    let currentY = targetY;
+    let targetY =
+      window.innerHeight / 2;
+
+    let currentX =
+      targetX;
+
+    let currentY =
+      targetY;
 
     window.addEventListener(
       "pointermove",
       (event) => {
-        targetX = event.clientX;
-        targetY = event.clientY;
+        targetX =
+          event.clientX;
+
+        targetY =
+          event.clientY;
       },
-      { passive: true }
+      {
+        passive: true
+      }
     );
 
     const frame = () => {
       currentX +=
-        (targetX - currentX) * 0.13;
+        (targetX -
+          currentX) *
+        0.13;
 
       currentY +=
-        (targetY - currentY) * 0.13;
+        (targetY -
+          currentY) *
+        0.13;
 
-      glow.style.left = `${currentX}px`;
-      glow.style.top = `${currentY}px`;
+      glow.style.left =
+        `${currentX}px`;
 
-      requestAnimationFrame(frame);
+      glow.style.top =
+        `${currentY}px`;
+
+      requestAnimationFrame(
+        frame
+      );
     };
 
-    requestAnimationFrame(frame);
+    requestAnimationFrame(
+      frame
+    );
   }
+
+  /* =========================================================
+     MAGNETIC BUTTONS
+     ========================================================= */
 
   function setupMagnetic() {
-    if (isTouch || reducedMotion) {
+    if (
+      isTouch ||
+      reducedMotion
+    ) {
       return;
     }
 
-    $$(".magnetic").forEach((element) => {
-      element.addEventListener(
-        "pointermove",
-        (event) => {
-          const rect =
-            element.getBoundingClientRect();
+    $$(".magnetic").forEach(
+      (element) => {
+        element.addEventListener(
+          "pointermove",
+          (event) => {
+            const rect =
+              element.getBoundingClientRect();
 
-          const x =
-            event.clientX -
-            rect.left -
-            rect.width / 2;
+            const x =
+              event.clientX -
+              rect.left -
+              rect.width / 2;
 
-          const y =
-            event.clientY -
-            rect.top -
-            rect.height / 2;
+            const y =
+              event.clientY -
+              rect.top -
+              rect.height / 2;
 
-          element.style.transform =
-            `translate(${x * 0.12}px, ${y * 0.12}px)`;
-        }
-      );
+            element.style.transform =
+              `
+                translate(
+                  ${x * 0.12}px,
+                  ${y * 0.12}px
+                )
+              `;
+          }
+        );
 
-      element.addEventListener(
-        "pointerleave",
-        () => {
-          element.style.transform = "";
-        }
-      );
-    });
+        element.addEventListener(
+          "pointerleave",
+          () => {
+            element.style.transform =
+              "";
+          }
+        );
+      }
+    );
   }
+
+  /* =========================================================
+     3D TILT CARDS
+     ========================================================= */
 
   function setupTiltCards() {
-    if (isTouch || reducedMotion) {
+    if (
+      isTouch ||
+      reducedMotion
+    ) {
       return;
     }
 
-    $$(".tilt-card").forEach((card) => {
-      card.addEventListener(
-        "pointermove",
-        (event) => {
-          const rect =
-            card.getBoundingClientRect();
+    $$(".tilt-card").forEach(
+      (card) => {
+        card.addEventListener(
+          "pointermove",
+          (event) => {
+            const rect =
+              card.getBoundingClientRect();
 
-          const px =
-            (event.clientX - rect.left) /
-            rect.width;
+            const px =
+              (
+                event.clientX -
+                rect.left
+              ) / rect.width;
 
-          const py =
-            (event.clientY - rect.top) /
-            rect.height;
+            const py =
+              (
+                event.clientY -
+                rect.top
+              ) / rect.height;
 
-          const rotateY =
-            (px - 0.5) * 5;
+            const rotateY =
+              (px - 0.5) * 5;
 
-          const rotateX =
-            (py - 0.5) * -5;
+            const rotateX =
+              (py - 0.5) * -5;
 
-          card.style.transform =
-            `perspective(900px)
-             rotateX(${rotateX}deg)
-             rotateY(${rotateY}deg)
-             translateY(-2px)`;
-        }
-      );
+            card.style.transform =
+              `
+                perspective(900px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                translateY(-2px)
+              `;
+          }
+        );
 
-      card.addEventListener(
-        "pointerleave",
-        () => {
-          card.style.transform = "";
-        }
-      );
-    });
+        card.addEventListener(
+          "pointerleave",
+          () => {
+            card.style.transform =
+              "";
+          }
+        );
+      }
+    );
   }
 
+  /* =========================================================
+     HERO PARALLAX
+     ========================================================= */
+
   function setupHeroParallax() {
-    if (isTouch || reducedMotion) {
+    if (
+      isTouch ||
+      reducedMotion
+    ) {
       return;
     }
 
-    const hero = $(".hero");
+    const hero =
+      $(".hero");
 
     if (!hero) {
       return;
     }
 
-    const decorativeElements = $$(
-      ".hero-orbit, .hero-glow, .hero-fragment"
-    );
+    const decorativeElements =
+      $$(
+        `
+          .hero-orbit,
+          .hero-glow,
+          .hero-fragment
+        `
+      );
 
     let targetX = 0;
     let targetY = 0;
@@ -820,55 +1155,79 @@
           hero.getBoundingClientRect();
 
         if (
-          event.clientY < rect.top ||
-          event.clientY > rect.bottom
+          event.clientY <
+            rect.top ||
+          event.clientY >
+            rect.bottom
         ) {
           return;
         }
 
         targetX =
-          (event.clientX /
+          (
+            event.clientX /
             window.innerWidth -
-            0.5) *
-          1.8;
+            0.5
+          ) * 1.8;
 
         targetY =
-          (event.clientY /
+          (
+            event.clientY /
             window.innerHeight -
-            0.5) *
-          1.8;
+            0.5
+          ) * 1.8;
       },
-      { passive: true }
+      {
+        passive: true
+      }
     );
 
     const frame = () => {
       currentX +=
-        (targetX - currentX) * 0.04;
+        (targetX -
+          currentX) *
+        0.04;
 
       currentY +=
-        (targetY - currentY) * 0.04;
+        (targetY -
+          currentY) *
+        0.04;
 
       decorativeElements.forEach(
-        (element, index) => {
+        (
+          element,
+          index
+        ) => {
           const strength =
             ((index % 3) + 1) * 4;
 
           element.style.translate =
-            `${currentX * strength}px ${currentY * strength}px`;
+            `
+              ${currentX * strength}px
+              ${currentY * strength}px
+            `;
         }
       );
 
-      requestAnimationFrame(frame);
+      requestAnimationFrame(
+        frame
+      );
     };
 
-    requestAnimationFrame(frame);
+    requestAnimationFrame(
+      frame
+    );
   }
+
+  /* =========================================================
+     COUNTDOWN
+     ========================================================= */
 
   function getEventTarget() {
     /*
-      15 Eylül 2026, Türkiye yerel saati.
-      Saat belirtilmediği için gün başlangıcı olan
-      00:00 TRT kullanılır.
+      Saat belirtilmediği için
+      Türkiye yerel gün başlangıcı
+      00:00 TRT kullanılıyor.
     */
     return new Date(
       "2026-09-15T00:00:00+03:00"
@@ -876,9 +1235,14 @@
   }
 
   function setupCountdown() {
-    const countdown = $("#countdown");
-    const started = $("#countdownStarted");
-    const shell = $("#countdownShell");
+    const countdown =
+      $("#countdown");
+
+    const started =
+      $("#countdownStarted");
+
+    const shell =
+      $("#countdownShell");
 
     if (
       !countdown ||
@@ -900,26 +1264,37 @@
 
     const values =
       Object.fromEntries(
-        units.map((unit) => [
-          unit,
-          $(
-            `[data-unit="${unit}"] [data-value]`,
-            countdown
-          )
-        ])
+        units.map(
+          (unit) => [
+            unit,
+            $(
+              `
+                [data-unit="${unit}"]
+                [data-value]
+              `,
+              countdown
+            )
+          ]
+        )
       );
 
     const showStartedState = () => {
       countdown.hidden = true;
       started.hidden = false;
-      shell.classList.add("event-live");
 
-      if (state.countdownInterval) {
+      shell.classList.add(
+        "event-live"
+      );
+
+      if (
+        state.countdownInterval
+      ) {
         clearInterval(
           state.countdownInterval
         );
 
-        state.countdownInterval = null;
+        state.countdownInterval =
+          null;
       }
     };
 
@@ -928,7 +1303,9 @@
         target.getTime() -
         Date.now();
 
-      if (difference <= 0) {
+      if (
+        difference <= 0
+      ) {
         showStartedState();
         return;
       }
@@ -939,49 +1316,67 @@
         );
 
       const next = {
-        days: Math.floor(
-          totalSeconds / 86400
-        ),
+        days:
+          Math.floor(
+            totalSeconds /
+              86400
+          ),
 
-        hours: Math.floor(
-          (totalSeconds % 86400) / 3600
-        ),
+        hours:
+          Math.floor(
+            (totalSeconds %
+              86400) /
+              3600
+          ),
 
-        minutes: Math.floor(
-          (totalSeconds % 3600) / 60
-        ),
+        minutes:
+          Math.floor(
+            (totalSeconds %
+              3600) /
+              60
+          ),
 
         seconds:
           totalSeconds % 60
       };
 
-      units.forEach((unit) => {
-        const text =
-          String(next[unit])
-            .padStart(2, "0");
-
-        const node =
-          values[unit];
-
-        if (
-          node &&
-          node.textContent !== text
-        ) {
-          node.textContent = text;
-
-          if (!reducedMotion) {
-            node.classList.remove(
-              "bump"
+      units.forEach(
+        (unit) => {
+          const text =
+            String(
+              next[unit]
+            ).padStart(
+              2,
+              "0"
             );
 
-            void node.offsetWidth;
+          const node =
+            values[unit];
 
-            node.classList.add(
-              "bump"
-            );
+          if (
+            node &&
+            node.textContent !==
+              text
+          ) {
+            node.textContent =
+              text;
+
+            if (
+              !reducedMotion
+            ) {
+              node.classList.remove(
+                "bump"
+              );
+
+              void node.offsetWidth;
+
+              node.classList.add(
+                "bump"
+              );
+            }
           }
         }
-      });
+      );
     };
 
     tick();
@@ -993,11 +1388,18 @@
       );
   }
 
+  /* =========================================================
+     KEYBOARD / ACCESSIBILITY
+     ========================================================= */
+
   function setupKeyboardFocus() {
     document.addEventListener(
       "keydown",
       (event) => {
-        if (event.key !== "Escape") {
+        if (
+          event.key !==
+          "Escape"
+        ) {
           return;
         }
 
@@ -1018,20 +1420,30 @@
     );
   }
 
+  /* =========================================================
+     INITIALIZATION
+     ========================================================= */
+
   function init() {
     setupAssetFallbacks();
     setupLoader();
+
     initLanguage();
+
     setupHeader();
     setupMobileNav();
     setupSmoothNav();
+
     setupReveal();
     setupActiveSection();
+
     setupPointerGlow();
     setupMagnetic();
     setupTiltCards();
     setupHeroParallax();
+
     setupCountdown();
+
     setupKeyboardFocus();
   }
 
