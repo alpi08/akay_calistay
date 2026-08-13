@@ -1,620 +1,1099 @@
-// script.js — optimize edilmiş + hatalar düzeltildi + interaktivite artırıldı
-// language, particles, cursor, scroll, menu, main
-
-(function() {
+(() => {
   'use strict';
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = window.matchMedia('(hover: none)').matches;
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-  /* ============================================================
-     1. LANGUAGE SYSTEM
-     ============================================================ */
+  const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  const isTouch =
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0;
+
+  // =========================================================
+  // TRANSLATIONS
+  // =========================================================
+
   const translations = {
     tr: {
-      navHome: "Ana Sayfa", navAbout: "Hakkımızda", navMission: "Misyon", navVision: "Vizyon",
-      navCommittees: "Komiteler", navSponsors: "Sponsorlar", navApply: "Başvurular", navContact: "İletişim",
-      heroTitle: "AKAY ÇALIŞTAYI",
-      heroSubtitle: "Geleceğin Liderlerini Bir Araya Getiriyoruz",
-      heroSubtitleFull: "Eleştirel düşünceyi, liderliği ve etkili iletişimi genç zihinlerle buluşturan akademik bir deneyim.",
-      heroApply: "Başvur", heroInstagram: "Instagram", scrollHint: "Aşağı Kaydır",
-      aboutEyebrow: "Hakkımızda", aboutTitle: "AKAY Çalıştayı",
-      aboutP1: "AKAY Çalıştayı, akademik gelişimi ve eleştirel düşünceyi merkezine alan bir gençlik topluluğudur.",
-      aboutP2: "Katılımcılarımız; liderlik, etkili iletişim ve topluluk önünde konuşma becerilerini gerçek tartışma ortamlarında geliştirir.",
-      aboutP3: "Her komite, güncel dünya meselelerini analitik bir bakış açısıyla ele alarak katılımcıları geleceğin karar vericileri olarak yetiştirir.",
-      missionEyebrow: "Misyon", missionTitle: "Misyonumuz",
-      missionText: "AKAY Çalıştayı olarak misyonumuz, genç bireylerin eleştirel düşünme, etkili iletişim ve liderlik becerilerini akademik bir zeminde geliştirmelerine olanak tanımaktır. Katılımcılarımızın güncel dünya meselelerini derinlemesine analiz edebilen, farklı bakış açılarını saygıyla değerlendirebilen ve topluluk önünde özgüvenle konuşabilen bireyler olarak yetişmelerini hedefliyoruz. Bu doğrultuda, işbirliğine dayalı bir öğrenme ortamı sunarak gençlerin entelektüel farkındalıklarını artırmayı ve geleceğin sorumluluk sahibi liderlerini yetiştirmeyi amaçlıyoruz.",
-      visionEyebrow: "Vizyon", visionTitle: "Vizyonumuz",
-      visionText: "Vizyonumuz, akademik mükemmelliği ilham verici bir deneyimle birleştiren, bölgesinde öncü bir gençlik çalıştayı olmaktır. Genç bireylerin fikirlerini özgürce ifade edebildiği, entelektüel merakın teşvik edildiği ve liderlik potansiyelinin ortaya çıkarıldığı sürdürülebilir bir platform inşa etmeyi hedefliyoruz. AKAY Çalıştayı'nın, katılımcılarının hayatlarında kalıcı bir iz bırakan, onları geleceğin karar alma süreçlerine hazırlayan saygın bir kurum haline gelmesini öngörüyoruz.",
-      commEyebrow: "Komiteler", commTitle: "Geleceği Birlikte Tartışıyoruz",
-      commDesc: "Her komite farklı bir küresel meseleye odaklanarak katılımcılarımızın analitik düşünme, iletişim ve takım çalışması becerilerini geliştirmesini sağlar.",
-      detailBtn: "Detayları Gör",
-      c1Title: "Diplomasi Komitesi", c1Desc: "Uluslararası ilişkileri ve müzakere becerilerini gerçekçi senaryolarla keşfeden komite.",
-      c1Detail: "Diplomasi Komitesi katılımcıları, uluslararası kriz senaryoları üzerinden müzakere, ikna ve stratejik düşünme becerilerini geliştirir. Gerçek diplomatik süreçleri simüle ederek küresel meseleleri çok yönlü bir bakış açısıyla analiz ederler.",
-      c2Title: "Ekonomi Komitesi", c2Desc: "Küresel ekonomik politikaları analiz eden ve çözüm önerileri geliştiren komite.",
-      c2Detail: "Ekonomi Komitesi, güncel makroekonomik sorunları ele alarak katılımcıların veri okuryazarlığını ve politika geliştirme becerilerini güçlendirir. Tartışmalar, sürdürülebilir ve adil ekonomik modeller üzerine yoğunlaşır.",
-      c3Title: "Medya ve İletişim Komitesi", c3Desc: "Dijital çağda etkili iletişim stratejilerini ve medya okuryazarlığını inceleyen komite.",
-      c3Detail: "Medya ve İletişim Komitesi, dezenformasyonla mücadele, etkili anlatı kurma ve kamuoyu oluşturma dinamiklerini inceler. Katılımcılar, ikna edici ve etik iletişim stratejileri geliştirmeyi öğrenir.",
-      applyTitle: "Sen de Aramıza Katıl",
-      applyDesc: "AKAY Çalıştayı, eleştirel düşünen, meraklı ve liderlik vasfı taşıyan gençleri arıyor. Yolculuğa katılmak için başvurunu şimdi yap.",
-      teamAppTitle: "Ekip Başvurusu", teamAppDesc: "Organizasyon ekibimizin bir parçası olarak çalıştayın perde arkasında yer al.",
-      academyAppTitle: "Akademi Başvurusu", academyAppDesc: "Komitelere katılımcı olarak katıl ve akademik yolculuğuna başla.",
-      applyNow: "Başvur",
-      sponsorEyebrow: "Sponsorlar", sponsorTitle: "Bizi Destekleyenler",
-      s1Desc: "Eğitim teknolojileri alanında yenilikçi çözümler sunan kurumsal destekçimiz.",
-      s2Desc: "Yaratıcı tasarım ve marka deneyimleri üreten stratejik iş ortağımız.",
-      visitIg: "Instagram'da Ziyaret Et", visitWebsite: "Web Sitesi",
-      s3Desc: "Teknoloji alanında kurumsal destekçimiz.",
-      contactEyebrow: "İletişim", contactTitle: "Bizimle İletişime Geç",
-      contactDesc: "Sorularınız mı var? AKAY topluluğunun bir parçası olmak için bize ulaşın.",
-      formName: "Ad Soyad", formEmail: "Email", formSubject: "Konu", formMessage: "Mesaj", formSend: "Gönder",
-      errRequired: "Bu alan zorunludur.", errEmail: "Geçerli bir e-posta adresi girin.",
-      successTitle: "Mesajınız İçin Teşekkürler!",
-      successDesc: "Formumuz şu anda demo amaçlıdır. Bizimle hızlıca iletişime geçmek için Instagram'ı kullanabilirsiniz.",
-      igName: "AKAY Çalıştayı", igHandle: "Resmi Instagram",
-      wa1Name: "Zeynep Beril Köse", wa1Role: "Organizasyon Ekibi",
-      wa2Name: "Eylül Ulubulut", wa2Role: "Organizasyon Ekibi",
-      waBtn: "WhatsApp",
-      footerDesc: "Genç liderleri, eleştirel düşünürleri ve iletişimcileri bir araya getiren akademik bir çalıştay.",
-      footerNav: "Navigasyon", footerApps: "Başvurular", footerSocial: "Sosyal",
-      copyright: "Tüm Hakları Saklıdır.",
-      close: "Kapat",
-      menuOpen: "Menü", menuClose: "Kapat"
+      nav: {
+        home: 'Ana Sayfa',
+        about: 'Hakkımızda',
+        event: 'Etkinlik',
+        committees: 'Komiteler',
+        schedule: 'Akış',
+        sponsors: 'Sponsorluk',
+        contact: 'İletişim'
+      },
+
+      hero: {
+        eyebrow: 'Gençlik / Fikir / Perspektif',
+        copy: 'Bilginin yalnızca paylaşılmadığı, bakış açılarının birbirine temas ettiği bir düşünce alan.',
+        explore: 'Deneyimi Keşfet',
+        connect: 'İletişime Geç',
+        dateLabel: 'Etkinlik Tarihi',
+        month: 'Eylül',
+        sideNote: 'Düşün. Tartış. Perspektifini genişlet.'
+      },
+
+      countdown: {
+        kicker: 'Başlangıca kalan süre',
+        live: 'CANLI',
+        days: 'GÜN',
+        hours: 'SAAT',
+        minutes: 'DAKİKA',
+        seconds: 'SANİYE',
+        startedKicker: 'Şimdi',
+        started: 'Etkinlik Başladı'
+      },
+
+      about: {
+        eyebrow: 'Neden Akay?',
+        title: 'Fikirlerin kesiştiği yerde <em>perspektif</em> değişir.',
+
+        missionLabel: 'MİSYON',
+        missionTitle: 'Özgürce ifade et.',
+
+        missionText:
+          'Akay Çalıştayı olarak misyonumuz; Gençlerin hızla gelişen ve değişen dünyaya dair farkındalıklarını artırırken, onlara fikirlerini özgürce ifade edebilecekleri, güçlü bir bilgi paylaşım alanı sunmaktır. Komite konularımız ise hem akademik anlamda geliştirici hem de sosyal bakımdan günlük hayatımızı doğrudan etkileyen konular olarak özenle seçilmiştir. Sosyal becerilerini aktif olarak kullanabilecekleri bu platformda, çok yönlü bakış açıları kazanmalarını hedefliyoruz.',
+
+        axis: 'BİR FİKİR / BİRDEN ÇOK BAKIŞ',
+
+        visionLabel: 'VİZYON',
+        visionTitle: 'Aydınlık zihni somut faydaya dönüştür.',
+
+        visionText:
+          'Akay Perspektif ve Aydınlanma Çalıştayı ekibi olarak Türkiye’deki gençlerin Türk kültürü ve kökeni başta olmak üzere; dünya tarihini, farklı kültürleri ve dilleri anlayarak farkındalığı, entelektüel donanımı ve hitabet becerisi yüksek bireyler olmalarına katkı sağlayarak ülkemiz adına faydalı bireyler yetiştirmeyi amaçlıyoruz.<br><br>Nihai hedefimiz, gençlerin bu süreçte edindikleri bilgi birikimini ve aydınlık zihinlerini kullanarak başta ülkemiz olmak üzere tüm insanlığa somut faydalar sunan bireyler olarak yetişmeleridir.'
+      },
+
+      event: {
+        eyebrow: 'Etkinlik',
+        title: 'Bir buluşma değil, <em>bir düşünce alanı.</em>',
+        statement:
+          'Henüz açıklanmayan ayrıntıların yerini doldurmak yerine, burada gerçek olanı net ve güçlü biçimde sunuyoruz.',
+        date: 'Tarih',
+        location: 'Konum',
+        fee: 'Etkinlik Ücreti',
+        duration: 'Süre'
+      },
+
+      common: {
+        comingSoon: 'Yakında Açıklanacak'
+      },
+
+      schedule: {
+        eyebrow: 'Akış',
+        title: 'Zamanın ritmi <em>yakında</em> görünür olacak.',
+        frameLabel: 'GENEL AKIŞ / FRAMEWORK',
+        status: 'PROGRAM HAZIRLANIYOR',
+        emptyTitle: 'Program yakında açıklanacaktır.',
+        emptyText:
+          'Gerçek zaman, oturum, salon, komite ve konuşmacı bilgileri doğrulandığında bu akış dinamik olarak doldurulacaktır.',
+        time: 'Zaman',
+        session: 'Oturum',
+        room: 'Salon / Konum',
+        committee: 'Komite'
+      },
+
+      committees: {
+        eyebrow: 'Komiteler',
+        title: 'Gündemler hazır olduğunda <em>sahne açılacak.</em>',
+        label: 'AÇILACAK ALAN',
+        emptyTitle:
+          'Komiteler ve gündem maddeleri yakında açıklanacaktır.',
+        emptyText:
+          'Yayınlandığında her komite; gündem, açıklama, salon ve moderasyon bilgileriyle etkileşimli olarak burada yer alacaktır.',
+        awaiting: 'Yakında'
+      },
+
+      sponsors: {
+        eyebrow: 'Sponsorluk',
+        title: 'Bu deneyim <em>birlikte</em> büyüyor.',
+        ai: 'YAPAY ZEKA SPONSORU',
+        it: 'BT SPONSORU',
+        design: 'SOSYAL MEDYA / GRAFİK TASARIM SPONSORU',
+        visit: 'Web sitesini ziyaret et',
+        instagramVisit: "Instagram'ı ziyaret et",
+        note: 'Üç destekçi, tek bir deneyim.'
+      },
+
+      team: {
+        eyebrow: 'Koordinasyon',
+        title: 'Doğrudan <em>ulaş.</em>',
+        role: 'Genel Koordinatör'
+      },
+
+      contact: {
+        eyebrow: 'İletişim',
+        title: 'Perspektifini <em>paylaş.</em>',
+        text:
+          "Akay'ın güncel duyuruları ve etkinlik iletişimi için resmi Instagram hesabını takip et."
+      },
+
+      footer: {
+        statement:
+          'Gençlik, fikir, kültür ve çok yönlü bakışın kesiştiği dijital bir deneyim.',
+        navigation: 'NAVİGASYON',
+        supporters: 'DESTEKÇİLER',
+        social: 'SOSYAL',
+        rights: 'Tüm hakları saklıdır.'
+      }
     },
+
     en: {
-      navHome: "Home", navAbout: "About", navMission: "Mission", navVision: "Vision",
-      navCommittees: "Committees", navSponsors: "Sponsors", navApply: "Applications", navContact: "Contact",
-      heroTitle: "AKAY WORKSHOP",
-      heroSubtitle: "Bringing Together the Leaders of Tomorrow",
-      heroSubtitleFull: "An academic experience that unites critical thinking, leadership, and effective communication with young minds.",
-      heroApply: "Apply", heroInstagram: "Instagram", scrollHint: "Scroll Down",
-      aboutEyebrow: "About Us", aboutTitle: "AKAY Workshop",
-      aboutP1: "AKAY Workshop is a youth community centered on academic growth and critical thinking.",
-      aboutP2: "Our participants develop leadership, effective communication, and public speaking skills in real discussion environments.",
-      aboutP3: "Each committee approaches current global issues analytically, shaping participants into the decision-makers of tomorrow.",
-      missionEyebrow: "Mission", missionTitle: "Our Mission",
-      missionText: "At AKAY Workshop, our mission is to enable young individuals to develop critical thinking, effective communication, and leadership skills on an academic foundation. We aim to nurture participants who can deeply analyze current global issues, respectfully evaluate differing perspectives, and speak confidently in public. Through a collaborative learning environment, we strive to raise intellectual awareness and cultivate the responsible leaders of the future.",
-      visionEyebrow: "Vision", visionTitle: "Our Vision",
-      visionText: "Our vision is to become a leading youth workshop in the region, combining academic excellence with an inspiring experience. We aim to build a sustainable platform where young individuals can freely express their ideas, where intellectual curiosity is encouraged, and where leadership potential is unlocked. We envision AKAY Workshop as a respected institution that leaves a lasting mark on its participants' lives and prepares them for the decision-making processes of the future.",
-      commEyebrow: "Committees", commTitle: "Discussing the Future Together",
-      commDesc: "Each committee focuses on a different global issue, helping participants build analytical thinking, communication, and teamwork skills.",
-      detailBtn: "View Details",
-      c1Title: "Diplomacy Committee", c1Desc: "Explores international relations and negotiation skills through realistic scenarios.",
-      c1Detail: "Diplomacy Committee participants build negotiation, persuasion, and strategic thinking skills through international crisis scenarios. By simulating real diplomatic processes, they analyze global issues from multiple perspectives.",
-      c2Title: "Economics Committee", c2Desc: "Analyzes global economic policies and develops proposed solutions.",
-      c2Detail: "Economics Committee strengthens participants' data literacy and policy-development skills by addressing current macroeconomic issues, with discussions focused on sustainable and equitable economic models.",
-      c3Title: "Media & Communication Committee", c3Desc: "Examines effective communication strategies and media literacy in the digital age.",
-      c3Detail: "Media & Communication Committee studies combating disinformation, crafting effective narratives, and the dynamics of shaping public opinion, teaching participants persuasive and ethical communication strategies.",
-      applyTitle: "Join Us",
-      applyDesc: "AKAY Workshop is looking for curious, critically-minded young people with leadership qualities. Apply now to join the journey.",
-      teamAppTitle: "Team Application", teamAppDesc: "Join our organizing team and help shape the workshop behind the scenes.",
-      academyAppTitle: "Academy Application", academyAppDesc: "Join a committee as a delegate and begin your academic journey.",
-      applyNow: "Apply",
-      sponsorEyebrow: "Sponsors", sponsorTitle: "Our Supporters",
-      s1Desc: "Our corporate supporter delivering innovative solutions in education technology.",
-      s2Desc: "Our strategic partner producing creative design and brand experiences.",
-      visitIg: "Visit on Instagram", visitWebsite: "Website",
-      s3Desc: "Our corporate supporter in the technology sector.",
-      contactEyebrow: "Contact", contactTitle: "Get In Touch With Us",
-      contactDesc: "Have questions? Reach out to become part of the AKAY community.",
-      formName: "Full Name", formEmail: "Email", formSubject: "Subject", formMessage: "Message", formSend: "Send",
-      errRequired: "This field is required.", errEmail: "Please enter a valid email address.",
-      successTitle: "Thank You for Your Message!",
-      successDesc: "This form is currently for demo purposes. Reach us quickly on Instagram instead.",
-      igName: "AKAY Workshop", igHandle: "Official Instagram",
-      wa1Name: "Zeynep Beril Köse", wa1Role: "Organizing Team",
-      wa2Name: "Eylül Ulubulut", wa2Role: "Organizing Team",
-      waBtn: "WhatsApp",
-      footerDesc: "An academic workshop bringing together young leaders, critical thinkers, and communicators.",
-      footerNav: "Navigation", footerApps: "Applications", footerSocial: "Social",
-      copyright: "All Rights Reserved.",
-      close: "Close",
-      menuOpen: "Menu", menuClose: "Close"
+      nav: {
+        home: 'Home',
+        about: 'About',
+        event: 'Event',
+        committees: 'Committees',
+        schedule: 'Schedule',
+        sponsors: 'Sponsors',
+        contact: 'Contact'
+      },
+
+      hero: {
+        eyebrow: 'Youth / Idea / Perspective',
+        copy:
+          'A space for thought where knowledge is not simply shared, but perspectives meet and reshape one another.',
+        explore: 'Explore the Experience',
+        connect: 'Get in Touch',
+        dateLabel: 'Event Date',
+        month: 'September',
+        sideNote: 'Think. Debate. Expand your perspective.'
+      },
+
+      countdown: {
+        kicker: 'Time until the opening',
+        live: 'LIVE',
+        days: 'DAYS',
+        hours: 'HOURS',
+        minutes: 'MINUTES',
+        seconds: 'SECONDS',
+        startedKicker: 'Now',
+        started: 'The Event Has Started'
+      },
+
+      about: {
+        eyebrow: 'Why Akay?',
+        title: 'Where ideas intersect, <em>perspective</em> changes.',
+
+        missionLabel: 'MISSION',
+        missionTitle: 'Express yourself freely.',
+
+        missionText:
+          'Our mission as Akay Workshop is to increase young people’s awareness of a rapidly developing and changing world while providing a strong space for knowledge sharing where they can express their ideas freely. Our committee topics are carefully selected to be academically enriching and socially relevant to everyday life. Through this platform, where participants can actively use their social skills, we aim to help them gain multidimensional perspectives.',
+
+        axis: 'ONE IDEA / MANY PERSPECTIVES',
+
+        visionLabel: 'VISION',
+        visionTitle: 'Turn enlightened minds into tangible benefit.',
+
+        visionText:
+          'As the Akay Perspective and Enlightenment Workshop team, we aim to contribute to raising young people in Türkiye as individuals with strong awareness, intellectual depth, and oratory skills by helping them understand Turkish culture and origins, world history, different cultures, and languages, ultimately becoming beneficial individuals for our country.<br><br>Our ultimate goal is to raise young people who can use the knowledge they gain and their enlightened minds to create tangible benefits for all humanity, beginning with our country.'
+      },
+
+      event: {
+        eyebrow: 'Event',
+        title: 'Not just a gathering, <em>a space for thought.</em>',
+        statement:
+          'Instead of filling in details that have not been announced, we present what is real here with clarity and intention.',
+        date: 'Date',
+        location: 'Location',
+        fee: 'Event Fee',
+        duration: 'Duration'
+      },
+
+      common: {
+        comingSoon: 'Coming Soon'
+      },
+
+      schedule: {
+        eyebrow: 'Schedule',
+        title: 'The rhythm of time will <em>soon</em> come into view.',
+        frameLabel: 'GENERAL FLOW / FRAMEWORK',
+        status: 'PROGRAM IN PREPARATION',
+        emptyTitle: 'The full program will be announced soon.',
+        emptyText:
+          'Once verified, real times, sessions, rooms, committees, and speaker information will populate this flow dynamically.',
+        time: 'Time',
+        session: 'Session',
+        room: 'Room / Location',
+        committee: 'Committee'
+      },
+
+      committees: {
+        eyebrow: 'Committees',
+        title: 'When the agendas are ready, <em>the stage opens.</em>',
+        label: 'SPACE TO BE OPENED',
+        emptyTitle:
+          'Committees and agenda topics will be announced soon.',
+        emptyText:
+          'Once published, each committee will appear here interactively with agenda, description, room, and moderation details.',
+        awaiting: 'Coming Soon'
+      },
+
+      sponsors: {
+        eyebrow: 'Sponsorship',
+        title: 'This experience grows <em>together.</em>',
+        ai: 'ARTIFICIAL INTELLIGENCE SPONSOR',
+        it: 'IT SPONSOR',
+        design: 'SOCIAL MEDIA / GRAPHIC DESIGN SPONSOR',
+        visit: 'Visit website',
+        instagramVisit: 'Visit Instagram',
+        note: 'Three supporters, one experience.'
+      },
+
+      team: {
+        eyebrow: 'Coordination',
+        title: 'Reach us <em>directly.</em>',
+        role: 'General Coordinator'
+      },
+
+      contact: {
+        eyebrow: 'Contact',
+        title: 'Share your <em>perspective.</em>',
+        text:
+          'Follow the official Instagram account for Akay’s latest announcements and event communication.'
+      },
+
+      footer: {
+        statement:
+          'A digital experience at the intersection of youth, ideas, culture, and multidimensional perspectives.',
+        navigation: 'NAVIGATION',
+        supporters: 'SUPPORTERS',
+        social: 'SOCIAL',
+        rights: 'All rights reserved.'
+      }
     }
   };
 
-  const LANGUAGE = {
-    current: localStorage.getItem('akay-lang') || 'tr',
-    langBtns: null,
-    i18nEls: null,
+  // =========================================================
+  // STATE
+  // =========================================================
 
-    init() {
-      this.langBtns = document.querySelectorAll('[data-lang-btn]');
-      this.i18nEls = document.querySelectorAll('[data-i18n]');
-      this.apply(this.current, false);
-      this.langBtns.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.langBtn === this.current);
-        btn.addEventListener('click', () => this.switchTo(btn.dataset.langBtn));
-      });
-    },
-
-    switchTo(lang) {
-      if (lang === this.current) return;
-      this.current = lang;
-      localStorage.setItem('akay-lang', lang);
-      this.langBtns.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.langBtn === lang);
-      });
-      this.apply(lang, true);
-    },
-
-    apply(lang, animate) {
-      const dict = translations[lang];
-      document.documentElement.lang = lang;
-      this.i18nEls.forEach(el => {
-        const key = el.dataset.i18n;
-        if (dict[key] === undefined) return;
-        if (animate) {
-          el.style.transition = 'opacity 200ms ease';
-          el.style.opacity = 0;
-          setTimeout(() => {
-            el.textContent = dict[key];
-            el.style.opacity = 1;
-          }, 200);
-        } else {
-          el.textContent = dict[key];
-        }
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.dataset.i18nPlaceholder;
-        if (dict[key]) el.setAttribute('placeholder', dict[key]);
-      });
-    },
-
-    t(key) { return translations[this.current][key] || ''; }
+  const state = {
+    lang: localStorage.getItem('akay-lang') || 'tr',
+    countdownInterval: null
   };
 
-  /* ============================================================
-     2. UTILITY: Throttle
-     ============================================================ */
-  function throttle(fn, delay) {
-    let last = 0;
-    let rafId = null;
-    let lastArgs = null;
-    return function(...args) {
-      lastArgs = args;
-      const now = Date.now();
-      if (now - last >= delay) {
-        last = now;
-        fn.apply(this, args);
-      } else if (!rafId) {
-        rafId = requestAnimationFrame(() => {
-          rafId = null;
-          const remaining = delay - (Date.now() - last);
-          if (remaining <= 0) {
-            last = Date.now();
-            fn.apply(this, lastArgs);
-          }
-        });
-      }
-    };
+  // =========================================================
+  // HELPERS
+  // =========================================================
+
+  function getNested(obj, path) {
+    return path
+      .split('.')
+      .reduce((acc, key) => acc && acc[key], obj);
   }
 
-  /* ============================================================
-     3. PARTICLES — optimize edilmiş
-     ============================================================ */
-  (() => {
-    const canvas = document.getElementById('bg-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+  // =========================================================
+  // LANGUAGE SYSTEM
+  // =========================================================
 
-    let width, height, dpr;
-    let particles = [];
-    let running = true;
+  function updateMeta() {
+    document.title =
+      state.lang === 'tr'
+        ? 'Akay Perspektif ve Aydınlanma Çalıştayı'
+        : 'Akay Perspective and Enlightenment Workshop';
 
-    const COLORS = ['rgba(255,255,255,', 'rgba(192,132,252,', 'rgba(233,213,255,'];
-    let frameCount = 0;
-    const SKIP = 2;
+    const meta = document.querySelector(
+      'meta[name="description"]'
+    );
 
-    function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      canvas.style.width = width + 'px';
-      canvas.style.height = height + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      buildParticles();
+    if (meta) {
+      meta.content =
+        state.lang === 'tr'
+          ? 'Akay Perspektif ve Aydınlanma Çalıştayı. Gençlerin fikirlerini özgürce ifade edebileceği, bilgi paylaşımı ve çok yönlü bakış açıları geliştiren bir deneyim.'
+          : 'Akay Perspective and Enlightenment Workshop. A space for young people to express ideas freely, share knowledge, and develop multidimensional perspectives.';
     }
+  }
 
-    function buildParticles() {
-      const base = isMobile ? 16 : 44;
-      particles = [];
-      for (let i = 0; i < base; i++) {
-        particles.push({
-          x: Math.random() * width, y: Math.random() * height,
-          r: Math.random() * 1.2 + 0.3, speed: 0.02 + Math.random() * 0.03,
-          opacity: 0.15, color: COLORS[0], drift: 0
-        });
-      }
-      for (let i = 0; i < base * 0.5; i++) {
-        particles.push({
-          x: Math.random() * width, y: Math.random() * height,
-          r: Math.random() * 1.8 + 0.6, speed: 0.06 + Math.random() * 0.08,
-          opacity: 0.3, color: COLORS[1], drift: Math.random() * 0.4 - 0.2
-        });
-      }
-      for (let i = 0; i < base * 0.25; i++) {
-        particles.push({
-          x: Math.random() * width, y: Math.random() * height,
-          r: Math.random() * 2.4 + 1, speed: 0.12 + Math.random() * 0.12,
-          opacity: 0.5, color: COLORS[2], drift: Math.random() * 0.6 - 0.3
-        });
-      }
-    }
+  function applyTranslations() {
+    const dict = translations[state.lang];
 
-    function draw() {
-      if (!running) return;
-      frameCount++;
-      if (frameCount % (SKIP + 1) !== 0) {
-        requestAnimationFrame(draw);
-        return;
-      }
-      ctx.clearRect(0, 0, width, height);
-      for (const p of particles) {
-        p.y -= p.speed;
-        p.x += p.drift * 0.05;
-        if (p.y < -5) { p.y = height + 5; p.x = Math.random() * width; }
-        if (p.x < -5) p.x = width + 5;
-        if (p.x > width + 5) p.x = -5;
-        ctx.beginPath();
-        ctx.fillStyle = p.color + p.opacity + ')';
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      requestAnimationFrame(draw);
-    }
+    document.documentElement.lang = state.lang;
 
-    document.addEventListener('visibilitychange', () => {
-      running = !document.hidden;
-      if (running) requestAnimationFrame(draw);
+    $$('[data-i18n]').forEach((element) => {
+      const value = getNested(
+        dict,
+        element.dataset.i18n
+      );
+
+      if (typeof value === 'string') {
+        element.innerHTML = value;
+      }
     });
 
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(resize, 200);
-    }, { passive: true });
+    const current = $('.lang-current');
+    const other = $('.lang-other');
 
-    resize();
-    if (!reduceMotion) {
-      requestAnimationFrame(draw);
+    if (current) {
+      current.textContent = state.lang.toUpperCase();
     }
-  })();
 
-  /* ============================================================
-     4. CURSOR — optimize edilmiş (throttle)
-     ============================================================ */
-  (() => {
-    if (isMobile) return;
-
-    const ring = document.querySelector('.cursor-ring');
-    const dot = document.querySelector('.cursor-dot');
-    const light = document.querySelector('.mouse-light');
-    if (!ring || !dot) return;
-
-    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-    let rx = mx, ry = my;
-
-    const handleMove = throttle((e) => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top = my + 'px';
-      if (light) {
-        light.style.left = mx + 'px';
-        light.style.top = my + 'px';
-      }
-    }, 16);
-
-    window.addEventListener('mousemove', handleMove, { passive: true });
-
-    function loop() {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
-      requestAnimationFrame(loop);
+    if (other) {
+      other.textContent =
+        state.lang === 'tr'
+          ? 'EN'
+          : 'TR';
     }
-    requestAnimationFrame(loop);
 
-    const hoverTargets = 'a, button, .glass-card, input, textarea, .tilt-card, .sm-toggle-header';
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(hoverTargets)) ring.classList.add('hovering');
-    }, { passive: true });
-    document.addEventListener('mouseout', (e) => {
-      if (e.target.closest(hoverTargets)) ring.classList.remove('hovering');
-    }, { passive: true });
-    document.addEventListener('mousedown', () => ring.classList.add('clicking'));
-    document.addEventListener('mouseup', () => ring.classList.remove('clicking'));
-  })();
+    const languageLabel =
+      state.lang === 'tr'
+        ? 'Dili İngilizceye değiştir'
+        : 'Switch language to Turkish';
 
-  /* ============================================================
-     5. SCROLL — nav scroll + intersection observer reveals
-     ============================================================ */
-  (() => {
-    const nav = document.querySelector('.nav');
-    const NAV_THRESHOLD = 60;
+    $('#languageSwitch')?.setAttribute(
+      'aria-label',
+      languageLabel
+    );
 
-    function onScroll() {
-      if (window.scrollY > NAV_THRESHOLD) nav.classList.add('scrolled');
-      else nav.classList.remove('scrolled');
+    $('#languageSwitch')?.setAttribute(
+      'aria-pressed',
+      state.lang === 'en'
+        ? 'true'
+        : 'false'
+    );
+
+    const mobileLanguage = $('#mobileLanguage');
+
+    if (mobileLanguage) {
+      mobileLanguage.innerHTML =
+        `${state.lang === 'tr' ? 'EN' : 'TR'} <span>↗</span>`;
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
+
+    const footerLanguage = $('#footerLanguage');
+
+    if (footerLanguage) {
+      footerLanguage.textContent =
+        `${state.lang.toUpperCase()} / ${state.lang === 'tr' ? 'EN' : 'TR'} ↗`;
+    }
+
+    updateMeta();
+  }
+
+  function toggleLanguage() {
+    state.lang =
+      state.lang === 'tr'
+        ? 'en'
+        : 'tr';
+
+    localStorage.setItem(
+      'akay-lang',
+      state.lang
+    );
+
+    applyTranslations();
+  }
+
+  function initLanguage() {
+    applyTranslations();
+
+    [
+      $('#languageSwitch'),
+      $('#mobileLanguage'),
+      $('#footerLanguage')
+    ].forEach((button) => {
+      button?.addEventListener(
+        'click',
+        toggleLanguage
+      );
+    });
+  }
+
+  // =========================================================
+  // LOADER
+  // =========================================================
+
+  function setupLoader() {
+    const loader = $('#loader');
+
+    if (!loader) return;
+
+    const hideLoader = () => {
+      window.setTimeout(() => {
+        loader.classList.add('is-hidden');
+      }, reducedMotion ? 180 : 1400);
+    };
+
+    if (document.readyState === 'complete') {
+      hideLoader();
+    } else {
+      window.addEventListener(
+        'load',
+        hideLoader,
+        { once: true }
+      );
+    }
+
+    window.setTimeout(() => {
+      loader.classList.add('is-hidden');
+    }, 3600);
+  }
+
+  // =========================================================
+  // HEADER
+  // =========================================================
+
+  function setupHeader() {
+    const header = $('#siteHeader');
+
+    if (!header) return;
+
+    const onScroll = () => {
+      header.classList.toggle(
+        'scrolled',
+        window.scrollY > 24
+      );
+    };
+
     onScroll();
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    window.addEventListener(
+      'scroll',
+      onScroll,
+      { passive: true }
+    );
+  }
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // =========================================================
+  // MOBILE NAVIGATION
+  // =========================================================
 
-    document.querySelectorAll('[data-reveal-group]').forEach(group => {
-      const lines = group.querySelectorAll('.reveal-line');
-      const groupObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            lines.forEach((line, i) => {
-              setTimeout(() => line.classList.add('visible'), i * 120);
+  function setupMobileNav() {
+    const toggle = $('#menuToggle');
+    const nav = $('#mobileNav');
+
+    if (!toggle || !nav) return;
+
+    const setOpen = (open) => {
+      toggle.setAttribute(
+        'aria-expanded',
+        String(open)
+      );
+
+      toggle.setAttribute(
+        'aria-label',
+        open
+          ? (
+              state.lang === 'tr'
+                ? 'Menüyü kapat'
+                : 'Close menu'
+            )
+          : (
+              state.lang === 'tr'
+                ? 'Menüyü aç'
+                : 'Open menu'
+            )
+      );
+
+      nav.classList.toggle(
+        'is-open',
+        open
+      );
+
+      nav.setAttribute(
+        'aria-hidden',
+        String(!open)
+      );
+
+      document.body.classList.toggle(
+        'menu-open',
+        open
+      );
+    };
+
+    toggle.addEventListener(
+      'click',
+      () => {
+        setOpen(
+          !nav.classList.contains(
+            'is-open'
+          )
+        );
+      }
+    );
+
+    $$('.mobile-nav-link').forEach(
+      (link) => {
+        link.addEventListener(
+          'click',
+          () => setOpen(false)
+        );
+      }
+    );
+  }
+
+  // =========================================================
+  // SMOOTH NAVIGATION
+  // =========================================================
+
+  function setupSmoothNav() {
+    $$('a[href^="#"]').forEach(
+      (link) => {
+        link.addEventListener(
+          'click',
+          (event) => {
+            const id =
+              link.getAttribute('href');
+
+            const target =
+              id &&
+              document.querySelector(id);
+
+            if (!target) return;
+
+            event.preventDefault();
+
+            const top =
+              target.getBoundingClientRect()
+                .top +
+              window.scrollY -
+              82;
+
+            window.scrollTo({
+              top,
+              behavior: reducedMotion
+                ? 'auto'
+                : 'smooth'
             });
-            groupObserver.unobserve(entry.target);
           }
-        });
-      }, { threshold: 0.2 });
-      groupObserver.observe(group);
-    });
+        );
+      }
+    );
+  }
 
-    // Yeni scroll animasyon sınıfları: reveal-slide, reveal-scale, reveal-left, reveal-right, reveal-glow
-    const newRevealClasses = '.reveal-slide, .reveal-scale, .reveal-left, .reveal-right, .reveal-glow';
-    const newObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          newObserver.unobserve(entry.target);
+  // =========================================================
+  // SCROLL REVEAL
+  // =========================================================
+
+  function setupReveal() {
+    const items = $$('.reveal');
+
+    if (
+      reducedMotion ||
+      !('IntersectionObserver' in window)
+    ) {
+      items.forEach(
+        (element) =>
+          element.classList.add(
+            'is-visible'
+          )
+      );
+
+      return;
+    }
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach(
+            (entry) => {
+              if (!entry.isIntersecting)
+                return;
+
+              entry.target.classList.add(
+                'is-visible'
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+            }
+          );
+        },
+        {
+          threshold: 0.12,
+          rootMargin:
+            '0px 0px -8% 0px'
         }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll(newRevealClasses).forEach(el => newObserver.observe(el));
-  })();
+      );
 
-  /* ============================================================
-     6. STAGGERED MENU — header içindeki toggle ile
-     ============================================================ */
-  (() => {
-    const wrapper = document.getElementById('staggered-menu');
-    const toggle = document.getElementById('sm-toggle-header');
-    const scrim = document.getElementById('sm-scrim');
-    const panel = document.getElementById('sm-panel');
-    if (!wrapper || !toggle) return;
+    items.forEach(
+      (element) =>
+        observer.observe(element)
+    );
+  }
 
-    let open = false;
+  // =========================================================
+  // ACTIVE NAVIGATION SECTION
+  // =========================================================
 
-    function openMenu() {
-      open = true;
-      wrapper.classList.add('sm-open');
-      toggle.setAttribute('aria-expanded', 'true');
-      panel.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+  function setupActiveSection() {
+    const links = $$(
+      '.nav-link, .mobile-nav-link'
+    );
+
+    const sections = $$(
+      '[data-section-id]'
+    );
+
+    if (
+      !('IntersectionObserver' in window)
+    ) {
+      return;
     }
 
-    function closeMenu() {
-      open = false;
-      wrapper.classList.remove('sm-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      panel.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach(
+            (entry) => {
+              if (!entry.isIntersecting)
+                return;
+
+              const id =
+                entry.target.dataset
+                  .sectionId;
+
+              links.forEach(
+                (link) => {
+                  link.classList.toggle(
+                    'active',
+                    link.dataset.section === id
+                  );
+                }
+              );
+            }
+          );
+        },
+        {
+          rootMargin:
+            '-35% 0px -50% 0px',
+          threshold: 0
+        }
+      );
+
+    sections.forEach(
+      (section) =>
+        observer.observe(section)
+    );
+  }
+
+  // =========================================================
+  // CURSOR GLOW
+  // =========================================================
+
+  function setupPointerGlow() {
+    if (
+      isTouch ||
+      reducedMotion
+    ) {
+      return;
     }
 
-    toggle.addEventListener('click', () => (open ? closeMenu() : openMenu()));
-    scrim.addEventListener('click', closeMenu);
-    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && open) closeMenu(); });
-  })();
+    const glow = $('.cursor-glow');
 
-  /* ============================================================
-     7. LOADER + HERO + TILT + RIPPLE + GLARE
-     ============================================================ */
-  (() => {
-    /* --- Loader sequence --- */
-    const loader = document.getElementById('loader');
-    const loaderScene = document.querySelector('.loader-scene');
-    const loaderTitle = document.querySelector('.loader-title');
+    if (!glow) return;
 
-    function buildLoaderTitle() {
-      const text = 'AKAY ÇALIŞTAYI';
-      loaderTitle.innerHTML = '';
-      [...text].forEach((ch, i) => {
-        const span = document.createElement('span');
-        span.textContent = ch === ' ' ? '\u00A0' : ch;
-        span.style.animationDelay = `${1.4 + i * 0.06}s`;
-        loaderTitle.appendChild(span);
-      });
-    }
+    document.body.classList.add(
+      'cursor-ready'
+    );
 
-    function spawnLoaderParticles() {
-      for (let i = 0; i < 10; i++) {
-        const p = document.createElement('div');
-        p.className = 'loader-particle';
-        const angle = Math.random() * Math.PI * 2;
-        const dist = 40 + Math.random() * 160;
-        p.style.setProperty('--x', `${Math.cos(angle) * dist}px`);
-        p.style.left = `calc(50% + ${Math.cos(angle) * dist}px)`;
-        p.style.top = `calc(50% + ${Math.sin(angle) * dist}px)`;
-        p.style.animationDelay = `${Math.random() * 1.2}s`;
-        loaderScene.appendChild(p);
+    let targetX = innerWidth / 2;
+    let targetY = innerHeight / 2;
+
+    let currentX = targetX;
+    let currentY = targetY;
+
+    window.addEventListener(
+      'pointermove',
+      (event) => {
+        targetX = event.clientX;
+        targetY = event.clientY;
+      },
+      {
+        passive: true
       }
+    );
+
+    const frame = () => {
+      currentX +=
+        (targetX - currentX) *
+        0.13;
+
+      currentY +=
+        (targetY - currentY) *
+        0.13;
+
+      glow.style.left =
+        `${currentX}px`;
+
+      glow.style.top =
+        `${currentY}px`;
+
+      requestAnimationFrame(frame);
+    };
+
+    requestAnimationFrame(frame);
+  }
+
+  // =========================================================
+  // MAGNETIC BUTTONS
+  // =========================================================
+
+  function setupMagnetic() {
+    if (
+      isTouch ||
+      reducedMotion
+    ) {
+      return;
     }
 
-    // Loader logoyu animasyonun tam ortasına yerleştir
-    const loaderLogo = document.querySelector('.loader-logo');
-    if (loaderLogo) {
-      loaderLogo.style.left = '50%';
-      loaderLogo.style.top = '50%';
+    $$('.magnetic').forEach(
+      (element) => {
+        element.addEventListener(
+          'pointermove',
+          (event) => {
+            const rect =
+              element.getBoundingClientRect();
+
+            const x =
+              event.clientX -
+              rect.left -
+              rect.width / 2;
+
+            const y =
+              event.clientY -
+              rect.top -
+              rect.height / 2;
+
+            element.style.transform =
+              `translate(${x * 0.12}px, ${y * 0.12}px)`;
+          }
+        );
+
+        element.addEventListener(
+          'pointerleave',
+          () => {
+            element.style.transform = '';
+          }
+        );
+      }
+    );
+  }
+
+  // =========================================================
+  // TILT CARDS
+  // =========================================================
+
+  function setupTiltCards() {
+    if (
+      isTouch ||
+      reducedMotion
+    ) {
+      return;
     }
 
-    function initHeroChars() {
-      const heroTitleEl = document.querySelector('.hero-title');
-      if (!heroTitleEl) return;
-      const text = heroTitleEl.textContent.trim();
-      heroTitleEl.innerHTML = '';
-      heroTitleEl.setAttribute('data-i18n', 'heroTitle');
-      [...text].forEach((ch, i) => {
-        const span = document.createElement('span');
-        span.className = 'char';
-        span.textContent = ch === ' ' ? '\u00A0' : ch;
-        span.style.transitionDelay = `${i * 0.035}s`;
-        heroTitleEl.appendChild(span);
-      });
+    $$('.tilt-card').forEach(
+      (card) => {
+        card.addEventListener(
+          'pointermove',
+          (event) => {
+            const rect =
+              card.getBoundingClientRect();
+
+            const px =
+              (event.clientX -
+                rect.left) /
+              rect.width;
+
+            const py =
+              (event.clientY -
+                rect.top) /
+              rect.height;
+
+            const rotateY =
+              (px - 0.5) * 5;
+
+            const rotateX =
+              (py - 0.5) * -5;
+
+            card.style.transform =
+              `perspective(900px)
+               rotateX(${rotateX}deg)
+               rotateY(${rotateY}deg)
+               translateY(-2px)`;
+          }
+        );
+
+        card.addEventListener(
+          'pointerleave',
+          () => {
+            card.style.transform = '';
+          }
+        );
+      }
+    );
+  }
+
+  // =========================================================
+  // HERO PARALLAX
+  // =========================================================
+
+  function setupHeroParallax() {
+    if (
+      isTouch ||
+      reducedMotion
+    ) {
+      return;
     }
 
-    function playHero() {
-      // 1. Eyebrow animasyonu
-      const eyebrow = document.querySelector('.hero-eyebrow');
-      if (eyebrow) {
-        setTimeout(() => eyebrow.classList.add('visible'), 200);
+    const hero = $('.hero');
+
+    if (!hero) return;
+
+    const decor = $$(
+      '.hero-orbit, .hero-glow, .hero-fragment'
+    );
+
+    let tx = 0;
+    let ty = 0;
+
+    let cx = 0;
+    let cy = 0;
+
+    window.addEventListener(
+      'pointermove',
+      (event) => {
+        const rect =
+          hero.getBoundingClientRect();
+
+        if (
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom
+        ) {
+          return;
+        }
+
+        tx =
+          (event.clientX / innerWidth -
+            0.5) *
+          1.8;
+
+        ty =
+          (event.clientY / innerHeight -
+            0.5) *
+          1.8;
+      },
+      {
+        passive: true
+      }
+    );
+
+    const frame = () => {
+      cx +=
+        (tx - cx) *
+        0.04;
+
+      cy +=
+        (ty - cy) *
+        0.04;
+
+      decor.forEach(
+        (element, index) => {
+          const strength =
+            (index % 3 + 1) * 4;
+
+          element.style.translate =
+            `${cx * strength}px ${cy * strength}px`;
+        }
+      );
+
+      requestAnimationFrame(frame);
+    };
+
+    requestAnimationFrame(frame);
+  }
+
+  // =========================================================
+  // COUNTDOWN
+  // =========================================================
+
+  function getEventTarget() {
+    return new Date(
+      '2026-09-15T00:00:00+03:00'
+    );
+  }
+
+  function setupCountdown() {
+    const countdown = $('#countdown');
+    const started = $('#countdownStarted');
+    const shell = $('#countdownShell');
+
+    if (
+      !countdown ||
+      !started ||
+      !shell
+    ) {
+      return;
+    }
+
+    const target =
+      getEventTarget();
+
+    const units = [
+      'days',
+      'hours',
+      'minutes',
+      'seconds'
+    ];
+
+    const values =
+      Object.fromEntries(
+        units.map(
+          (unit) => [
+            unit,
+            $(
+              `[data-unit="${unit}"] [data-value]`,
+              countdown
+            )
+          ]
+        )
+      );
+
+    const tick = () => {
+      const diff =
+        target.getTime() -
+        Date.now();
+
+      if (diff <= 0) {
+        countdown.hidden = true;
+        started.hidden = false;
+
+        shell.classList.add(
+          'event-live'
+        );
+
+        if (
+          state.countdownInterval
+        ) {
+          clearInterval(
+            state.countdownInterval
+          );
+        }
+
+        return;
       }
 
-      // 2. Başlık karakterleri — 3D flip in
-      document.querySelectorAll('.hero-title .char').forEach(c => {
-        c.classList.add('visible');
-      });
+      const totalSeconds =
+        Math.floor(
+          diff / 1000
+        );
 
-      // 3. Alt başlık + CTAs
-      const sub = document.querySelector('.hero-subtitle');
-      const ctas = document.querySelector('.hero-ctas');
-      setTimeout(() => { sub.style.transition = 'opacity 900ms var(--ease)'; sub.style.opacity = 1; }, 800);
-      setTimeout(() => { ctas.style.transition = 'opacity 900ms var(--ease)'; ctas.style.opacity = 1; }, 1200);
-    }
+      const next = {
+        days: Math.floor(
+          totalSeconds / 86400
+        ),
 
-    initHeroChars();
+        hours: Math.floor(
+          (totalSeconds % 86400) /
+            3600
+        ),
 
-    if (reduceMotion) {
-      loader.classList.add('hidden');
-      playHero();
-    } else {
-      buildLoaderTitle();
-      spawnLoaderParticles();
-      setTimeout(() => {
-        loader.classList.add('hidden');
-        playHero();
-        loader.style.display = 'none';
-        loader.remove();
-      }, 5200);
-    }
+        minutes: Math.floor(
+          (totalSeconds % 3600) /
+            60
+        ),
 
-    /* --- Ripple (optimize edilmiş) --- */
-    document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
-        const size = Math.max(rect.width, rect.height);
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-        btn.appendChild(ripple);
-        setTimeout(() => {
-          if (ripple.parentNode) ripple.remove();
-        }, 700);
-      });
-    });
+        seconds:
+          totalSeconds % 60
+      };
 
-    /* --- 3D Hero Logo (yavaş otomatik dönüş + fare ile kontrol) --- */
-    if (!isMobile) {
-      const logoWrapper = document.getElementById('hero3dLogo');
-      if (logoWrapper) {
-        const heroLogo = logoWrapper.querySelector('.hero-3d-logo');
-        if (heroLogo) {
-          // Başlangıçta yavaş otomatik dönüş
-          heroLogo.style.animation = 'spin3dLogo 20s linear infinite';
-          let logoRy = 0;
-          let mouseActive = false;
-          const handleLogoMove = throttle((e) => {
-            mouseActive = true;
-            heroLogo.style.animation = 'none';
-            const rect = logoWrapper.getBoundingClientRect();
-            const px = (e.clientX - rect.left) / rect.width - 0.5;
-            logoRy += px * 4;
-            const tiltX = (e.clientY - rect.top) / rect.height - 0.5;
-            heroLogo.style.transform = `rotateY(${logoRy}deg) rotateX(${(-tiltX * 8).toFixed(1)}deg)`;
-          }, 16);
-          logoWrapper.addEventListener('mousemove', handleLogoMove, { passive: true });
-          logoWrapper.addEventListener('mouseleave', () => {
-            // Fare çıkınca yavaşça otomatik dönüşe geri dön
-            heroLogo.style.transition = 'transform 1.5s cubic-bezier(0.16,1,0.3,1)';
-            const snapAngle = Math.round(logoRy / 90) * 90;
-            heroLogo.style.transform = `rotateY(${snapAngle}deg) rotateX(5deg)`;
-            setTimeout(() => {
-              heroLogo.style.transition = '';
-              heroLogo.style.animation = 'spin3dLogo 20s linear infinite';
-            }, 1600);
-          });
+      units.forEach(
+        (unit) => {
+          const text =
+            String(
+              next[unit]
+            ).padStart(2, '0');
+
+          const node =
+            values[unit];
+
+          if (
+            node &&
+            node.textContent !== text
+          ) {
+            node.textContent =
+              text;
+
+            node.classList.remove(
+              'bump'
+            );
+
+            void node.offsetWidth;
+
+            if (!reducedMotion) {
+              node.classList.add(
+                'bump'
+              );
+            }
+          }
+        }
+      );
+    };
+
+    tick();
+
+    state.countdownInterval =
+      window.setInterval(
+        tick,
+        1000
+      );
+  }
+
+  // =========================================================
+  // KEYBOARD ACCESSIBILITY
+  // =========================================================
+
+  function setupKeyboardFocus() {
+    document.addEventListener(
+      'keydown',
+      (event) => {
+        if (
+          event.key !== 'Escape'
+        ) {
+          return;
+        }
+
+        const nav =
+          $('#mobileNav');
+
+        const toggle =
+          $('#menuToggle');
+
+        if (
+          nav?.classList.contains(
+            'is-open'
+          )
+        ) {
+          toggle?.click();
         }
       }
-    }
+    );
+  }
 
-    /* --- Glare hover (throttle edilmiş) --- */
-    document.querySelectorAll('.glare-hover').forEach(card => {
-      const glareHandler = throttle((e) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(168,85,247,0.16), var(--bg-card) 60%)`;
-      }, 32);
-      card.addEventListener('mousemove', glareHandler, { passive: true });
-      card.addEventListener('mouseleave', () => { card.style.background = 'var(--bg-card)'; });
-    });
+  // =========================================================
+  // INITIALIZATION
+  // =========================================================
 
-    /* --- Tilt-3d cards (hafifletilmiş, mobilde kapalı) --- */
-    if (!isMobile) {
-      document.querySelectorAll('.tilt-3d').forEach(card => {
-        card.style.transformStyle = 'preserve-3d';
-        card.style.willChange = 'transform';
-        const tiltHandler = throttle((e) => {
-          const rect = card.getBoundingClientRect();
-          const px = (e.clientX - rect.left) / rect.width - 0.5;
-          const py = (e.clientY - rect.top) / rect.height - 0.5;
-          const rotX = (-py * 5).toFixed(2);
-          const rotY = (px * 5).toFixed(2);
-          card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px) scale(1.015)`;
-        }, 32);
-        card.addEventListener('mousemove', tiltHandler, { passive: true });
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-        });
-      });
-    }
+  function init() {
+    setupLoader();
+    initLanguage();
+    setupHeader();
+    setupMobileNav();
+    setupSmoothNav();
+    setupReveal();
+    setupActiveSection();
+    setupPointerGlow();
+    setupMagnetic();
+    setupTiltCards();
+    setupHeroParallax();
+    setupCountdown();
+    setupKeyboardFocus();
+  }
 
-    /* --- Tilt cards (committees) — hafifletilmiş --- */
-    if (!isMobile) {
-      document.querySelectorAll('.tilt-card').forEach(card => {
-        const inner = card.querySelector('.tilt-card-inner');
-        if (!inner) return;
-        const tiltHandler = throttle((e) => {
-          const rect = card.getBoundingClientRect();
-          const px = (e.clientX - rect.left) / rect.width - 0.5;
-          const py = (e.clientY - rect.top) / rect.height - 0.5;
-          const rotX = (-py * 6).toFixed(2);
-          const rotY = (px * 6).toFixed(2);
-          inner.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px)`;
-        }, 32);
-        card.addEventListener('mousemove', tiltHandler, { passive: true });
-        card.addEventListener('mouseleave', () => {
-          inner.style.transform = 'rotateX(0) rotateY(0) translateY(0)';
-        });
-      });
-    }
-
-  })();
-
-  /* ============================================================
-     8. LANGUAGE INIT (en son)
-     ============================================================ */
-  LANGUAGE.init();
-
+  init();
 })();
