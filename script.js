@@ -86,6 +86,8 @@
     const draw = () => { context.clearRect(0,0,canvas.offsetWidth,canvas.offsetHeight); particles.forEach(p => { p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>canvas.offsetWidth)p.vx*=-1; if(p.y<0||p.y>canvas.offsetHeight)p.vy*=-1; context.beginPath(); context.arc(p.x,p.y,p.r,0,Math.PI*2); context.fillStyle='rgba(216,211,231,.45)'; context.fill(); }); requestAnimationFrame(draw); }; draw();
   }
 
-  function init() { applyLanguage(); $$('[data-lang-toggle]').forEach(button => button.addEventListener('click', toggleLanguage)); initLoader(); initNavigation(); initCountdown(); initReveal(); initPointer(); initParticles(); $('#committee-button')?.addEventListener('click', () => $('#committee-button').blur()); }
+  function initLogoFallbacks() { $$('img[src="Logo-0.png"], img[src="Logo-1.png"]').forEach(image => { image.addEventListener('error', () => { image.classList.add('asset-missing'); image.setAttribute('aria-hidden', 'true'); image.removeAttribute('alt'); image.parentElement?.classList.add('asset-missing-parent'); }, { once:true }); }); }
+  function init() { applyLanguage(); $$('[data-lang-toggle]').forEach(button => button.addEventListener('click', toggleLanguage)); initLogoFallbacks(); initLoader(); initNavigation(); initCountdown(); initReveal(); initPointer(); initParticles(); $('#committee-button')?.addEventListener('click', () => $('#committee-button').blur()); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
