@@ -87,7 +87,29 @@
   }
 
   function initLogoFallbacks() { $$('img[src="Logo-0.png"], img[src="Logo-1.png"]').forEach(image => { image.addEventListener('error', () => { image.classList.add('asset-missing'); image.setAttribute('aria-hidden', 'true'); image.removeAttribute('alt'); image.parentElement?.classList.add('asset-missing-parent'); }, { once:true }); }); }
-  function init() { applyLanguage(); $$('[data-lang-toggle]').forEach(button => button.addEventListener('click', toggleLanguage)); initLogoFallbacks(); initLoader(); initNavigation(); initCountdown(); initReveal(); initPointer(); initParticles(); $('#committee-button')?.addEventListener('click', () => $('#committee-button').blur()); }
+  function initSegmentViews() {
+    const main = $('main'); if (!main) return;
+    const sections = $$('main > section[id]');
+    const navLinks = $$('.desktop-nav a, .mobile-menu a');
+    const progress = document.createElement('div'); progress.className = 'segment-progress'; document.body.appendChild(progress);
+    const groups = { home:['home'], about:['about'], event:['event'], flow:['flow'], committees:['committees'], sponsors:['sponsors'], contact:['team','contact'] };
+    const labels = ['home','about','event','committees','flow','sponsors','contact'];
+    const render = () => {
+      const requested = (window.location.hash || '#home').slice(1).toLowerCase();
+      const key = groups[requested] ? requested : 'home';
+      const visible = groups[key];
+      main.classList.add('segment-mode');
+      sections.forEach(section => section.classList.toggle('segment-active', visible.includes(section.id)));
+      navLinks.forEach(link => { const target = (link.getAttribute('href') || '').slice(1); link.classList.toggle('active', target === key); });
+      const index = Math.max(0, labels.indexOf(key)); progress.style.width = `${((index + 1) / labels.length) * 100}%`;
+      document.title = key === 'home' ? (state.lang === 'tr' ? 'Akay Perspektif ve Aydınlanma Çalıştayı' : 'Akay Perspective and Enlightenment Workshop') : `${key.toUpperCase()} / AKAY`;
+      window.scrollTo({ top:0, behavior: state.reducedMotion ? 'auto' : 'smooth' });
+      window.setTimeout(() => $$('.segment-active .reveal').forEach(el => el.classList.add('visible')), 40);
+    };
+    document.addEventListener('click', event => { const link = event.target.closest('a[href^="#"]'); if (!link) return; const target = link.getAttribute('href').slice(1); if (!groups[target]) return; event.preventDefault(); if (window.location.hash !== `#${target}`) window.location.hash = target; else render(); $('.mobile-menu')?.classList.remove('open'); $('.menu-toggle')?.setAttribute('aria-expanded','false'); }, true);
+    window.addEventListener('hashchange', render); render();
+  }
+  function init() { applyLanguage(); $$('[data-lang-toggle]').forEach(button => button.addEventListener('click', toggleLanguage)); initLogoFallbacks(); initLoader(); initNavigation(); initSegmentViews(); initCountdown(); initReveal(); initPointer(); initParticles(); $('#committee-button')?.addEventListener('click', () => $('#committee-button').blur()); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 
