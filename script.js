@@ -1,485 +1,128 @@
-/* ============================================================================
-   TRANSLATION SYSTEM
-   ============================================================================ */
-const translations = {
+(() => {
+  'use strict';
+
+  const translations = {
     tr: {
-        event_name: 'Akay Perspektif ve Aydınlanma Çalıştayı',
-        event_date: '15 Eylül 2026',
-        event_date_label: 'Tarih',
-        event_date_value: '15 Eylül 2026',
-        event_location_label: 'Konum',
-        event_location_value: 'Yakında Açıklanacak',
-        event_fee_label: 'Ücret',
-        event_fee_value: 'Yakında Açıklanacak',
-        event_duration_label: 'Süre',
-        event_duration_value: 'Yakında Açıklanacak',
-        event_started: 'Etkinlik Başladı',
-        
-        countdown_days: 'Gün',
-        countdown_hours: 'Saat',
-        countdown_minutes: 'Dakika',
-        countdown_seconds: 'Saniye',
-        
-        nav_home: 'Ana Sayfa',
-        nav_about: 'Hakkımızda',
-        nav_event: 'Etkinlik',
-        nav_committees: 'Komiteler',
-        nav_schedule: 'Akış',
-        nav_sponsors: 'Sponsorluk',
-        nav_contact: 'İletişim',
-        
-        about_title: 'Misyon & Vizyon',
-        mission_title: 'Misyonumuz',
-        mission_text: 'Akay Çalıştayı olarak misyonumuz; gençlerin hızla gelişen ve değişen dünyaya dair farkındalıklarını artırırken, onlara fikirlerini özgürce ifade edebilecekleri, güçlü bir bilgi paylaşım alanı sunmaktır. Komite konularımız ise hem akademik anlamda geliştirici hem de sosyal bakımdan günlük hayatımızı doğrudan etkileyen konular olarak özenle seçilmiştir. Sosyal becerilerini aktif olarak kullanabilecekleri bu platformda, çok yönlü bakış açıları kazanmalarını hedefliyoruz.',
-        vision_title: 'Vizyonumuz',
-        vision_text: 'Türkiye\'deki gençlerin Türk kültürü ve kökeni başta olmak üzere dünya tarihini, farklı kültürleri ve dilleri anlayarak farkındalığı, entelektüel donanımı ve hitabet becerisi yüksek bireyler olmalarına katkı sağlayarak ülkemiz adına faydalı bireyler yetiştirmeyi amaçlıyoruz. Nihai hedefimiz, gençlerin bu süreçte edindikleri bilgi birikimini ve aydınlık zihinlerini kullanarak başta ülkemiz olmak üzere tüm insanlığa somut faydalar sunan bireyler olarak yetişmeleridir.',
-        
-        event_info_title: 'Etkinlik Bilgileri',
-        
-        schedule_title: 'Program Akışı',
-        schedule_coming_soon: 'Program yakında açıklanacaktır.',
-        
-        committees_title: 'Komiteler',
-        committees_coming_soon: 'Komiteler ve gündem maddeleri yakında açıklanacaktır.',
-        
-        sponsors_title: 'Sponsorlar',
-        sponsor_ai: 'Yapay Zeka Sponsoru',
-        sponsor_it: 'IT Sponsoru',
-        sponsor_design: 'Sosyal Medya ve Grafik Tasarım Sponsoru',
-        
-        team_title: 'Koordinasyon Ekibi',
-        team_general_coordinator: 'Genel Koordinatör',
-        
-        contact_title: 'İletişim',
-        contact_follow: 'Bizi takip edin',
-        
-        footer_copyright: '© 2026 Akay Perspektif ve Aydınlanma Çalıştayı. Tüm hakları saklıdır.',
-        
-        lang_short: 'TR',
+      nav: { home: 'Ana Sayfa', about: 'Hakkımızda', event: 'Etkinlik', committees: 'Komiteler', schedule: 'Akış', sponsors: 'Sponsorluk', contact: 'İletişim' },
+      hero: { title: 'Perspektif<br><em>ve</em><br>Aydınlanma', overline: 'Fikrin sınırlarını genişletmek için', description: 'Genç zihinlerin dünyayı yeniden okumak, anlamlandırmak ve dönüştürmek için bir araya geldiği alan.', cta: 'Çalıştayı keşfet', dateLabel: 'Eylül', scroll: 'Aşağı kaydır' },
+      about: { eyebrow: 'Bir duruş', title: 'Düşünce, ancak<br><em>paylaşıldığında</em> büyür.', missionLabel: 'Misyon', missionTitle: 'Merak etmek.<br>İfade etmek.<br><em>Bağ kurmak.</em>', mission: 'Akay Çalıştayı olarak misyonumuz; gençlerin hızla gelişen ve değişen dünyaya dair farkındalıklarını artırırken, onlara fikirlerini özgürce ifade edebilecekleri, güçlü bir bilgi paylaşım alanı sunmaktır. Komite konularımız hem akademik anlamda geliştirici hem de sosyal bakımdan günlük hayatımızı doğrudan etkileyen konular olarak özenle seçilmiştir. Sosyal becerilerini aktif olarak kullanabilecekleri bu platformda, çok yönlü bakış açıları kazanmalarını hedefliyoruz.', visionLabel: 'Vizyon', visionTitle: 'Bilgiyi, geleceğe<br>taşıyan <em>zihinler.</em>', vision: 'Akay Perspektif ve Aydınlanma Çalıştayı ekibi olarak Türkiye’deki gençlerin Türk kültürü ve kökeni başta olmak üzere; dünya tarihini, farklı kültürleri ve dilleri anlayarak farkındalığı, entelektüel donanımı ve hitabet becerisi yüksek bireyler olmalarına katkı sağlayarak ülkemiz adına faydalı bireyler yetiştirmeyi amaçlıyoruz. Nihai hedefimiz, gençlerin edindikleri bilgi birikimi ve aydınlık zihinleriyle tüm insanlığa somut faydalar sunan bireyler olarak yetişmeleridir.', quote: 'Aydınlanma, tek bir cevaba ulaşmak değil; daha iyi sorular sormaya cesaret etmektir.' },
+      event: { eyebrow: 'Buluşma noktası', title: 'Bir gün.<br><em>Çoklu perspektif.</em>', note: 'Bilginin, kültürün ve iletişimin kesiştiği; soruların cevaplardan daha değerli olduğu bir deneyim.', dateLabel: 'Tarih', locationLabel: 'Konum', feeLabel: 'Katılım', durationLabel: 'Süre', locationHint: 'Detaylar çok yakında', feeHint: 'Katılım koşulları', durationHint: 'Akış duyurusu' },
+      countdown: { kicker: 'Başlamasına', timezone: 'İstanbul saatiyle', days: 'Gün', hours: 'Saat', minutes: 'Dakika', seconds: 'Saniye', started: 'Etkinlik Başladı' },
+      schedule: { eyebrow: 'Akış / 01', title: 'Günün ritmi,<br><em>henüz yazılıyor.</em>', note: 'Program, fikirlerin ve karşılaşmaların ritmini taşıyacak şekilde yakında açıklanacaktır.', placeholderTitle: 'Program yakında açıklanacaktır.', placeholderDesc: 'Detaylı akış, oturumlar ve komite bilgileri burada yer alacak.', fields: 'Saat / Oturum / Açıklama / Salon / Komite / Konuşmacı veya moderatör', secondTitle: 'Perspektifler buluşuyor.', secondDesc: 'Çalıştayın yapısı ve içerikleri duyurulduğunda güncellenecek.' },
+      committees: { eyebrow: 'Fikir odakları', title: 'Her soru,<br><em>bir komiteye açılır.</em>', placeholder: 'Komiteler ve gündem maddeleri yakında açıklanacaktır.', cta: 'Komiteleri keşfet' },
+      sponsors: { eyebrow: 'Birlikte', title: 'Bu deneyime<br><em>omuz verenler.</em>', note: 'Fikirlerin çoğalması, onu mümkün kılan dayanışmayla başlar.', vertex: 'Artificial Intelligence sponsor', banna: 'IT sponsor', cord: 'Social media visuals & graphic design sponsor' },
+      contact: { eyebrow: 'Bize ulaş', title: 'Bir sonraki<br><em>perspektif</em> sende.', teamLabel: 'Genel koordinasyon' },
+      footer: { statement: 'Fikirlerin kesiştiği, perspektiflerin genişlediği bir alan.' },
+      common: { readMore: 'Devamını oku', comingSoon: 'Yakında Açıklanacak' }
     },
     en: {
-        event_name: 'Akay Perspective and Enlightenment Workshop',
-        event_date: 'September 15, 2026',
-        event_date_label: 'Date',
-        event_date_value: 'September 15, 2026',
-        event_location_label: 'Location',
-        event_location_value: 'Coming Soon',
-        event_fee_label: 'Fee',
-        event_fee_value: 'Coming Soon',
-        event_duration_label: 'Duration',
-        event_duration_value: 'Coming Soon',
-        event_started: 'The Event Has Started',
-        
-        countdown_days: 'Days',
-        countdown_hours: 'Hours',
-        countdown_minutes: 'Minutes',
-        countdown_seconds: 'Seconds',
-        
-        nav_home: 'Home',
-        nav_about: 'About',
-        nav_event: 'Event',
-        nav_committees: 'Committees',
-        nav_schedule: 'Schedule',
-        nav_sponsors: 'Sponsors',
-        nav_contact: 'Contact',
-        
-        about_title: 'Mission & Vision',
-        mission_title: 'Our Mission',
-        mission_text: 'Our mission is to empower young people with awareness of our rapidly evolving world while providing them with a strong platform to express their ideas freely. Our committee topics have been carefully selected to be both academically enriching and directly relevant to our daily lives. We aim to help participants develop multiple perspectives while actively engaging their social skills.',
-        vision_title: 'Our Vision',
-        vision_text: 'We aspire to cultivate informed, intellectually equipped, and eloquent individuals who understand Turkish culture and history, as well as world history and diverse cultures and languages. Our ultimate goal is to prepare young people to become valuable contributors to our country and humanity as a whole, using the knowledge and enlightened minds they develop throughout this journey.',
-        
-        event_info_title: 'Event Information',
-        
-        schedule_title: 'Event Schedule',
-        schedule_coming_soon: 'The full program will be announced soon.',
-        
-        committees_title: 'Committees',
-        committees_coming_soon: 'Committees and agenda topics will be announced soon.',
-        
-        sponsors_title: 'Sponsors',
-        sponsor_ai: 'Artificial Intelligence Sponsor',
-        sponsor_it: 'IT Sponsor',
-        sponsor_design: 'Social Media and Design Sponsor',
-        
-        team_title: 'Coordination Team',
-        team_general_coordinator: 'General Coordinator',
-        
-        contact_title: 'Contact',
-        contact_follow: 'Follow Us',
-        
-        footer_copyright: '© 2026 Akay Perspective and Enlightenment Workshop. All rights reserved.',
-        
-        lang_short: 'EN',
+      nav: { home: 'Home', about: 'About', event: 'Event', committees: 'Committees', schedule: 'Flow', sponsors: 'Sponsors', contact: 'Contact' },
+      hero: { title: 'Perspective<br><em>and</em><br>Enlightenment', overline: 'For expanding the limits of thought', description: 'A space where young minds gather to reread, make sense of, and reshape the world.', cta: 'Explore the workshop', dateLabel: 'September', scroll: 'Scroll to explore' },
+      about: { eyebrow: 'A position', title: 'Thought grows<br><em>when shared.</em>', missionLabel: 'Mission', missionTitle: 'Be curious.<br>Speak freely.<br><em>Connect.</em>', mission: 'Akay Workshop exists to deepen young people’s awareness of a rapidly changing world while giving them a strong space to express ideas freely and share knowledge. Our committee themes are chosen with care: academically enriching, socially relevant, and connected to everyday life. Through this platform, we aim to help participants develop broad, many-sided perspectives.', visionLabel: 'Vision', visionTitle: 'Minds that<br>carry knowledge <em>forward.</em>', vision: 'The Akay Perspektif ve Aydınlanma Çalıştayı team aims to help young people in Türkiye understand Turkish culture and origins alongside world history, diverse cultures, and languages—becoming individuals with awareness, intellectual depth, and strong public speaking skills. Our ultimate goal is to nurture people who turn their knowledge and enlightened minds into tangible benefit for humanity.', quote: 'Enlightenment is not reaching a single answer; it is having the courage to ask better questions.' },
+      event: { eyebrow: 'The meeting point', title: 'One day.<br><em>Many perspectives.</em>', note: 'An experience where knowledge, culture, and communication meet—and questions matter more than answers.', dateLabel: 'Date', locationLabel: 'Location', feeLabel: 'Participation', durationLabel: 'Duration', locationHint: 'Details coming soon', feeHint: 'Participation terms', durationHint: 'Flow announcement' },
+      countdown: { kicker: 'Until it begins', timezone: 'Istanbul time', days: 'Days', hours: 'Hours', minutes: 'Minutes', seconds: 'Seconds', started: 'The Event Has Started' },
+      schedule: { eyebrow: 'Flow / 01', title: 'The rhythm of the day<br><em>is still being written.</em>', note: 'The programme will be announced soon, shaped around the rhythm of ideas and encounters.', placeholderTitle: 'The full programme will be announced soon.', placeholderDesc: 'Detailed flow, sessions, and committee information will live here.', fields: 'Time / Session / Description / Room / Committee / Speaker or moderator', secondTitle: 'Perspectives meet.', secondDesc: 'This will be updated once the workshop structure and content are announced.' },
+      committees: { eyebrow: 'Idea centres', title: 'Every question<br><em>opens a committee.</em>', placeholder: 'Committees and agenda topics will be announced soon.', cta: 'Explore committees' },
+      sponsors: { eyebrow: 'Together', title: 'Those who<br><em>make this possible.</em>', note: 'Ideas multiply through the solidarity that gives them room to grow.', vertex: 'Artificial Intelligence sponsor', banna: 'IT sponsor', cord: 'Social media visuals & graphic design sponsor' },
+      contact: { eyebrow: 'Reach out', title: 'The next<br><em>perspective</em> is yours.', teamLabel: 'General coordination' },
+      footer: { statement: 'A space where ideas intersect and perspectives expand.' },
+      common: { readMore: 'Read more', comingSoon: 'Coming Soon' }
     }
-};
+  };
 
-/* ============================================================================
-   STATE & DOM REFERENCES
-   ============================================================================ */
-let currentLanguage = localStorage.getItem('akay-language') || 'tr';
-let countdownInterval = null;
-let mouseX = 0;
-let mouseY = 0;
-let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const state = { lang: localStorage.getItem('akay-language') || 'tr', raf: null, pointer: { x: 0, y: 0 }, target: { x: 0, y: 0 } };
+  const $ = (selector, parent = document) => parent.querySelector(selector);
+  const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
 
-/* ============================================================================
-   INITIALIZATION
-   ============================================================================ */
-document.addEventListener('DOMContentLoaded', () => {
-    initializeLanguage();
-    initializePreloader();
-    initializeCountdown();
-    initializeNavigation();
-    initializeMouseLight();
-    initializeScrollReveal();
-    initializeAccessibility();
-});
+  function getPath(object, path) { return path.split('.').reduce((value, key) => value?.[key], object); }
 
-/* ============================================================================
-   LANGUAGE SYSTEM
-   ============================================================================ */
-function initializeLanguage() {
-    // Set initial language
-    document.documentElement.lang = currentLanguage;
-    updateAllTranslations();
-    
-    // Language toggle listeners
-    const langToggle = document.getElementById('lang-toggle');
-    const footerLangToggle = document.getElementById('footer-lang-toggle');
-    
-    if (langToggle) {
-        langToggle.addEventListener('click', toggleLanguage);
-    }
-    if (footerLangToggle) {
-        footerLangToggle.addEventListener('click', toggleLanguage);
-    }
-}
-
-function toggleLanguage() {
-    currentLanguage = currentLanguage === 'tr' ? 'en' : 'tr';
-    localStorage.setItem('akay-language', currentLanguage);
-    document.documentElement.lang = currentLanguage;
-    updateAllTranslations();
-}
-
-function updateAllTranslations() {
-    const elements = document.querySelectorAll('[data-i18n]');
-    elements.forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (translations[currentLanguage][key]) {
-            element.textContent = translations[currentLanguage][key];
-        }
+  function applyLanguage(lang) {
+    state.lang = lang;
+    document.documentElement.lang = lang;
+    localStorage.setItem('akay-language', lang);
+    $$('[data-i18n]').forEach((element) => {
+      const value = getPath(translations[lang], element.dataset.i18n);
+      if (value !== undefined) element.innerHTML = value;
     });
-}
+    $$('[data-i18n-aria-label]').forEach((element) => {
+      const value = getPath(translations[lang], element.dataset.i18nAriaLabel);
+      if (value !== undefined) element.setAttribute('aria-label', value);
+    });
+    $$('#language-label, #language-label-footer').forEach((element) => { element.textContent = lang === 'tr' ? 'EN' : 'TR'; });
+    updateCountdown(true);
+  }
 
-/* ============================================================================
-   PRELOADER / INTRO
-   ============================================================================ */
-function initializePreloader() {
-    // Simulate preloader duration
-    const preloader = document.getElementById('preloader');
-    
-    // Add slight delay to show animation
-    const preloadDuration = prefersReducedMotion ? 100 : 2500;
-    
-    setTimeout(() => {
-        preloader.classList.add('hidden');
-        
-        // Remove preloader from DOM after animation
-        setTimeout(() => {
-            preloader.remove();
-        }, 600);
-    }, preloadDuration);
-}
+  function initLanguage() {
+    $$('.language-toggle').forEach((button) => button.addEventListener('click', () => applyLanguage(state.lang === 'tr' ? 'en' : 'tr')));
+    applyLanguage(state.lang);
+  }
 
-/* ============================================================================
-   COUNTDOWN TIMER
-   ============================================================================ */
-function initializeCountdown() {
+  function initLoader() {
+    const loader = $('#loader');
+    const finish = () => window.setTimeout(() => loader.classList.add('is-hidden'), 1450);
+    if (document.readyState === 'complete') finish(); else window.addEventListener('load', finish, { once: true });
+  }
+
+  function initNavigation() {
+    const header = $('#site-header');
+    const menu = $('#mobile-menu');
+    const toggle = $('#menu-toggle');
+    const closeMenu = () => { toggle.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); menu.classList.remove('is-open'); menu.setAttribute('aria-hidden', 'true'); document.body.classList.remove('menu-open'); };
+    toggle.addEventListener('click', () => { const isOpen = !toggle.classList.contains('is-open'); toggle.classList.toggle('is-open', isOpen); toggle.setAttribute('aria-expanded', String(isOpen)); menu.classList.toggle('is-open', isOpen); menu.setAttribute('aria-hidden', String(!isOpen)); document.body.classList.toggle('menu-open', isOpen); });
+    $$('a[href^="#"]').forEach((link) => link.addEventListener('click', () => closeMenu()));
+    window.addEventListener('scroll', () => header.classList.toggle('is-scrolled', window.scrollY > 20), { passive: true });
+    const sections = $$('main section[id]');
+    const navLinks = $$('[data-nav]');
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) navLinks.forEach((link) => link.classList.toggle('is-active', link.dataset.nav === entry.target.id)); }), { rootMargin: '-35% 0px -55% 0px' });
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  function initCountdown() {
     updateCountdown();
-    
-    // Update countdown every second
-    countdownInterval = setInterval(updateCountdown, 1000);
-}
+    window.setInterval(updateCountdown, 1000);
+  }
 
-function updateCountdown() {
-    // Event date: September 15, 2026 at 09:00 AM Istanbul time
-    const eventDate = new Date('2026-09-15T09:00:00+03:00');
-    const now = new Date();
-    
-    const timeRemaining = eventDate - now;
-    
-    const daysElement = document.getElementById('countdown-days');
-    const hoursElement = document.getElementById('countdown-hours');
-    const minutesElement = document.getElementById('countdown-minutes');
-    const secondsElement = document.getElementById('countdown-seconds');
-    const statusElement = document.getElementById('countdown-status');
-    const countdownContainer = document.querySelector('.countdown-container');
-    
-    if (timeRemaining <= 0) {
-        // Event has started
-        if (daysElement) daysElement.textContent = '0';
-        if (hoursElement) hoursElement.textContent = '0';
-        if (minutesElement) minutesElement.textContent = '0';
-        if (secondsElement) secondsElement.textContent = '0';
-        
-        if (statusElement) {
-            statusElement.style.display = 'block';
-        }
-        if (countdownContainer) {
-            countdownContainer.style.opacity = '0.5';
-        }
-        
-        clearInterval(countdownInterval);
-    } else {
-        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-        
-        updateCountdownValue(daysElement, days);
-        updateCountdownValue(hoursElement, hours);
-        updateCountdownValue(minutesElement, minutes);
-        updateCountdownValue(secondsElement, seconds);
-        
-        if (statusElement) {
-            statusElement.style.display = 'none';
-        }
+  function updateCountdown(force = false) {
+    const target = Date.parse('2026-09-15T00:00:00+03:00');
+    const difference = target - Date.now();
+    const status = $('#countdown-status');
+    if (difference <= 0) {
+      ['days', 'hours', 'minutes', 'seconds'].forEach((unit) => { const element = $(`[data-unit="${unit}"]`); if (element) element.textContent = '00'; });
+      status.textContent = translations[state.lang].countdown.started;
+      return;
     }
-}
-
-function updateCountdownValue(element, newValue) {
-    if (!element) return;
-    
-    const oldValue = parseInt(element.textContent);
-    
-    if (oldValue !== newValue) {
-        element.textContent = String(newValue).padStart(2, '0');
-        
-        // Trigger animation only if not respecting reduced motion
-        if (!prefersReducedMotion) {
-            element.classList.remove('updated');
-            // Force reflow
-            void element.offsetWidth;
-            element.classList.add('updated');
-        }
-    }
-}
-
-/* ============================================================================
-   NAVIGATION
-   ============================================================================ */
-function initializeNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const navMain = document.querySelector('.nav-main');
-    
-    // Mobile menu toggle
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenuToggle.classList.toggle('active');
-            navMain.classList.toggle('active');
-        });
-    }
-    
-    // Navigation links
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Close mobile menu
-            if (mobileMenuToggle) {
-                mobileMenuToggle.classList.remove('active');
-            }
-            if (navMain) {
-                navMain.classList.remove('active');
-            }
-            
-            // Get target section
-            const targetId = link.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                // Smooth scroll
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Update active link
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-            }
-        });
+    const values = { days: Math.floor(difference / 86400000), hours: Math.floor(difference / 3600000) % 24, minutes: Math.floor(difference / 60000) % 60, seconds: Math.floor(difference / 1000) % 60 };
+    Object.entries(values).forEach(([unit, value]) => {
+      const element = $(`[data-unit="${unit}"]`);
+      const next = String(value).padStart(2, '0');
+      if (element && (force || element.textContent !== next)) { element.animate([{ opacity: .4, transform: 'translateY(5px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 300, easing: 'cubic-bezier(.23,1,.32,1)' }); element.textContent = next; }
     });
-    
-    // Update active nav on scroll
-    window.addEventListener('scroll', updateActiveNavigation);
-}
+    status.textContent = `${String(values.days).padStart(2, '0')} : ${String(values.hours).padStart(2, '0')}`;
+  }
 
-function updateActiveNavigation() {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const headerHeight = document.querySelector('.header').offsetHeight;
-    
-    let currentSection = null;
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - headerHeight - 100;
-        const sectionBottom = sectionTop + section.offsetHeight;
-        
-        if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-            currentSection = section.id;
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active');
-        }
-    });
-}
+  function initAccordions() {
+    $$('.schedule-item').forEach((button) => button.addEventListener('click', () => { const detail = button.nextElementSibling; const open = button.getAttribute('aria-expanded') === 'true'; button.setAttribute('aria-expanded', String(!open)); detail.classList.toggle('is-open', !open); }));
+    $$('.manifesto-expand').forEach((button) => button.addEventListener('click', () => { const panel = button.closest('.manifesto-panel'); panel.classList.toggle('is-expanded'); }));
+    $('.committee-trigger')?.addEventListener('click', () => document.querySelector('#committees').scrollIntoView({ behavior: 'smooth' }));
+  }
 
-/* ============================================================================
-   MOUSE SPOTLIGHT EFFECT
-   ============================================================================ */
-function initializeMouseLight() {
-    // Skip on touch devices
-    if (window.matchMedia('(pointer: coarse)').matches) {
-        return;
-    }
-    
-    const mouseLight = document.getElementById('mouse-light');
-    if (!mouseLight) return;
-    
-    document.addEventListener('mousemove', (e) => {
-        if (prefersReducedMotion) return;
-        
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        requestAnimationFrame(() => {
-            mouseLight.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
-            mouseLight.classList.add('active');
-        });
-    }, { passive: true });
-    
-    document.addEventListener('mouseleave', () => {
-        mouseLight.classList.remove('active');
-    }, { passive: true });
-}
+  function initReveals() {
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
+    $$('.reveal').forEach((element) => observer.observe(element));
+  }
 
-/* ============================================================================
-   SCROLL REVEAL ANIMATION
-   ============================================================================ */
-function initializeScrollReveal() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('scroll-reveal');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
-    document.querySelectorAll('[class*="scroll-reveal"]').forEach(element => {
-        observer.observe(element);
-    });
-}
+  function initPointer() {
+    if (!window.matchMedia('(pointer: fine)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const light = $('.cursor-light'); light.style.opacity = '1';
+    window.addEventListener('pointermove', (event) => { state.target.x = event.clientX; state.target.y = event.clientY; }, { passive: true });
+    const loop = () => { state.pointer.x += (state.target.x - state.pointer.x) * .12; state.pointer.y += (state.target.y - state.pointer.y) * .12; light.style.transform = `translate(${state.pointer.x}px, ${state.pointer.y}px) translate(-50%, -50%)`; state.raf = requestAnimationFrame(loop); };
+    state.raf = requestAnimationFrame(loop);
+    $$('.tilt-card').forEach((card) => card.addEventListener('pointermove', (event) => { const rect = card.getBoundingClientRect(); const x = (event.clientX - rect.left) / rect.width - .5; const y = (event.clientY - rect.top) / rect.height - .5; card.style.transform = `perspective(700px) rotateX(${y * -3}deg) rotateY(${x * 3}deg) translateY(-4px)`; }));
+    $$('.tilt-card').forEach((card) => card.addEventListener('pointerleave', () => { card.style.transform = ''; }));
+    $$('.magnetic').forEach((button) => button.addEventListener('pointermove', (event) => { const rect = button.getBoundingClientRect(); button.style.transform = `translate(${(event.clientX - rect.left - rect.width / 2) * .08}px, ${(event.clientY - rect.top - rect.height / 2) * .08}px)`; }));
+    $$('.magnetic').forEach((button) => button.addEventListener('pointerleave', () => { button.style.transform = ''; }));
+  }
 
-/* ============================================================================
-   ACCESSIBILITY
-   ============================================================================ */
-function initializeAccessibility() {
-    // Handle reduced motion preference
-    const prefersReducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
-    prefersReducedMotionQuery.addEventListener('change', (e) => {
-        prefersReducedMotion = e.matches;
-    });
-    
-    // Keyboard navigation for buttons
-    const buttons = document.querySelectorAll('button, a[role="button"]');
-    buttons.forEach(button => {
-        button.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                button.click();
-            }
-        });
-    });
-    
-    // Focus management
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Tab') {
-            document.body.classList.add('keyboard-focus');
-        }
-    });
-    
-    document.addEventListener('mousedown', () => {
-        document.body.classList.remove('keyboard-focus');
-    });
-}
-
-/* ============================================================================
-   UTILITY FUNCTIONS
-   ============================================================================ */
-
-// Magnetic button effect (subtle cursor-following)
-function addMagneticButton(element) {
-    if (prefersReducedMotion || window.matchMedia('(pointer: coarse)').matches) {
-        return;
-    }
-    
-    element.addEventListener('mousemove', (e) => {
-        const rect = element.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        
-        const distance = Math.sqrt(x * x + y * y);
-        const maxDistance = 100;
-        
-        if (distance < maxDistance) {
-            const force = 1 - distance / maxDistance;
-            const moveX = (x / distance) * 10 * force;
-            const moveY = (y / distance) * 10 * force;
-            
-            element.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        }
-    });
-    
-    element.addEventListener('mouseleave', () => {
-        element.style.transform = 'translate(0, 0)';
-    });
-}
-
-// Apply magnetic effect to sponsor and team cards
-document.addEventListener('DOMContentLoaded', () => {
-    const magneticElements = document.querySelectorAll('.sponsor-card, .team-card, .about-card');
-    magneticElements.forEach(addMagneticButton);
-});
-
-/* ============================================================================
-   PERFORMANCE OPTIMIZATION
-   ============================================================================ */
-
-// Use passive event listeners for scroll
-let ticking = false;
-
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        requestAnimationFrame(() => {
-            updateActiveNavigation();
-            ticking = false;
-        });
-        ticking = true;
-    }
-}, { passive: true });
+  function init() { initLoader(); initLanguage(); initNavigation(); initCountdown(); initAccordions(); initReveals(); initPointer(); }
+  init();
+})();
