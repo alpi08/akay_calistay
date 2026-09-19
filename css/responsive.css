@@ -1,0 +1,62 @@
+/* responsive.css — desktop / laptop / tablet / telefon ayrı düşünülmüş */
+/* laptop: header sıkışmasın */
+@media (max-width:1280px){
+  .nav-links{gap:14px}
+  .nav-links a{font-size:12.5px}
+  .brand b{letter-spacing:.16em;font-size:13px}
+  .vision-layout{gap:36px}
+}
+/* tablet */
+@media (max-width:1100px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .vision-layout{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .ed-grid{grid-template-columns:1fr}
+  .ed-side{position:static;flex-direction:row;align-items:center;gap:16px}
+  .ed-side .big-no{font-size:2.4rem}
+  .event-grid{grid-template-columns:1fr}
+  .comm-explorer{grid-template-columns:1fr}
+  .comm-list{border-right:0;border-bottom:1px solid var(--line)}
+  .comm-btn{padding:18px}
+  .comm-detail{min-height:0;padding:26px 22px}
+  .info-row{grid-template-columns:110px 1fr;grid-template-rows:auto auto}
+  .info-row .tag{grid-column:2;justify-self:start}
+  .cursor-glow{display:none}
+  .pillar{padding:20px 18px}
+  .contact-grid{grid-template-columns:1fr}
+  .ghost-no{font-size:5rem;top:12px}
+}
+/* telefon: ayrı tipografi + ritim, küçültülmüş desktop değil */
+@media (max-width:640px){
+  body{font-size:15px;line-height:1.65}
+  .scene{padding:64px 0}
+  .scene-head{margin-bottom:30px}
+  .nav-inner{height:60px;gap:12px}
+  .brand img{width:28px;height:28px}
+  .brand b{font-size:12px}
+  .lang button{padding:6px 10px;font-size:11px}
+  .hero-inner{padding:84px var(--pad) 28px}
+  .hero-logo{width:120px}
+  .hero-kicker{font-size:10.5px;letter-spacing:.34em}
+  .hero-sub{font-size:.95rem}
+  .hero-date{font-size:1rem}
+  .manifesto-text{line-height:1.7}
+  .big-date .d{font-size:4.2rem}
+  .spon-grid{grid-template-columns:1fr}
+  .spon-lead{grid-template-columns:1fr}
+  .spon-count{flex-direction:row;justify-content:center;gap:12px}
+  .spon-lead-mark{font-size:3rem;top:24px;transform:none}
+  .info-row{grid-template-columns:1fr;gap:6px;padding:20px 18px}
+  .info-row .tag{grid-column:1}
+  .cta-row .btn{width:100%;justify-content:center}
+  .foot-grid{flex-direction:column}
+  .hero-media video{animation-duration:40s}
+  .timeline{padding-left:26px}
+  .intro-logo{width:150px}
+  .pillar-no{font-size:1.3rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .cursor-glow{display:none}
+}
