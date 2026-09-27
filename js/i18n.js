@@ -1,0 +1,156 @@
+/* i18n.js — full TR/EN dictionary, localStorage, data-i18n */
+(function(){
+"use strict";
+const translations = {
+tr:{
+  "skip":"İçeriğe atla",
+  "intro.tag":"Perspektif ve Aydınlanma Çalıştayı",
+  "intro.subtag":"Gençlik · Düşünce · Perspektif · Bilgi · Aydınlanma",
+  "intro.made":"Banna Tarafından Yapılmıştır",
+  "nav.perspektif":"Perspektif","nav.misyon":"Misyon","nav.vizyon":"Vizyon","nav.etkinlik":"Etkinlik","nav.komiteler":"Komiteler","nav.isbirlikleri":"İş Birlikleri","nav.iletisim":"İletişim",
+  "hero.kicker":"Akay sunar","hero.l1":"PERSPEKTİF","hero.l2":"ve aydınlanma","hero.l3":"ÇALIŞTAYI",
+  "hero.sub":"Gençlik, düşünce, perspektif, bilgi ve aydınlanma — entelektüel bir buluşma.",
+  "hero.scroll":"KAYDIRARAK KEŞFET",
+  "cd.day":"GÜN","cd.hour":"SAAT","cd.min":"DAKİKA","cd.sec":"SANİYE",
+  "status.live":"ETKİNLİK BAŞLADI","status.soon":"GÜN KALDI",
+  "mani.eyebrow":"Manifesto — 00","mani.a":"BİR FİKİR,","mani.b":"BİR PERSPEKTİFİ","mani.c":"DEĞİŞTİREBİLİR.",
+  "mani.foot":"Akay, gençliğin düşünceyle kurduğu bağa dair bir davet.",
+  "mani.body":"Bu sayfa bir etkinlik duyurusu değil; bir düşünme alanı. Aşağı indikçe fikir, amaç, vizyon ve keşif sırayla açılır — tıpkı iyi bir tartışma gibi.",
+  "mission.label":"Misyon","mission.eyebrow":"Neden varız","mission.title":"Fikrin özgürce konuşulduğu bir alan.",
+  "mission.body":"Akay Çalıştayı olarak misyonumuz; gençlerin hızla gelişen ve değişen dünyaya dair farkındalıklarını artırırken, onlara fikirlerini özgürce ifade edebilecekleri, güçlü bir bilgi paylaşım alanı sunmaktır. Komite konularımız ise hem akademik anlamda geliştirici hem de sosyal bakımdan günlük hayatımızı doğrudan etkileyen konular olarak özenle seçilmiştir. Sosyal becerilerini aktif olarak kullanabilecekleri bu platformda, çok yönlü bakış açıları kazanmalarını hedefliyoruz.",
+  "mission.note":"Akademik derinlik + gündelik hayatın gerçekliği. Komiteler bu ikisini bir arada tutar.",
+  "vision.label":"VİZYON","vision.title":"Aydınlık zihinler, somut faydalar.","vision.lede":"Geçmişi anlayan, bugünü okuyan, geleceği kuran bir gençlik.",
+  "vision.p1":"Akay Perspektif ve Aydınlanma Çalıştayı ekibi olarak Türkiye’deki gençlerin Türk kültürü ve kökeni başta olmak üzere; dünya tarihini, farklı kültürleri ve dilleri anlayarak farkındalığı, entelektüel donanımı ve hitabet becerisi yüksek bireyler olmalarına katkı sağlayarak ülkemiz adına faydalı bireyler yetiştirmeyi amaçlıyoruz.",
+  "vision.p2":"Nihai hedefimiz, gençlerin bu süreçte edindikleri bilgi birikimini ve aydınlık zihinlerini kullanarak başta ülkemiz olmak üzere tüm insanlığa somut faydalar sunan bireyler olarak yetişmeleridir.",
+  "vision.m1":"Kültür","vision.m2":"Tarih","vision.m3":"Entelektüel donanım","vision.m4":"Hitabet",
+  "vision.q1t":"Kültür ve Köken","vision.q1d":"Türk kültürü ve kökeninden başlayarak farklı kültürleri ve dilleri anlamak.",
+  "vision.q2t":"Tarih ve Dünya","vision.q2d":"Dünya tarihini okuyarak bugüne ve geleceğe bilinçle bakmak.",
+  "vision.q3t":"Donanım ve Hitabet","vision.q3d":"Entelektüel birikimi güçlü ifade becerisiyle birleştiren bireyler.",
+  "event.eyebrow":"Program Akışımız","event.title":"Program Akışımız","event.month":"EKİM","event.weekday":"CUMARTESİ",
+  "event.venueK":"MEKAN","event.venueV":"Yakında duyurulacak","event.venueS":"Konum ve ulaşım bilgisi burada yayımlanacak.",
+  "event.feeK":"KATILIM","event.feeV":"Bilgi yakında","event.feeS":"Kayıt detayları Instagram üzerinden duyurulacak.",
+  "flow.eyebrow":"Program Akışı — 03","flow.title":"Günün ritmi.",
+  "flow.note":"Detaylı program <a href=\"#etkinlik\" class=\"u-link\">Etkinlik</a> bölümünde.",
+  "flow.day1":"10 EKİM 2026","flow.day2":"11 EKİM 2026",
+  "flow.s1":"Kayıt ve Kahvaltı","flow.s1d":"Katılımcı kayıtları ve açılış kahvaltısı.",
+  "flow.s2":"Açılış Konferansı","flow.s2d":"Çalıştay vizyonu ve amaçlarının paylaşılması.",
+  "flow.s3":"1. Oturum","flow.s3d":"Kültür ve köken: Kimlik, dil ve bellek.",
+  "flow.break1":"Mola","flow.break1d":"Kahve ve sohbet arası.",
+  "flow.s4":"2. Oturum","flow.s4d":"Tarih ve dünya: Geçişten geleceğe bakış.",
+  "flow.lunch1":"Öğle Molası","flow.lunch1d":"Yemek ve dinlenme.",
+  "flow.s5":"3. Oturum","flow.s5d":"Donanım ve hitabet: Fikri ifade etme sanatı.",
+  "flow.break2":"Mola","flow.break2d":"Kahve ve sohbet arası.",
+  "flow.s6":"4. Oturum","flow.s6d":"Entegrasyon: Perspektif birleştirme atölyesi.",
+  "flow.s7":"Kahvaltı","flow.s7d":"İkinci gün açılış kahvaltısı.",
+  "flow.s8":"5. Oturum","flow.s8d":"Derinlemesine: Konu odaklı çalışma grupları.",
+  "flow.break3":"Mola","flow.break3d":"Kahve ve sohbet arası.",
+  "flow.s9":"6. Oturum","flow.s9d":"Uygulama: Proje geliştirme ve sunum hazırlığı.",
+  "flow.lunch2":"Öğle Molası","flow.lunch2d":"Yemek ve dinlenme.",
+  "flow.s10":"7. Oturum","flow.s10d":"Sunumlar: Grup çalışmalarının paylaşımı.",
+  "flow.break4":"Mola","flow.break4d":"Kahve ve sohbet arası.",
+  "flow.s11":"8. Oturum","flow.s11d":"Değerlendirme ve geri bildirim.",
+  "flow.break5":"Mola","flow.break5d":"Kapanış öncesi son mola.",
+  "flow.closing":"Kapanış Konferansı","flow.closingd":"Sertifika, teşekkürler ve gelecek vizyonu.",
+  "comm.eyebrow":"Komiteler","comm.title":"Keşfetmek için seç.","comm.lede":"","comm.headsNote":"Komite başkanları fotoğrafları buraya eklenecek","comm.headsLabel":"Başkanlar",
+  "comm.hint":"← Soldan bir komite seç / dokun","comm.tba":"Yakında açıklanacak","comm.soonBody":"Bu komitenin konusu ve içeriği ekip tarafından hazırlanıyor. Duyuru @akay_calistay üzerinden yapılacak.",
+  "comm.metaA":"DURUM","comm.metaB":"DUYURU",
+  "spon.eyebrow":"İş Birlikleri","spon.title":"Birlikte aydınlatanlar.","spon.lede":"Merkezde Akay; çevresinde bu deneyimi mümkün kılan ekipler. Bağlantılar çizgilerle değil, emekle kuruldu.",
+  "spon.vRole":"AI Sponsoru","spon.bRole":"IT Sponsoru","spon.cRole":"Grafik / Sosyal Medya Sponsoru","spon.tier1":"ANA SPONSORLAR","spon.tier2":"DESTEK SPONSORLARI","spon.tier3":"İŞ BİRLİKLERİ","spon.visit":"Web Sitesi",
+  "team.label":"Koordinatörler","team.eyebrow":"İnsanlar","team.title":"Sorun varsa, doğrudan yaz.",
+  "team.role":"Genel Koordinatör","team.role2":"Genel Koordinatör",
+  "cta.title":"AKAY'I TAKİP ET.","cta.body":"Çalıştaydan gelişmeleri, duyuruları ve içerikleri kaçırma.",
+  "chairs.eyebrow":"Başkanlar","chairs.title":"Komite Başkanları","chairs.desc":"Komiteleri yöneten ve süreci koordine eden isimler.","chairs.eyebrow":"Chairs","chairs.title":"Committee Chairs","chairs.desc":"The individuals leading and coordinating the committees.","cta.eyebrow":"Instagram","cta.btn":"Instagram'da Takip Et","cta.btn2":"Etkinlik Detayı",
+  "foot.sub":"Perspektif ve Aydınlanma Çalıştayı","foot.top":"Başa dön ↑","foot.note":"Düşünceyle tasarlandı."
+},
+en:{
+  "skip":"Skip to content",
+  "intro.tag":"Perspective and Enlightenment Workshop",
+  "intro.subtag":"Youth · Thought · Perspective · Knowledge · Enlightenment",
+  "intro.made":"Created by Banna",
+  "nav.perspektif":"Perspective","nav.misyon":"Mission","nav.vizyon":"Vision","nav.etkinlik":"Event","nav.komiteler":"Committees","nav.isbirlikleri":"Partners","nav.iletisim":"Contact",
+  "hero.kicker":"Akay presents","hero.l1":"PERSPECTIVE","hero.l2":"and enlightenment","hero.l3":"WORKSHOP",
+  "hero.sub":"Youth, thought, perspective, knowledge and enlightenment — an intellectual gathering.",
+  "hero.scroll":"SCROLL TO EXPLORE",
+  "cd.day":"DAYS","cd.hour":"HOURS","cd.min":"MINUTES","cd.sec":"SECONDS",
+  "status.live":"THE EVENT HAS STARTED","status.soon":"DAYS TO GO",
+  "mani.eyebrow":"Manifesto — 00","mani.a":"ONE IDEA","mani.b":"CAN SHIFT A","mani.c":"PERSPECTIVE.",
+  "mani.foot":"Akay is an invitation to the bond between youth and thought.",
+  "mani.body":"This page is not an event announcement; it is a space for thinking. As you scroll, idea, purpose, vision and discovery unfold in order — like a good discussion.",
+  "mission.label":"Mission","mission.eyebrow":"Why we exist","mission.title":"A space where ideas speak freely.",
+  "mission.body":"As Akay Workshop, our mission is to raise young people's awareness of a rapidly evolving and changing world while providing them with a strong knowledge-sharing platform where they can freely express their ideas. Our committee topics are carefully selected to be both academically enriching and directly relevant to everyday social life. On this platform, where they can actively use their social skills, we aim to help them gain multifaceted perspectives.",
+  "mission.note":"Academic depth + the reality of everyday life. Committees hold both together.",
+  "vision.label":"VISION","vision.title":"Bright minds, tangible good.","vision.lede":"A youth that understands the past, reads the present, builds the future.",
+  "vision.p1":"As the Akay Perspective and Enlightenment Workshop team, we aim to help Türkiye's youth — starting with Turkish culture and roots — understand world history, different cultures and languages, and thereby become individuals with high awareness, intellectual capacity and oratory skills who serve our country.",
+  "vision.p2":"Our ultimate goal is for young people to use the knowledge and luminous minds they gain in this process to grow into individuals who deliver tangible benefits to our country first, and to all humanity.",
+  "vision.m1":"Culture","vision.m2":"History","vision.m3":"Intellectual capacity","vision.m4":"Oratory",
+  "vision.q1t":"Culture & Roots","vision.q1d":"Understanding different cultures and languages, starting with Turkish culture and roots.",
+  "vision.q2t":"History & World","vision.q2d":"Reading world history to look at today and tomorrow with awareness.",
+  "vision.q3t":"Intellect & Oratory","vision.q3d":"Individuals who combine intellectual depth with strong expression.",
+  "event.eyebrow":"Our Programme","event.title":"Our Programme","event.month":"OCTOBER","event.weekday":"SATURDAY",
+  "event.venueK":"VENUE","event.venueV":"To be announced","event.venueS":"Location and transport info will be published here.",
+  "event.feeK":"ADMISSION","event.feeV":"Info coming soon","event.feeS":"Registration details via Instagram.",
+  "flow.eyebrow":"Programme — 03","flow.title":"The rhythm of the days.",
+  "flow.note":"Detailed programme in the <a href=\"#etkinlik\" class=\"u-link\">Event</a> section.",
+  "flow.day1":"10 OCTOBER 2026","flow.day2":"11 OCTOBER 2026",
+  "flow.s1":"Registration & Breakfast","flow.s1d":"Participant check-in and opening breakfast.",
+  "flow.s2":"Opening Conference","flow.s2d":"Workshop vision and objectives shared.",
+  "flow.s3":"Session 1","flow.s3d":"Culture & roots: Identity, language, and memory.",
+  "flow.break1":"Break","flow.break1d":"Coffee and conversation.",
+  "flow.s4":"Session 2","flow.s4d":"History & world: From transition to future outlook.",
+  "flow.lunch1":"Lunch Break","flow.lunch1d":"Meal and rest.",
+  "flow.s5":"Session 3","flow.s5d":"Intellect & oratory: The art of expressing ideas.",
+  "flow.break2":"Break","flow.break2d":"Coffee and conversation.",
+  "flow.s6":"Session 4","flow.s6d":"Integration: Perspective synthesis workshop.",
+  "flow.s7":"Breakfast","flow.s7d":"Second day opening breakfast.",
+  "flow.s8":"Session 5","flow.s8d":"Deep dive: Topic-focused working groups.",
+  "flow.break3":"Break","flow.break3d":"Coffee and conversation.",
+  "flow.s9":"Session 6","flow.s9d":"Application: Project development & presentation prep.",
+  "flow.lunch2":"Lunch Break","flow.lunch2d":"Meal and rest.",
+  "flow.s10":"Session 7","flow.s10d":"Presentations: Group work sharing.",
+  "flow.break4":"Break","flow.break4d":"Coffee and conversation.",
+  "flow.s11":"Session 8","flow.s11d":"Evaluation and feedback.",
+  "flow.break5":"Break","flow.break5d":"Final break before closing.",
+  "flow.closing":"Closing Conference","flow.closingd":"Certificates, thanks, and future vision.",
+  "comm.eyebrow":"Committees","comm.title":"Select to explore.","comm.lede":"","comm.headsNote":"Committee chairs photos will be added here","comm.headsLabel":"Chairs",
+  "comm.hint":"← Select / tap a committee","comm.tba":"To be announced","comm.soonBody":"This committee's topic is being prepared by the team. Announcements via @akay_calistay.",
+  "comm.metaA":"STATUS","comm.metaB":"CHANNEL",
+  "spon.eyebrow":"Partnerships","spon.title":"Those who enlighten together.","spon.lede":"Akay at the centre; the teams that make this experience possible around it.",
+  "spon.vRole":"AI Sponsor","spon.bRole":"IT Sponsor","spon.cRole":"Graphics / Social Media Sponsor","spon.tier1":"MAIN SPONSORS","spon.tier2":"SUPPORTING SPONSORS","spon.tier3":"PARTNERSHIPS","spon.visit":"Visit Website",
+  "team.label":"Coordinators","team.eyebrow":"People","team.title":"Questions? Write directly.",
+  "team.role":"General Coordinator","team.role2":"General Coordinator",
+  "cta.title":"FOLLOW AKAY.","cta.body":"Don't miss updates, announcements and content from the workshop.",
+  "chairs.eyebrow":"Başkanlar","chairs.title":"Komite Başkanları","chairs.desc":"Komiteleri yöneten ve süreci koordine eden isimler.","chairs.eyebrow":"Chairs","chairs.title":"Committee Chairs","chairs.desc":"The individuals leading and coordinating the committees.","cta.eyebrow":"Instagram","cta.btn":"Follow on Instagram","cta.btn2":"Event Details",
+  "foot.sub":"Perspective and Enlightenment Workshop","foot.top":"Back to top ↑","foot.note":"Designed with thought."
+}
+};
+let lang = "tr";
+try{ lang = localStorage.getItem("akay-lang") || "tr"; }catch(e){}
+if(!translations[lang]) lang = "tr";
+
+function applyLang(l){
+  lang = translations[l] ? l : "tr";
+  try{ localStorage.setItem("akay-lang", lang); }catch(e){}
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    const k = el.getAttribute("data-i18n");
+    if(translations[lang][k] !== undefined) el.textContent = translations[lang][k];
+  });
+  document.querySelectorAll(".lang button").forEach(function(b){
+    b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
+  });
+  document.dispatchEvent(new CustomEvent("akay:lang",{detail:{lang:lang}}));
+  // re-render dynamic modules if present
+  if(window.AkayCommittees) window.AkayCommittees.render();
+  if(window.AkayTimeline) window.AkayTimeline.render();
+  if(window.AkayCountdown) window.AkayCountdown.tick(true);
+}
+function t(k){ return (translations[lang] && translations[lang][k]) || translations.tr[k] || k; }
+
+document.addEventListener("DOMContentLoaded", function(){
+  document.querySelectorAll(".lang button").forEach(function(b){
+    b.addEventListener("click", function(){ applyLang(b.dataset.lang); });
+  });
+  applyLang(lang);
+});
+window.AkayI18n = { applyLang:applyLang, t:t, getLang:function(){return lang;} };
+})();
