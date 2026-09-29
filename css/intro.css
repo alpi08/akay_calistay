@@ -1,0 +1,228 @@
+﻿/* intro.css — Cinematic Intro Animation Styles */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-0);
+  overflow: hidden;
+}
+
+.intro-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(122, 59, 255, 0.15) 0%, transparent 70%),
+              var(--bg-0);
+  opacity: 0;
+}
+
+.intro-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.intro-inner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.intro-stage {
+  position: relative;
+  width: min(280px, 60vw);
+  height: min(280px, 60vw);
+  min-width: 200px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.intro-emblem {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-rings {
+  width: 100%;
+  height: auto;
+  max-width: min(320px, 65vw);
+  transform-origin: center;
+}
+
+.intro-rings .ring {
+  fill: none;
+  stroke: var(--accent-3);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  opacity: 0;
+}
+
+.intro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(120px, 25vw);
+  height: min(120px, 25vw);
+  object-fit: contain;
+  transform: translate(-50%, -50%) scale(0.2) rotate(-20deg);
+  transform-origin: center;
+  opacity: 0;
+  filter: drop-shadow(0 0 30px rgba(122, 59, 255, 0.4));
+  will-change: transform, opacity, filter;
+}
+
+.intro-logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(160px, 35vw);
+  height: min(160px, 35vw);
+  background: radial-gradient(circle at center, rgba(122, 59, 255, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.intro-text-reveal {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.intro-tag {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.intro-subtag {
+  font-family: var(--mono);
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.intro-made {
+  font-family: var(--mono);
+  font-size: clamp(0.65rem, 1vw, 0.8rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+/* Intro exit animation - purple gradient wipe */
+.intro.wipe-out {
+  animation: wipeOut 1.2s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+}
+
+@keyframes wipeOut {
+  0% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+  40% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    background: linear-gradient(135deg, #1a0a2e 0%, #2d1047 50%, #0f051a 100%);
+  }
+  60% {
+    opacity: 1;
+    background: linear-gradient(135deg, #2d1047 0%, #5a1a7a 50%, #1a0a2e 100%);
+  }
+  80% {
+    opacity: 0.5;
+    background: linear-gradient(135deg, #5a1a7a 0%, #8b2fc4 50%, #2d1047 100%);
+  }
+  100% {
+    opacity: 0;
+    background: linear-gradient(135deg, #7a3bff 0%, #a855f7 50%, #c084fc 100%);
+  }
+}
+
+/* Intro exit for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none !important;
+  }
+}
+
+.intro-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.intro-burst {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 301;
+  will-change: transform, opacity;
+}
+
+/* Particle float animation */
+@keyframes particleFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(var(--tx, 20px), var(--ty, -20px)) scale(1.2);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+}
+
+/* Text cascade reveals */
+@keyframes textRevealUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
