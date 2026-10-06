@@ -1,0 +1,48 @@
+/* responsive.css � mobile is rethought, not shrunk */
+@media (max-width:1100px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .net-stage{min-height:560px}
+  .net-svg{display:none}
+  .net-center{width:130px;height:130px;margin-bottom:10px}
+  .net-stage{display:flex;flex-direction:column;gap:16px}
+  .net-node{position:static;transform:none;width:100%;max-width:420px}
+  .net-n3:hover{transform:translateY(-3px)}
+}
+@media (max-width:900px){
+  .ed-grid{grid-template-columns:1fr}
+  .ed-side{position:static;flex-direction:row;align-items:center;gap:16px}
+  .ed-side .big-no{font-size:2.4rem}
+  .event-grid{grid-template-columns:1fr}
+  .comm-explorer{grid-template-columns:1fr}
+  .comm-list{border-right:0;border-bottom:1px solid var(--line)}
+  .comm-btn{padding:18px}
+  .comm-detail{min-height:0}
+  .info-row{grid-template-columns:110px 1fr;grid-template-rows:auto auto}
+  .info-row .tag{grid-column:2;justify-self:start}
+  .cursor-glow{display:none}
+  .vision-layout{grid-template-columns:1fr}
+  /* Schedule grid stacks to single column on tablet */
+  .schedule-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:15.5px}
+  .scene{padding:72px 0}
+  .nav-inner{height:64px}
+  .lang button{padding:6px 10px}
+  .hero-inner{padding-top:90px}
+  .cd-cell{min-width:52px}
+  .person{grid-template-columns:1fr}
+  .person .tel{padding-top:0}
+  .foot-grid{flex-direction:column}
+  .hero-media video{display:block}
+  /* reduce motion cost on mobile: pause drift */
+  .hero-media video{animation-duration:40s}
+  .timeline{padding-left:26px}
+  /* Schedule session time column collapses on mobile */
+  .schedule-session{grid-template-columns:1fr;gap:8px}
+  .session-time{padding-top:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .cursor-glow{display:none}
+}
